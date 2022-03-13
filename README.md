@@ -9,5 +9,5 @@
 • [Miro - Архитектура приложения](https://miro.com/app/board/uXjVOLozn9Q=/) <br>
 • [Miro - Диаграмма пользовательских сценариев](https://miro.com/app/board/uXjVOL0ymX0=/)
 # Документация
-• [ТЗ docx](https://github.com/artyom-myasoedov/household_budjet/documents/ТЗ%20приложение%20для%20ведения%20домашнего%20бюджета%20и%20рекомендаций%20по%20сокращению%20расходов.docx) <br>
-• [ТЗ pdf](https://github.com/artyom-myasoedov/household_budjet/documents/ТЗ%20приложение%20для%20ведения%20домашнего%20бюджета%20и%20рекомендаций%20по%20сокращению%20расходов.pdf) <br>
+• [ТЗ docx](https://github.com/artyom-myasoedov/household_budjet/blob/main/documents/ТЗ%20приложение%20для%20ведения%20домашнего%20бюджета%20и%20рекомендаций%20по%20сокращению%20расходов.docx) <br>
+• [ТЗ pdf](https://github.com/artyom-myasoedov/household_budjet/blob/main/documents/ТЗ%20приложение%20для%20ведения%20домашнего%20бюджета%20и%20рекомендаций%20по%20сокращению%20расходов.pdf) <br>
