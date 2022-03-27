@@ -31,3 +31,7 @@ gen
 /hb_back/.gradle/
 /hb_back/.idea/
 /hb_back/gradle/
+
+/hb_front/.gradle
+/hb_front/.idea
+/hb_front/gradle/
