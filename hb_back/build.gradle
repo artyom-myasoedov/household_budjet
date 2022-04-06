@@ -1,3 +1,6 @@
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 plugins {
     id 'org.springframework.boot' version '2.5.2'
     id 'java'
@@ -12,7 +15,7 @@ repositories {
 
 dependencies {
     implementation 'org.springframework:spring-webmvc:5.3.9'
-    implementation 'org.springframework.boot:spring-boot-starter-web:2.6.5'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.2'
 
     implementation 'org.springframework.security:spring-security-core:5.5.1'
 
@@ -27,13 +30,34 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.12.4'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.4'
 
-    implementation 'org.springframework.boot:spring-boot-starter-actuator:2.6.5'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator:2.5.2'
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.6'
     implementation 'org.mockito:mockito-core:2.21.0'
 
     implementation 'org.slf4j:slf4j-api:1.7.31'
+}
+
+task newMigration {
+    doLast {
+
+        def path = java.nio.file.Path.of("${project.projectDir}/src/main/resources/db/migration/v1/1.0")
+
+        def id = "BOK-001-${DateTimeFormatter.ofPattern("YYYYMMddHHmm").format(LocalDateTime.now())}"
+
+        path.resolve("_changelog-cumulative.yaml").append("""
+  - changeSet:
+      id: ${id}
+      author: amyasoedov
+      comment: TODO
+      changes:
+        - sqlFile:
+            path: ${id}.sql
+            relativeToChangelogFile: true
+""")
+        path.resolve("${id}.sql").toFile().createNewFile();
+    }
 }
 
 test {

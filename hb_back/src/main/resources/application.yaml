@@ -12,3 +12,5 @@ spring:
       hibernate:
         ddl-auto: validate
       show-sql: true
+  liquibase:
+    change-log: classpath:db/migration/v1/changelog.yaml

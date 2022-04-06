@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - preConditions:
+      - dbms:
+          type: postgresql
+  - changeSet:
+      id: BOK-001-202204070009
+      author: amyasoedov
+      comment: init struct
+      changes:
+        - sqlFile:
+            path: BOK-001-202204070009.sql
+            relativeToChangelogFile: true
