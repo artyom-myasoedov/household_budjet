@@ -12,7 +12,7 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "transaction_id")
-    private UUID transaction_id;
+    private UUID transactionId;
 
     @ManyToOne
     @JoinColumn(
@@ -33,12 +33,12 @@ public class Transaction {
     @Column(name = "category_name")
     private String categoryName;
 
-    public UUID getTransaction_id() {
-        return transaction_id;
+    public UUID getTransactionId() {
+        return transactionId;
     }
 
-    public void setTransaction_id(UUID transaction_id) {
-        this.transaction_id = transaction_id;
+    public void setTransactionId(UUID transaction_id) {
+        this.transactionId = transaction_id;
     }
 
     public User getUser() {
