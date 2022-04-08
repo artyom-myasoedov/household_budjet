@@ -10,7 +10,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private UUID user_id;
+    private UUID userId;
 
     @Column(name = "email")
     private String email;
@@ -22,12 +22,12 @@ public class User {
     @Column(name = "first_name")
     private String firstName;
 
-    public UUID getUser_id() {
-        return user_id;
+    public UUID getUserId() {
+        return userId;
     }
 
-    public void setUser_id(UUID user_id) {
-        this.user_id = user_id;
+    public void setUserId(UUID user_id) {
+        this.userId = user_id;
     }
 
     public String getEmail() {
