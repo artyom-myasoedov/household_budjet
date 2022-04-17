@@ -26,6 +26,7 @@ dependencies {
     implementation 'org.liquibase:liquibase-core:3.10.3'
 
     implementation 'jakarta.validation:jakarta.validation-api:2.0.2'
+    implementation 'com.leakyabstractions:result:0.7.0.0'
 
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.12.4'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.4'
