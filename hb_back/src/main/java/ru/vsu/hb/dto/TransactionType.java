@@ -1,4 +1,4 @@
-package ru.vsu.hb.controller.model;
+package ru.vsu.hb.dto;
 
 public enum TransactionType {
     ALL,

@@ -9,16 +9,20 @@ public class PageDto<T> {
     private int currPage;
     private int maxPage;
     private boolean hasNext;
+    private String sortField;
+    private SortOrder sortOrder;
 
     public PageDto() {
     }
 
-    public PageDto(List<T> items, int limit, int currPage, int maxPage, boolean hasNext) {
+    public PageDto(List<T> items, int limit, int currPage, int maxPage, boolean hasNext, String sortField, SortOrder sortOrder) {
         this.items = items;
         this.limit = limit;
         this.currPage = currPage;
         this.maxPage = maxPage;
         this.hasNext = hasNext;
+        this.sortField = sortField;
+        this.sortOrder = sortOrder;
     }
 
     public List<T> getItems() {
@@ -27,6 +31,22 @@ public class PageDto<T> {
 
     public void setItems(List<T> items) {
         this.items = items;
+    }
+
+    public String getSortField() {
+        return sortField;
+    }
+
+    public void setSortField(String sortField) {
+        this.sortField = sortField;
+    }
+
+    public SortOrder getSortOrder() {
+        return sortOrder;
+    }
+
+    public void setSortOrder(SortOrder sortOrder) {
+        this.sortOrder = sortOrder;
     }
 
     public int getLimit() {

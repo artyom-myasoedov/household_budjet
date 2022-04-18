@@ -3,8 +3,10 @@ package ru.vsu.hb.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.vsu.hb.controller.model.TransactionType;
+import ru.vsu.hb.dto.PageDto;
 import ru.vsu.hb.dto.TransactionDto;
+import ru.vsu.hb.dto.request.TransactionByCategoryRequest;
+import ru.vsu.hb.dto.request.TransactionListRequest;
 import ru.vsu.hb.dto.response.HBResponseData;
 import ru.vsu.hb.service.TransactionService;
 
@@ -44,15 +46,15 @@ public class TransactionController {
     public ResponseEntity<? super HBResponseData<? super BigDecimal>> getBalance(@RequestParam UUID userId) {
         return toHBResult(service.getBalance(userId));
     }
-//
-//    @GetMapping
-//    public ResponseEntity<?> getList(@RequestParam TransactionType transactionType, @RequestParam UUID userId) {
-//        return toHBResult(service.getList(transactionType, userId));
-//    }
-//
-//    @GetMapping("/byCategory")
-//    public ResponseEntity<?> getByCategory(@RequestParam String categoryName, @RequestParam UUID userId) {
-//
-//    }
+
+    @PostMapping("/list")
+    public ResponseEntity<? super HBResponseData<? super PageDto<TransactionDto>>> getList(@RequestBody TransactionListRequest request) {
+        return toHBResult(service.getList(request));
+    }
+
+    @PostMapping("/byCategory")
+    public ResponseEntity<? super HBResponseData<? super PageDto<TransactionDto>>> getByCategory(@RequestBody TransactionByCategoryRequest request) {
+        return toHBResult(service.getByCategoryName(request));
+    }
 
 }
