@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.vsu.hb.dto.UserDto;
 import ru.vsu.hb.dto.error.EntityNotFoundError;
 import ru.vsu.hb.dto.error.HBError;
+import ru.vsu.hb.persistence.entity.User;
 import ru.vsu.hb.persistence.repository.UserRepository;
 
 import java.util.UUID;
@@ -28,4 +29,5 @@ public class UserService {
                     throw new RuntimeException(e);
                 });
     }
+
 }

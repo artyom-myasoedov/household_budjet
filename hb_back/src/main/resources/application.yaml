@@ -3,10 +3,13 @@ server:
 spring:
   application:
     name: household-budget-service
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
-    password: 123321
+    password: 12345678
     jpa:
       open-in-view: on
       hibernate:
