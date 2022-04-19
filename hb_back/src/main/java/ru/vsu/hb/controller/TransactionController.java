@@ -10,10 +10,12 @@ import ru.vsu.hb.dto.request.TransactionByCategoryRequest;
 import ru.vsu.hb.dto.request.TransactionListRequest;
 import ru.vsu.hb.dto.response.HBResponseData;
 import ru.vsu.hb.service.TransactionService;
+import ru.vsu.hb.utils.HBResponseBuilder;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import static ru.vsu.hb.security.SecurityConstants.HEADER_STRING;
 import static ru.vsu.hb.utils.ControllerUtils.toHBResult;
 
 @PreAuthorize("hasAnyAuthority('USER')")
@@ -25,38 +27,66 @@ public class TransactionController {
     private TransactionService service;
 
     @PostMapping
-    public ResponseEntity<? super HBResponseData<? super TransactionDto>> addTransaction(@RequestBody TransactionDto transaction) {
-        return toHBResult(service.addTransaction(transaction));
+    public ResponseEntity<? super HBResponseData<? super TransactionDto>> addTransaction(
+            @RequestBody TransactionDto transaction,
+            @RequestHeader(name = HEADER_STRING) String auth) {
+        return HBResponseBuilder.fromHBResult(service.addTransaction(transaction))
+                .withAuthToken(auth)
+                .build();
     }
 
     @PutMapping
-    public ResponseEntity<? super HBResponseData<? super TransactionDto>> updateTransaction(@RequestBody TransactionDto transaction) {
-        return toHBResult(service.updateTransaction(transaction));
+    public ResponseEntity<? super HBResponseData<? super TransactionDto>> updateTransaction(
+            @RequestBody TransactionDto transaction,
+            @RequestHeader(name = HEADER_STRING) String auth) {
+        return HBResponseBuilder.fromHBResult(service.updateTransaction(transaction))
+                .withAuthToken(auth)
+                .build();
     }
 
     @DeleteMapping
-    public ResponseEntity<? super HBResponseData<? super Integer>> deleteTransaction(@RequestParam UUID transactionId){
-        return toHBResult(service.deleteByTransactionId(transactionId));
+    public ResponseEntity<? super HBResponseData<? super Integer>> deleteTransaction(
+            @RequestParam UUID transactionId,
+            @RequestHeader(name = HEADER_STRING) String auth) {
+        return HBResponseBuilder.fromHBResult(service.deleteByTransactionId(transactionId))
+                .withAuthToken(auth)
+                .build();
     }
 
     @GetMapping("/{transactionId}")
-    public ResponseEntity<? super HBResponseData<? super TransactionDto>> getTransactionById(@PathVariable UUID transactionId) {
-        return toHBResult(service.getByTransactionId(transactionId));
+    public ResponseEntity<? super HBResponseData<? super TransactionDto>> getTransactionById(
+            @PathVariable UUID transactionId,
+            @RequestHeader(name = HEADER_STRING) String auth) {
+        return HBResponseBuilder.fromHBResult(service.getByTransactionId(transactionId))
+                .withAuthToken(auth)
+                .build();
     }
 
     @GetMapping("/balance")
-    public ResponseEntity<? super HBResponseData<? super BigDecimal>> getBalance(@RequestParam UUID userId) {
-        return toHBResult(service.getBalance(userId));
+    public ResponseEntity<? super HBResponseData<? super BigDecimal>> getBalance(
+            @RequestParam UUID userId,
+            @RequestHeader(name = HEADER_STRING) String auth) {
+        return HBResponseBuilder.fromHBResult(service.getBalance(userId))
+                .withAuthToken(auth)
+                .build();
     }
 
     @PostMapping("/list")
-    public ResponseEntity<? super HBResponseData<? super PageDto<TransactionDto>>> getList(@RequestBody TransactionListRequest request) {
-        return toHBResult(service.getList(request));
+    public ResponseEntity<? super HBResponseData<? super PageDto<TransactionDto>>> getList(
+            @RequestBody TransactionListRequest request,
+            @RequestHeader(name = HEADER_STRING) String auth) {
+        return HBResponseBuilder.fromHBResult(service.getList(request))
+                .withAuthToken(auth)
+                .build();
     }
 
     @PostMapping("/byCategory")
-    public ResponseEntity<? super HBResponseData<? super PageDto<TransactionDto>>> getByCategory(@RequestBody TransactionByCategoryRequest request) {
-        return toHBResult(service.getByCategoryName(request));
+    public ResponseEntity<? super HBResponseData<? super PageDto<TransactionDto>>> getByCategory(
+            @RequestBody TransactionByCategoryRequest request,
+            @RequestHeader(name = HEADER_STRING) String auth) {
+        return HBResponseBuilder.fromHBResult(service.getByCategoryName(request))
+                .withAuthToken(auth)
+                .build();
     }
 
 }
