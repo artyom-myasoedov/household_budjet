@@ -19,7 +19,7 @@ public class UserService {
     private UserRepository repository;
 
 
-    public Result<UserDto, HBError> getById(UUID userId) {
+    public Result<UserDto, HBError> getDtoById(UUID userId) {
         return Results.ofCallable(() -> repository.getByUserId(userId).orElseThrow(() -> new IllegalStateException("not_found")))
                 .mapSuccess(UserDto::fromEntity)
                 .mapFailure(e -> {
@@ -28,6 +28,34 @@ public class UserService {
                     }
                     throw new RuntimeException(e);
                 });
+    }
+
+    public Result<User, HBError> getUserById(UUID userId) {
+        return Results.ofCallable(() -> repository.getByUserId(userId).orElseThrow(() -> new IllegalStateException("not_found")))
+                .mapFailure(e -> {
+                    if ("not_found".equals(e.getMessage())) {
+                        return new EntityNotFoundError("User with id = " + userId + " not found");
+                    }
+                    throw new RuntimeException(e);
+                });
+    }
+
+    public Result<UserDto, HBError> editUser(User user) {
+        return getUserById(user.getUserId())
+                .mapSuccess(userInDb -> {
+                    userInDb.setEmail(user.getEmail());
+                    userInDb.setFirstName(user.getFirstName());
+                    return repository.save(userInDb);
+                })
+                .mapSuccess(UserDto::fromEntity);
+    }
+
+    public User findUserByEmail(String email){
+        return repository.findByEmail(email);
+    }
+
+    public User createUser(User user){
+        return repository.save(user);
     }
 
 }
