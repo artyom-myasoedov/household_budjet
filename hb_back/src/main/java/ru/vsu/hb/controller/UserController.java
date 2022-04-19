@@ -3,6 +3,7 @@ package ru.vsu.hb.controller;
 import com.auth0.jwt.JWT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -37,7 +38,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody User user) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword(), user.getAuthorities()));
         if (authentication.isAuthenticated()) {
             String token = JWT.create().withSubject(((UserDetails) authentication.getPrincipal()).getUsername())
 //                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))

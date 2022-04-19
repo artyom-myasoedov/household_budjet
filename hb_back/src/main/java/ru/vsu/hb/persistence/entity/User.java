@@ -1,10 +1,11 @@
 package ru.vsu.hb.persistence.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.*;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ import java.util.UUID;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private UUID userId;
 
@@ -54,10 +55,9 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return List.of(new SimpleGrantedAuthority("USER"));
     }
 
-    @JsonIgnore
     public String getPassword() {
         return password;
     }

@@ -19,7 +19,4 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
     void deleteByUserId(UUID userId);
 
-
-
-
 }
