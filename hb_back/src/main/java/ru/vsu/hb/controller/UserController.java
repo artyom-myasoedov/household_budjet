@@ -10,27 +10,24 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ru.vsu.hb.dto.UserDto;
+import ru.vsu.hb.dto.response.HBResponseData;
 import ru.vsu.hb.persistence.entity.User;
-import ru.vsu.hb.persistence.repository.UserRepository;
-import ru.vsu.hb.service.TransactionService;
 import ru.vsu.hb.service.UserService;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.util.UUID;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static ru.vsu.hb.security.SecurityConstants.*;
+import static ru.vsu.hb.utils.ControllerUtils.toHBResult;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
-    private UserRepository userRepo;
+    private UserService userService;
     @Autowired
     AuthenticationManager authenticationManager;
     @Autowired
@@ -44,7 +41,7 @@ public class UserController {
 //                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                     .sign(HMAC512(SECRET.getBytes()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            User userInDb = userRepo.findByEmail(authentication.getName());
+            User userInDb = userService.findUserByEmail(authentication.getName());
 
             return ResponseEntity.ok().header(HEADER_STRING, TOKEN_PREFIX + token).body(userInDb);
         } else return ResponseEntity.status(403).build();
@@ -52,14 +49,25 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) {
-        User userInDb = userRepo.findByEmail(user.getEmail());
+        User userInDb = userService.findUserByEmail(user.getEmail());
         if (userInDb != null)
             return ResponseEntity.status(409).build();
         else {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            User newUser = userRepo.save(user);
+            User newUser = userService.createUser(user);
             return ResponseEntity.ok(newUser);
         }
     }
 
+    @PreAuthorize("hasAnyAuthority('USER')")
+    @PostMapping
+    public ResponseEntity<? super HBResponseData<? super UserDto>> editUser(@RequestBody User user) {
+        return toHBResult(userService.editUser(user));
+    }
+
+    @PreAuthorize("hasAnyAuthority('USER')")
+    @GetMapping("/{userId}")
+    public ResponseEntity<? super HBResponseData<? super UserDto>> getUserById(@PathVariable UUID userId) {
+        return toHBResult(userService.getDtoById(userId));
+    }
 }

@@ -46,7 +46,7 @@ public class TransactionService {
                 .mapSuccess(TransactionDto::fromEntity)
                 .flatMapFailure(error -> {
                     if (transaction.getCategoryName() == null) {
-                        return userService.getById(transaction.getUserId())
+                        return userService.getDtoById(transaction.getUserId())
                                 .mapSuccess(user -> repository.save(transaction.toEntity()))
                                 .mapSuccess(TransactionDto::fromEntity);
                     }
@@ -99,12 +99,12 @@ public class TransactionService {
     }
 
     public Result<BigDecimal, HBError> getBalance(UUID userId) {
-        return userService.getById(userId)
+        return userService.getDtoById(userId)
                 .mapSuccess(user -> repository.getBalance(userId));
     }
 
     public Result<PageDto<TransactionDto>, HBError> getList(TransactionListRequest request) {
-        return userService.getById(request.getUserId())
+        return userService.getDtoById(request.getUserId())
                 .mapSuccess(user -> {
                     if (request.getTransactionType().equals(TransactionType.ALL)) {
                         return repository.findByUser_UserId(
