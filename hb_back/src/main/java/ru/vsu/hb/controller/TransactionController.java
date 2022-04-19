@@ -2,6 +2,7 @@ package ru.vsu.hb.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.vsu.hb.dto.PageDto;
 import ru.vsu.hb.dto.TransactionDto;
@@ -15,6 +16,7 @@ import java.util.UUID;
 
 import static ru.vsu.hb.utils.ControllerUtils.toHBResult;
 
+@PreAuthorize("hasAnyAuthority('USER')")
 @RestController
 @RequestMapping("/transaction")
 public class TransactionController {
