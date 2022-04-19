@@ -1,30 +1,41 @@
 package ru.vsu.hb.persistence.entity;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Entity
+@Entity(name = "transactions")
 @Table(schema = "hb", name = "transactions")
 public class Transaction {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "transaction_id")
     private UUID transactionId;
 
     @ManyToOne
     @JoinColumn(
             name = "user_id",
-            referencedColumnName = "user_id"
+            referencedColumnName = "user_id",
+            insertable = false,
+            updatable = false
     )
     private User user;
+
+    @Column(name = "user_id", updatable = false)
+    private UUID userId;
 
     @Column(name = "sum")
     private BigDecimal sum;
 
     @Column(name = "create_time")
+    @Generated(GenerationTime.INSERT)
     private LocalDateTime createTime;
 
     @Column(name = "description")
@@ -32,6 +43,27 @@ public class Transaction {
 
     @Column(name = "category_name")
     private String categoryName;
+
+    public Transaction() {
+    }
+
+    public Transaction(UUID transactionId, UUID userId, BigDecimal sum, LocalDateTime createTime, String description, String categoryName) {
+        this.transactionId = transactionId;
+        this.userId = userId;
+        this.sum = sum;
+        this.createTime = createTime;
+        this.description = description;
+        this.categoryName = categoryName;
+    }
+
+
+    public UUID getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
+    }
 
     public UUID getTransactionId() {
         return transactionId;

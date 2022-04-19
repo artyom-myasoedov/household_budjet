@@ -18,9 +18,18 @@ public class User {
     @Column(name = "password")
     private String password;
 
-
     @Column(name = "first_name")
     private String firstName;
+
+    public User() {
+    }
+
+    public User(UUID userId, String email, String password, String firstName) {
+        this.userId = userId;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+    }
 
     public UUID getUserId() {
         return userId;
