@@ -31,7 +31,6 @@ public class TransactionController {
             @RequestBody TransactionDto transaction,
             @RequestHeader(name = HEADER_STRING) String auth) {
         return HBResponseBuilder.fromHBResult(service.addTransaction(transaction))
-                .withAuthToken(auth)
                 .build();
     }
 
@@ -40,7 +39,6 @@ public class TransactionController {
             @RequestBody TransactionDto transaction,
             @RequestHeader(name = HEADER_STRING) String auth) {
         return HBResponseBuilder.fromHBResult(service.updateTransaction(transaction))
-                .withAuthToken(auth)
                 .build();
     }
 
@@ -49,7 +47,6 @@ public class TransactionController {
             @RequestParam UUID transactionId,
             @RequestHeader(name = HEADER_STRING) String auth) {
         return HBResponseBuilder.fromHBResult(service.deleteByTransactionId(transactionId))
-                .withAuthToken(auth)
                 .build();
     }
 
@@ -58,7 +55,6 @@ public class TransactionController {
             @PathVariable UUID transactionId,
             @RequestHeader(name = HEADER_STRING) String auth) {
         return HBResponseBuilder.fromHBResult(service.getByTransactionId(transactionId))
-                .withAuthToken(auth)
                 .build();
     }
 
@@ -67,7 +63,6 @@ public class TransactionController {
             @RequestParam UUID userId,
             @RequestHeader(name = HEADER_STRING) String auth) {
         return HBResponseBuilder.fromHBResult(service.getBalance(userId))
-                .withAuthToken(auth)
                 .build();
     }
 
@@ -76,7 +71,6 @@ public class TransactionController {
             @RequestBody TransactionListRequest request,
             @RequestHeader(name = HEADER_STRING) String auth) {
         return HBResponseBuilder.fromHBResult(service.getList(request))
-                .withAuthToken(auth)
                 .build();
     }
 
@@ -85,7 +79,6 @@ public class TransactionController {
             @RequestBody TransactionByCategoryRequest request,
             @RequestHeader(name = HEADER_STRING) String auth) {
         return HBResponseBuilder.fromHBResult(service.getByCategoryName(request))
-                .withAuthToken(auth)
                 .build();
     }
 
