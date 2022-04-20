@@ -50,8 +50,15 @@ public class UserService {
                 .mapSuccess(UserDto::fromEntity);
     }
 
-    public User findUserByEmail(String email){
-        return repository.findByEmail(email);
+    public Result<UserDto, HBError> findUserByEmail(String email){
+        return Results.ofCallable(() -> repository.findByEmail(email).orElseThrow(() -> new IllegalStateException("not_found")))
+                .mapSuccess(UserDto::fromEntity)
+                .mapFailure(e -> {
+                    if ("not_found".equals(e.getMessage())) {
+                        return new EntityNotFoundError("User with email = " + email + " not found");
+                    }
+                    throw new RuntimeException(e);
+                });
     }
 
     public User createUser(User user){

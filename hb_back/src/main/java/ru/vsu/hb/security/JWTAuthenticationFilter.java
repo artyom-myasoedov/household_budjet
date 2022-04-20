@@ -52,7 +52,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
-        User user = userRepo.findByEmail(auth.getName());
+        User user = userRepo.findByEmail(auth.getName()).orElse(null);
         String token = JWT.create()
                 .withSubject(((User) auth.getPrincipal()).getEmail())
                 // .withClaim("authorities",  user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
