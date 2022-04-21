@@ -39,6 +39,15 @@ public class TransactionService {
     @Autowired
     private UserService userService;
 
+    public TransactionService() {
+    }
+
+    public TransactionService(TransactionRepository repository, CategoryService categoryService, UserService userService) {
+        this.repository = repository;
+        this.categoryService = categoryService;
+        this.userService = userService;
+    }
+
     @Transactional
     public Result<TransactionDto, HBError> addTransaction(TransactionDto transaction) {
         return categoryService.getByUserCategoryId(transaction.getUserId(), transaction.getCategoryName())
