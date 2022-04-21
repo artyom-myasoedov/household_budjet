@@ -31,4 +31,5 @@ public class ControllerUtils {
     public static HBErrorResponse fromException(Exception e) {
         return new HBErrorResponse("unknown_error", e.getMessage());
     }
+
 }

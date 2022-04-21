@@ -12,12 +12,11 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
     Optional<User> getByUserId(UUID userId);
 
+    Optional<User> findByEmail(String email);
+
     @Override
     User save(User user);
 
     void deleteByUserId(UUID userId);
-
-
-
 
 }

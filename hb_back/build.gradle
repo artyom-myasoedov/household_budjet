@@ -18,12 +18,18 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web:2.5.2'
 
     implementation 'org.springframework.security:spring-security-core:5.5.1'
+    implementation 'org.springframework.boot:spring-boot-starter-security:2.6.6'
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
+    implementation 'com.auth0:java-jwt:3.10.3'
+    implementation 'org.springframework.security:spring-security-web:5.6.2'
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.2'
     implementation 'org.springframework.data:spring-data-jpa:2.5.3'
     implementation 'org.hibernate:hibernate-jpamodelgen:5.4.31.Final'
     implementation 'org.postgresql:postgresql:42.2.23'
     implementation 'org.liquibase:liquibase-core:3.10.3'
+
+    implementation 'org.hibernate:hibernate-entitymanager:5.6.8.Final'
 
     implementation 'jakarta.validation:jakarta.validation-api:2.0.2'
     implementation 'com.leakyabstractions:result:0.7.0.0'
