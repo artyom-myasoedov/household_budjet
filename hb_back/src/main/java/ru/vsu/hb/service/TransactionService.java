@@ -50,11 +50,11 @@ public class TransactionService {
 
     @Transactional
     public Result<TransactionDto, HBError> addTransaction(TransactionDto transaction) {
-        return categoryService.getByUserCategoryId(transaction.getUserId(), transaction.getCategoryName())
+        return categoryService.getByUserCategoryId(transaction.getUserId(), transaction.getCategoryId())
                 .mapSuccess(it -> repository.save(transaction.toEntity()))
                 .mapSuccess(TransactionDto::fromEntity)
                 .flatMapFailure(error -> {
-                    if (transaction.getCategoryName() == null) {
+                    if (transaction.getCategoryId() == null) {
                         return userService.getDtoById(transaction.getUserId())
                                 .mapSuccess(user -> repository.save(transaction.toEntity()))
                                 .mapSuccess(TransactionDto::fromEntity);
@@ -65,8 +65,8 @@ public class TransactionService {
 
     @Transactional
     public Result<TransactionDto, HBError> updateTransaction(TransactionDto transaction) {
-        var res = transaction.getCategoryName() == null ? Results.success(new Category()).mapFailure(it -> (HBError) it)
-                : categoryService.getByUserCategoryId(transaction.getUserId(), transaction.getCategoryName());
+        var res = transaction.getCategoryId() == null ? Results.success(new Category()).mapFailure(it -> (HBError) it)
+                : categoryService.getByUserCategoryId(transaction.getUserId(), transaction.getCategoryId());
         return res.flatMapSuccess((category) -> Results.ofCallable(() -> repository.getByTransactionId(transaction.getTransactionId())
                                 .orElseThrow(() -> new IllegalStateException("not_found")))
                         .mapFailure(exception -> {
@@ -120,11 +120,11 @@ public class TransactionService {
                                 request.getUserId(),
                                 getPageable(request.getPage()));
                     } else if (request.getTransactionType().equals(TransactionType.IN)) {
-                        return repository.findByUser_UserIdAndCategoryNameIsNull(
+                        return repository.findByUser_UserIdAndCategoryIdIsNull(
                                 request.getUserId(),
                                 getPageable(request.getPage()));
                     } else {
-                        return repository.findByUser_UserIdAndCategoryNameIsNotNull(
+                        return repository.findByUser_UserIdAndCategoryIdIsNotNull(
                                 request.getUserId(),
                                 getPageable(request.getPage()));
                     }
@@ -133,10 +133,10 @@ public class TransactionService {
     }
 
     public Result<PageDto<TransactionDto>, HBError> getByCategoryName(TransactionByCategoryRequest request) {
-        return categoryService.getByUserCategoryId(request.getUserId(), request.getCategoryName())
-                .mapSuccess(category -> repository.findByUser_UserIdAndCategoryName(
+        return categoryService.getByUserCategoryId(request.getUserId(), request.getCategoryId())
+                .mapSuccess(category -> repository.findByUser_UserIdAndCategoryId(
                         request.getUserId(),
-                        request.getCategoryName(),
+                        request.getCategoryId(),
                         getPageable(request.getPage())
                 ))
                 .mapSuccess(getPageToPageDtoFunction(request.getPage()));

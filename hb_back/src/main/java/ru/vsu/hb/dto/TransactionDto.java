@@ -18,18 +18,18 @@ public class TransactionDto {
 
     private String description;
 
-    private String categoryName;
+    private UUID categoryId;
 
     public TransactionDto() {
     }
 
-    public TransactionDto(UUID transactionId, UUID userId, BigDecimal sum, LocalDateTime createTime, String description, String categoryName) {
+    public TransactionDto(UUID transactionId, UUID userId, BigDecimal sum, LocalDateTime createTime, String description, UUID categoryId) {
         this.transactionId = transactionId;
         this.userId = userId;
         this.sum = sum;
         this.createTime = createTime;
         this.description = description;
-        this.categoryName = categoryName;
+        this.categoryId = categoryId;
     }
 
     public UUID getTransactionId() {
@@ -56,8 +56,8 @@ public class TransactionDto {
         this.description = description;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setCategoryId(UUID categoryId) {
+        this.categoryId = categoryId;
     }
 
     public UUID getUserId() {
@@ -76,8 +76,8 @@ public class TransactionDto {
         return description;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public UUID getCategoryId() {
+        return categoryId;
     }
 
     public Transaction toEntity() {
@@ -86,7 +86,7 @@ public class TransactionDto {
                 sum,
                 createTime,
                 description,
-                categoryName);
+                categoryId);
     }
 
     public static TransactionDto fromEntity(Transaction transaction) {
@@ -95,6 +95,6 @@ public class TransactionDto {
                 transaction.getSum(),
                 transaction.getCreateTime(),
                 transaction.getDescription(),
-                transaction.getCategoryName());
+                transaction.getCategoryId());
     }
 }

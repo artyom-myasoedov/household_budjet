@@ -24,14 +24,16 @@ public interface TransactionRepository extends JpaRepository<Transaction, UUID>,
 
     Integer deleteByTransactionId(UUID transactionId);
 
+    Integer deleteAllByCategoryIdAndUserId(UUID categoryId, UUID userId);
+
     @Query(nativeQuery = true, value = "SELECT (SELECT SUM(sum) FROM hb.transactions where user_id = ?1 and category_name is null) - (SELECT SUM(sum) FROM hb.transactions where user_id = ?1 and category_name is not null)")
     BigDecimal getBalance(UUID userId);
 
-    Page<Transaction> findByUser_UserIdAndCategoryName(UUID userId, String categoryName, Pageable pageable);
+    Page<Transaction> findByUser_UserIdAndCategoryId(UUID userId, UUID categoryId, Pageable pageable);
 
-    Page<Transaction> findByUser_UserIdAndCategoryNameIsNull(UUID userId, Pageable pageable);
+    Page<Transaction> findByUser_UserIdAndCategoryIdIsNull(UUID userId, Pageable pageable);
 
-    Page<Transaction> findByUser_UserIdAndCategoryNameIsNotNull(UUID userId, Pageable pageable);
+    Page<Transaction> findByUser_UserIdAndCategoryIdIsNotNull(UUID userId, Pageable pageable);
 
     Page<Transaction> findByUser_UserId(UUID userId, Pageable pageable);
 }

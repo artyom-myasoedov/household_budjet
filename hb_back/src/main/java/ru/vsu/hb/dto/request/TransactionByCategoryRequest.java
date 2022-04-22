@@ -5,15 +5,15 @@ import java.util.UUID;
 public class TransactionByCategoryRequest {
 
     private UUID userId;
-    private String categoryName;
+    private UUID categoryId;
     private PageRequest page = new PageRequest();
 
     public TransactionByCategoryRequest() {
     }
 
-    public TransactionByCategoryRequest(UUID userId, String categoryName, PageRequest page) {
+    public TransactionByCategoryRequest(UUID userId, UUID categoryId, PageRequest page) {
         this.userId = userId;
-        this.categoryName = categoryName;
+        this.categoryId = categoryId;
         this.page = page;
     }
 
@@ -25,12 +25,12 @@ public class TransactionByCategoryRequest {
         this.userId = userId;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public UUID getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setCategoryId(UUID categoryId) {
+        this.categoryId = categoryId;
     }
 
     public PageRequest getPage() {
