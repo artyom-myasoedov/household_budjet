@@ -14,15 +14,14 @@ public interface CategoryRepository extends JpaRepository<Category, UserCategory
 
     Optional<Category> getByUserCategoryId(UserCategoryId userCategoryId);
 
-    List<Category> getByUserCategoryId_UserId(UUID userId);
+    List<Category> getAllByUserCategoryId_UserId(UUID userId);
 
     @Override
     Category save(Category category);
 
-    void deleteByUserCategoryId(UserCategoryId userCategoryId);
+    Integer deleteByUserCategoryId_CategoryId(UUID categoryId);
 
     void deleteByUserCategoryId_UserId(UUID userId);
-
 
 
 

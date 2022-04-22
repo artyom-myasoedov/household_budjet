@@ -32,7 +32,7 @@ class TransactionServiceTest {
     private Transaction OUT_TRANSACTION_ENTITY = new Transaction(
             UUID.fromString("ecd8c0d6-b513-4435-af7a-59ccbfcddf28"),
             UUID.fromString("ecd8c0d6-b513-4435-af7a-59ccbfcddf26"),
-            BigDecimal.TEN, LocalDateTime.now(), "desc", "cat1");
+            BigDecimal.TEN, LocalDateTime.now(), "desc", UUID.fromString("ecd8c0d6-b513-4435-af7a-59c5bfcddf28"));
     private Transaction IN_TRANSACTION_ENTITY = new Transaction(
             UUID.fromString("ecd8c0d6-b513-4435-af7a-59ccbfcddf27"),
             UUID.fromString("ecd8c0d6-b513-4435-af7a-59ccbfcddf25"),
@@ -45,7 +45,7 @@ class TransactionServiceTest {
 
     @Test
     public void addOutTransactionSuccess() {
-        Mockito.when(categoryService.getByUserCategoryId(any(UUID.class), any(String.class)))
+        Mockito.when(categoryService.getByUserCategoryId(any(UUID.class), any(UUID.class)))
                 .thenReturn(Results.success(new Category()));
         Mockito.when(repository.save(any())).thenReturn(OUT_TRANSACTION_ENTITY);
         var res = service.addTransaction(OUT_TRANSACTION_DTO);
@@ -54,7 +54,7 @@ class TransactionServiceTest {
 
     @Test
     public void addInTransactionSuccess() {
-        Mockito.when(categoryService.getByUserCategoryId(any(), any()))
+        Mockito.when(categoryService.getByUserCategoryId((UUID) any(), any()))
                 .thenReturn(Results.failure(new EntityNotFoundError("")));
         Mockito.when(repository.save(any())).thenReturn(IN_TRANSACTION_ENTITY);
         Mockito.when(userService.getDtoById(any())).thenReturn(Results.success(new UserDto()));
@@ -64,7 +64,7 @@ class TransactionServiceTest {
 
     @Test
     public void addInTransactionUserNotFound() {
-        Mockito.when(categoryService.getByUserCategoryId(any(), any()))
+        Mockito.when(categoryService.getByUserCategoryId((UUID) any(), any()))
                 .thenReturn(Results.failure(new EntityNotFoundError("")));
         Mockito.when(repository.save(any())).thenReturn(IN_TRANSACTION_ENTITY);
         Mockito.when(userService.getDtoById(any())).thenReturn(Results.failure(new EntityNotFoundError("msg")));
@@ -74,7 +74,7 @@ class TransactionServiceTest {
 
     @Test
     public void addOutTransactionUserOrCategoryNotFound() {
-        Mockito.when(categoryService.getByUserCategoryId(any(), any()))
+        Mockito.when(categoryService.getByUserCategoryId((UUID) any(), any()))
                 .thenReturn(Results.failure(new EntityNotFoundError("msg")));
         Mockito.when(repository.save(any())).thenReturn(OUT_TRANSACTION_ENTITY);
         var res = service.addTransaction(OUT_TRANSACTION_DTO);
@@ -83,7 +83,7 @@ class TransactionServiceTest {
 
     @Test
     public void updateOutTransactionSuccess() {
-        Mockito.when(categoryService.getByUserCategoryId(any(), any()))
+        Mockito.when(categoryService.getByUserCategoryId((UUID) any(), any()))
                 .thenReturn(Results.success(new Category()));
         Mockito.when(repository.save(any())).thenReturn(OUT_TRANSACTION_ENTITY);
         Mockito.when(repository.getByTransactionId(any())).thenReturn(Optional.of(OUT_TRANSACTION_ENTITY));
@@ -93,7 +93,7 @@ class TransactionServiceTest {
 
     @Test
     public void updateOutTransactionTransactionNotFound() {
-        Mockito.when(categoryService.getByUserCategoryId(any(), any()))
+        Mockito.when(categoryService.getByUserCategoryId((UUID) any(), any()))
                 .thenReturn(Results.success(new Category()));
         Mockito.when(repository.save(any())).thenReturn(OUT_TRANSACTION_ENTITY);
         Mockito.when(repository.getByTransactionId(any())).thenReturn(Optional.empty());
@@ -103,7 +103,7 @@ class TransactionServiceTest {
 
     @Test
     public void updateOutTransactionUserNotFound() {
-        Mockito.when(categoryService.getByUserCategoryId(any(), any()))
+        Mockito.when(categoryService.getByUserCategoryId((UUID) any(), any()))
                 .thenReturn(Results.success(new Category()));
         Mockito.when(repository.save(any())).thenReturn(OUT_TRANSACTION_ENTITY);
         Mockito.when(repository.getByTransactionId(any())).thenReturn(Optional.of(IN_TRANSACTION_ENTITY));
@@ -113,7 +113,7 @@ class TransactionServiceTest {
 
     @Test
     public void updateInTransactionSuccess() {
-        Mockito.when(categoryService.getByUserCategoryId(any(), any()))
+        Mockito.when(categoryService.getByUserCategoryId((UUID) any(), any()))
                 .thenReturn(Results.success(new Category()));
         Mockito.when(repository.save(any())).thenReturn(IN_TRANSACTION_ENTITY);
         Mockito.when(repository.getByTransactionId(any())).thenReturn(Optional.of(IN_TRANSACTION_ENTITY));
@@ -180,8 +180,8 @@ class TransactionServiceTest {
     @Test
     public void getByCategorySuccess() {
         var req = new TransactionByCategoryRequest();
-        Mockito.when(categoryService.getByUserCategoryId(any(), any())).thenReturn(Results.success(new Category()));
-        Mockito.when(repository.findByUser_UserIdAndCategoryName(any(), any(), any())).thenReturn(Page.empty());
+        Mockito.when(categoryService.getByUserCategoryId((UUID) any(), any())).thenReturn(Results.success(new Category()));
+        Mockito.when(repository.findByUser_UserIdAndCategoryId(any(), any(), any())).thenReturn(Page.empty());
         var res = service.getByCategoryName(req);
         assertTrue(res.isSuccess());
     }
@@ -189,8 +189,8 @@ class TransactionServiceTest {
     @Test
     public void getByCategoryFailure() {
         var req = new TransactionByCategoryRequest();
-        Mockito.when(categoryService.getByUserCategoryId(any(), any())).thenReturn(Results.failure(new HBError("", "")));
-        Mockito.when(repository.findByUser_UserIdAndCategoryName(any(), any(), any())).thenReturn(Page.empty());
+        Mockito.when(categoryService.getByUserCategoryId((UUID) any(), any())).thenReturn(Results.failure(new HBError("", "")));
+        Mockito.when(repository.findByUser_UserIdAndCategoryId(any(), any(), any())).thenReturn(Page.empty());
         var res = service.getByCategoryName(req);
         assertTrue(res.isFailure());
     }
