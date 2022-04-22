@@ -1,12 +1,11 @@
 package ru.vsu.hb.persistence.entity;
 
 
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
@@ -14,26 +13,27 @@ import java.util.UUID;
 @Embeddable
 public class UserCategoryId implements Serializable {
 
-    @Column(name = "user_id")
-    private UUID userId;
+    @Column(name = "user_email")
+    private String userEmail;
 
     @Column(name = "category_id")
+    @Generated(GenerationTime.INSERT)
     private UUID categoryId = UUID.randomUUID();
 
-    public UserCategoryId(UUID userId, UUID categoryId) {
-        this.userId = userId;
+    public UserCategoryId(String userEmail, UUID categoryId) {
+        this.userEmail = userEmail;
         this.categoryId = categoryId == null ? UUID.randomUUID() : categoryId;
     }
 
     public UserCategoryId() {
     }
 
-    public UUID getUserId() {
-        return userId;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUserId(UUID userId) {
-        this.userId = userId;
+    public void setUserEmail(String userId) {
+        this.userEmail = userId;
     }
 
     public UUID getCategoryId() {
@@ -51,13 +51,13 @@ public class UserCategoryId implements Serializable {
 
         UserCategoryId that = (UserCategoryId) o;
 
-        if (!Objects.equals(userId, that.userId)) return false;
+        if (!Objects.equals(userEmail, that.userEmail)) return false;
         return Objects.equals(categoryId, that.categoryId);
     }
 
     @Override
     public int hashCode() {
-        int result = userId != null ? userId.hashCode() : 0;
+        int result = userEmail != null ? userEmail.hashCode() : 0;
         result = 31 * result + (categoryId != null ? categoryId.hashCode() : 0);
         return result;
     }

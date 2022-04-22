@@ -19,15 +19,15 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(
-            name = "user_id",
-            referencedColumnName = "user_id",
+            name = "user_email",
+            referencedColumnName = "user_email",
             insertable = false,
             updatable = false
     )
     private User user;
 
-    @Column(name = "user_id", updatable = false)
-    private UUID userId;
+    @Column(name = "user_email", updatable = false)
+    private String userEmail;
 
     @Column(name = "sum")
     private BigDecimal sum;
@@ -45,9 +45,9 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(UUID transactionId, UUID userId, BigDecimal sum, LocalDateTime createTime, String description, UUID categoryId) {
+    public Transaction(UUID transactionId, String userEmail, BigDecimal sum, LocalDateTime createTime, String description, UUID categoryId) {
         this.transactionId = transactionId;
-        this.userId = userId;
+        this.userEmail = userEmail;
         this.sum = sum;
         this.createTime = createTime;
         this.description = description;
@@ -55,12 +55,12 @@ public class Transaction {
     }
 
 
-    public UUID getUserId() {
-        return userId;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUserId(UUID userId) {
-        this.userId = userId;
+    public void setUserEmail(String userId) {
+        this.userEmail = userId;
     }
 
     public UUID getTransactionId() {

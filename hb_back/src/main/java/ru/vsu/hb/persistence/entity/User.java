@@ -7,19 +7,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.*;
 import java.util.Collection;
-import java.util.UUID;
 
 @Entity
 @Table(schema = "hb", name = "users")
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
-    private UUID userId;
-
-    @Column(name = "email")
-    private String email;
+    @Column(name = "user_email")
+    private String userEmail;
 
     @Column(name = "password")
     private String password;
@@ -30,27 +25,18 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(UUID userId, String email, String password, String firstName) {
-        this.userId = userId;
-        this.email = email;
+    public User(String email, String password, String firstName) {
+        this.userEmail = email;
         this.password = password;
         this.firstName = firstName;
     }
 
-    public UUID getUserId() {
-        return userId;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUserId(UUID user_id) {
-        this.userId = user_id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserEmail(String email) {
+        this.userEmail = email;
     }
 
     @Override
@@ -64,7 +50,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return userEmail;
     }
 
     @Override

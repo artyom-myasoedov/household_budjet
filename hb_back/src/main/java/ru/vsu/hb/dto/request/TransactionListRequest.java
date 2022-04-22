@@ -2,29 +2,27 @@ package ru.vsu.hb.dto.request;
 
 import ru.vsu.hb.dto.TransactionType;
 
-import java.util.UUID;
-
 public class TransactionListRequest {
 
-    private UUID userId;
+    private String userEmail;
     private TransactionType transactionType = TransactionType.ALL;
     private PageRequest page = new PageRequest();
 
     public TransactionListRequest() {
     }
 
-    public TransactionListRequest(UUID userId, TransactionType transactionType, PageRequest page) {
-        this.userId = userId;
+    public TransactionListRequest(String userEmail, TransactionType transactionType, PageRequest page) {
+        this.userEmail = userEmail;
         this.transactionType = transactionType;
         this.page = page;
     }
 
-    public UUID getUserId() {
-        return userId;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUserId(UUID userId) {
-        this.userId = userId;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public TransactionType getTransactionType() {

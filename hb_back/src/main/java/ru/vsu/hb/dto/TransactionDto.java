@@ -10,7 +10,7 @@ public class TransactionDto {
 
     private UUID transactionId;
 
-    private UUID userId;
+    private String userEmail;
 
     private BigDecimal sum;
 
@@ -23,9 +23,9 @@ public class TransactionDto {
     public TransactionDto() {
     }
 
-    public TransactionDto(UUID transactionId, UUID userId, BigDecimal sum, LocalDateTime createTime, String description, UUID categoryId) {
+    public TransactionDto(UUID transactionId, String userEmail, BigDecimal sum, LocalDateTime createTime, String description, UUID categoryId) {
         this.transactionId = transactionId;
-        this.userId = userId;
+        this.userEmail = userEmail;
         this.sum = sum;
         this.createTime = createTime;
         this.description = description;
@@ -40,8 +40,8 @@ public class TransactionDto {
         this.transactionId = transactionId;
     }
 
-    public void setUserId(UUID userId) {
-        this.userId = userId;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public void setSum(BigDecimal sum) {
@@ -60,8 +60,8 @@ public class TransactionDto {
         this.categoryId = categoryId;
     }
 
-    public UUID getUserId() {
-        return userId;
+    public String getUserEmail() {
+        return userEmail;
     }
 
     public BigDecimal getSum() {
@@ -82,7 +82,7 @@ public class TransactionDto {
 
     public Transaction toEntity() {
         return new Transaction(transactionId,
-                userId,
+                userEmail,
                 sum,
                 createTime,
                 description,
@@ -91,7 +91,7 @@ public class TransactionDto {
 
     public static TransactionDto fromEntity(Transaction transaction) {
         return new TransactionDto(transaction.getTransactionId(),
-                transaction.getUserId(),
+                transaction.getUserEmail(),
                 transaction.getSum(),
                 transaction.getCreateTime(),
                 transaction.getDescription(),

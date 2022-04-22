@@ -1,5 +1,8 @@
 package ru.vsu.hb.persistence.entity;
 
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,8 +13,10 @@ public class Category {
     private UserCategoryId userCategoryId;
 
     @Column(name = "is_default")
+    @Generated(GenerationTime.INSERT)
     private Boolean isDefault;
 
+    @Column(name = "category_name")
     private String categoryName;
 
     public String getCategoryName() {

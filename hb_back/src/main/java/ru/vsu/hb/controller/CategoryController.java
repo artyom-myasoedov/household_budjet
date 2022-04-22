@@ -24,8 +24,8 @@ public class CategoryController {
 
     @PostMapping
     public ResponseEntity<? super HBResponseData<? super CategoryDto>> addCategory(
-            @RequestBody CategoryDto category) {
-        return HBResponseBuilder.fromHBResult(service.addCategory(category)).build();
+            @RequestBody CategoryDto category, Principal principal) {
+        return HBResponseBuilder.fromHBResult(service.addCategory(category, principal.getName())).build();
     }
 
     @PutMapping
