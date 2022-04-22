@@ -42,3 +42,19 @@ gradle-app.setting
 
 !/gradle/
 !/.idea/
+/.idea/
+!/.idea/gradle.xml
+
+!/.idea/jarRepositories.xml
+
+!/.idea/misc.xml
+
+!/.idea/uiDesigner.xml
+
+!/.idea/vcs.xml
+
+!/.idea/dataSources.xml
+
+!/.idea/compiler.xml
+
+!/.idea/.gitignore

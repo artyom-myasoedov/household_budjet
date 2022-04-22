@@ -2,17 +2,20 @@ package ru.vsu.hb.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.vsu.hb.dto.GlobalStatisticsDto;
+import ru.vsu.hb.dto.GlobalStatistics;
 import ru.vsu.hb.dto.UserRecommendations;
-import ru.vsu.hb.dto.UserStatisticsDto;
+import ru.vsu.hb.dto.UserStatistics;
 import ru.vsu.hb.dto.response.HBResponseData;
 import ru.vsu.hb.service.StatisticsService;
+import ru.vsu.hb.utils.HBResponseBuilder;
 
-import static ru.vsu.hb.utils.ControllerUtils.toHBResult;
+import java.security.Principal;
+
 
 @RestController
 @RequestMapping("/statistics")
@@ -21,18 +24,20 @@ public class StatisticsController {
     @Autowired
     private StatisticsService service;
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<? super HBResponseData<? super UserStatisticsDto>> getByUserId(@PathVariable String userId) {
-        return toHBResult(service.getUserStatistics(userId));
+    @GetMapping("/personal")
+    @PreAuthorize("hasAnyAuthority('USER')")
+    public ResponseEntity<? super HBResponseData<? super UserStatistics>> getByUserId(Principal principal) {
+        return HBResponseBuilder.fromHBResult(service.getUserStatistics(principal.getName())).build();
     }
 
-    @GetMapping
-    public ResponseEntity<? super HBResponseData<? super GlobalStatisticsDto>> getGlobal() {
-        return toHBResult(service.getGlobalStatistics());
+    @GetMapping()
+    public ResponseEntity<? super HBResponseData<? super GlobalStatistics>> getGlobal() {
+        return HBResponseBuilder.fromHBResult(service.getGlobalStatistics()).build();
     }
 
-    @GetMapping("/{userId}/recommendations")
-    public ResponseEntity<? super HBResponseData<? super UserRecommendations>> getRecommendations(@PathVariable String userId) {
-        return toHBResult(service.getUserRecommendations(userId));
+    @GetMapping("/recommendations")
+    @PreAuthorize("hasAnyAuthority('USER')")
+    public ResponseEntity<? super HBResponseData<? super UserRecommendations>> getRecommendations(Principal principal) {
+        return HBResponseBuilder.fromHBResult(service.getUserRecommendations(principal.getName())).build();
     }
 }

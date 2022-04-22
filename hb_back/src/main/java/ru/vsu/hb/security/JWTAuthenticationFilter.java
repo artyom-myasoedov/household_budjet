@@ -39,7 +39,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            credentials.getEmail(),
+                            credentials.getUserEmail(),
                             credentials.getPassword(), new ArrayList<>())
             );
         } catch (IOException e) {
@@ -52,14 +52,14 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
-        User user = userRepo.findByEmail(auth.getName()).orElse(null);
+        User user = userRepo.findByUserEmail(auth.getName()).orElse(null);
         String token = JWT.create()
-                .withSubject(((User) auth.getPrincipal()).getEmail())
+                .withSubject(((User) auth.getPrincipal()).getUserEmail())
                 // .withClaim("authorities",  user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
 //                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(HMAC512(SECRET.getBytes()));
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
-        res.addHeader("user_id", String.valueOf(user.getUserId()));
+        res.addHeader("user_email", String.valueOf(user.getUserEmail()));
         res.addHeader("first_name", user.getFirstName());
         //res.addHeader("last_name", user.getLastName());
     }

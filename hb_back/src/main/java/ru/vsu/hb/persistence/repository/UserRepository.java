@@ -8,15 +8,13 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, UUID> {
+public interface UserRepository extends JpaRepository<User, String> {
 
-    Optional<User> getByUserId(UUID userId);
-
-    Optional<User> findByEmail(String email);
+    Optional<User> findByUserEmail(String userEmail);
 
     @Override
     User save(User user);
 
-    void deleteByUserId(UUID userId);
+    void deleteByUserEmail(String userEmail);
 
 }

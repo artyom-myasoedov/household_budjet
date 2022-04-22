@@ -50,12 +50,12 @@ public class TransactionService {
 
     @Transactional
     public Result<TransactionDto, HBError> addTransaction(TransactionDto transaction) {
-        return categoryService.getByUserCategoryId(transaction.getUserId(), transaction.getCategoryId())
+        return categoryService.getByUserCategoryId(transaction.getUserEmail(), transaction.getCategoryId())
                 .mapSuccess(it -> repository.save(transaction.toEntity()))
                 .mapSuccess(TransactionDto::fromEntity)
                 .flatMapFailure(error -> {
                     if (transaction.getCategoryId() == null) {
-                        return userService.getDtoById(transaction.getUserId())
+                        return userService.getUserDtoByEmail(transaction.getUserEmail())
                                 .mapSuccess(user -> repository.save(transaction.toEntity()))
                                 .mapSuccess(TransactionDto::fromEntity);
                     }
@@ -66,7 +66,7 @@ public class TransactionService {
     @Transactional
     public Result<TransactionDto, HBError> updateTransaction(TransactionDto transaction) {
         var res = transaction.getCategoryId() == null ? Results.success(new Category()).mapFailure(it -> (HBError) it)
-                : categoryService.getByUserCategoryId(transaction.getUserId(), transaction.getCategoryId());
+                : categoryService.getByUserCategoryId(transaction.getUserEmail(), transaction.getCategoryId());
         return res.flatMapSuccess((category) -> Results.ofCallable(() -> repository.getByTransactionId(transaction.getTransactionId())
                                 .orElseThrow(() -> new IllegalStateException("not_found")))
                         .mapFailure(exception -> {
@@ -76,14 +76,14 @@ public class TransactionService {
                             throw new RuntimeException(exception);
                         }))
                 .flatMapSuccess(it -> Results.ofCallable(() -> {
-                            if (it.getUserId().equals(transaction.getUserId())) {
+                            if (it.getUserEmail().equals(transaction.getUserEmail())) {
                                 return TransactionDto.fromEntity(repository.save(transaction.toEntity()));
                             }
                             throw new RuntimeException("bad_request");
                         },
                         e -> {
                             if ("bad_request".equals(e.getMessage())) {
-                                return new BadRequestError("User with id = " + transaction.getUserId() + " doesn't have transaction with id = " + transaction.getTransactionId());
+                                return new BadRequestError("User with userEmail = " + transaction.getUserEmail() + " doesn't have transaction with id = " + transaction.getTransactionId());
                             }
                             throw new RuntimeException(e);
                         }
@@ -107,25 +107,25 @@ public class TransactionService {
                 });
     }
 
-    public Result<BigDecimal, HBError> getBalance(UUID userId) {
-        return userService.getDtoById(userId)
+    public Result<BigDecimal, HBError> getBalance(String userId) {
+        return userService.getUserDtoByEmail(userId)
                 .mapSuccess(user -> repository.getBalance(userId));
     }
 
     public Result<PageDto<TransactionDto>, HBError> getList(TransactionListRequest request) {
-        return userService.getDtoById(request.getUserId())
+        return userService.getUserDtoByEmail(request.getUserEmail())
                 .mapSuccess(user -> {
                     if (request.getTransactionType().equals(TransactionType.ALL)) {
-                        return repository.findByUser_UserId(
-                                request.getUserId(),
+                        return repository.findByUser_UserEmail(
+                                request.getUserEmail(),
                                 getPageable(request.getPage()));
                     } else if (request.getTransactionType().equals(TransactionType.IN)) {
-                        return repository.findByUser_UserIdAndCategoryIdIsNull(
-                                request.getUserId(),
+                        return repository.findByUser_UserEmailAndCategoryIdIsNull(
+                                request.getUserEmail(),
                                 getPageable(request.getPage()));
                     } else {
-                        return repository.findByUser_UserIdAndCategoryIdIsNotNull(
-                                request.getUserId(),
+                        return repository.findByUser_UserEmailAndCategoryIdIsNotNull(
+                                request.getUserEmail(),
                                 getPageable(request.getPage()));
                     }
                 })
@@ -133,9 +133,9 @@ public class TransactionService {
     }
 
     public Result<PageDto<TransactionDto>, HBError> getByCategoryName(TransactionByCategoryRequest request) {
-        return categoryService.getByUserCategoryId(request.getUserId(), request.getCategoryId())
-                .mapSuccess(category -> repository.findByUser_UserIdAndCategoryId(
-                        request.getUserId(),
+        return categoryService.getByUserCategoryId(request.getUserEmail(), request.getCategoryId())
+                .mapSuccess(category -> repository.findByUser_UserEmailAndCategoryId(
+                        request.getUserEmail(),
                         request.getCategoryId(),
                         getPageable(request.getPage())
                 ))

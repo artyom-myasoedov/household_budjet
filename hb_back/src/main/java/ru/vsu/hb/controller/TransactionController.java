@@ -30,7 +30,8 @@ public class TransactionController {
 
     @PostMapping
     public ResponseEntity<? super HBResponseData<? super TransactionDto>> addTransaction(
-            @RequestBody TransactionDto transaction) {
+            @RequestBody TransactionDto transaction, Principal principal) {
+        transaction.setUserEmail(principal.getName());
         return HBResponseBuilder.fromHBResult(service.addTransaction(transaction))
                 .build();
     }
@@ -57,22 +58,23 @@ public class TransactionController {
     }
 
     @GetMapping("/balance")
-    public ResponseEntity<? super HBResponseData<? super BigDecimal>> getBalance(
-            @RequestParam UUID userId) {
-        return HBResponseBuilder.fromHBResult(service.getBalance(userId))
+    public ResponseEntity<? super HBResponseData<? super BigDecimal>> getBalance(Principal principal) {
+        return HBResponseBuilder.fromHBResult(service.getBalance(principal.getName()))
                 .build();
     }
 
     @PostMapping("/list")
     public ResponseEntity<? super HBResponseData<? super PageDto<TransactionDto>>> getList(
-            @RequestBody TransactionListRequest request) {
+            @RequestBody TransactionListRequest request, Principal principal) {
+        request.setUserEmail(principal.getName());
         return HBResponseBuilder.fromHBResult(service.getList(request))
                 .build();
     }
 
     @PostMapping("/byCategory")
     public ResponseEntity<? super HBResponseData<? super PageDto<TransactionDto>>> getByCategory(
-            @RequestBody TransactionByCategoryRequest request) {
+            @RequestBody TransactionByCategoryRequest request, Principal principal) {
+        request.setUserEmail(principal.getName());
         return HBResponseBuilder.fromHBResult(service.getByCategoryName(request))
                 .build();
     }

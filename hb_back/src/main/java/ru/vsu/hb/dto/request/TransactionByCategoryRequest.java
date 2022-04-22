@@ -4,25 +4,25 @@ import java.util.UUID;
 
 public class TransactionByCategoryRequest {
 
-    private UUID userId;
+    private String userEmail;
     private UUID categoryId;
     private PageRequest page = new PageRequest();
 
     public TransactionByCategoryRequest() {
     }
 
-    public TransactionByCategoryRequest(UUID userId, UUID categoryId, PageRequest page) {
-        this.userId = userId;
+    public TransactionByCategoryRequest(String userEmail, UUID categoryId, PageRequest page) {
+        this.userEmail = userEmail;
         this.categoryId = categoryId;
         this.page = page;
     }
 
-    public UUID getUserId() {
-        return userId;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUserId(UUID userId) {
-        this.userId = userId;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public UUID getCategoryId() {

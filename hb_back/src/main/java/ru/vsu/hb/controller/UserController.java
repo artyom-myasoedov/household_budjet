@@ -21,13 +21,8 @@ import ru.vsu.hb.persistence.entity.User;
 import ru.vsu.hb.service.UserService;
 import ru.vsu.hb.utils.HBResponseBuilder;
 
-import java.util.UUID;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
-
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static ru.vsu.hb.security.SecurityConstants.*;
-import static ru.vsu.hb.utils.ControllerUtils.toHBResult;
 
 @RestController
 @RequestMapping("/user")
@@ -42,11 +37,11 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<? super HBResponseData<? super UserDto>> login(@RequestBody User user) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword(), user.getAuthorities()));
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserEmail(), user.getPassword(), user.getAuthorities()));
         String token = JWT.create().withSubject(((UserDetails) authentication.getPrincipal()).getUsername())
                 .sign(HMAC512(SECRET.getBytes()));
         var result = authentication.isAuthenticated()
-                ? userService.findUserByEmail(authentication.getName())
+                ? userService.getUserDtoByEmail(authentication.getName())
                 .mapSuccess(u -> {
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                     return u;
@@ -57,8 +52,8 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<? super HBResponseData<? super UserDto>> register(@RequestBody User user) {
-        var result = userService.findUserByEmail(user.getEmail())
-                .flatMapSuccess(u -> Results.failure(new HBError("client_error", "User with email " + user.getEmail() + " already exists"))
+        var result = userService.getUserDtoByEmail(user.getUserEmail())
+                .flatMapSuccess(u -> Results.failure(new HBError("client_error", "User with email " + user.getUserEmail() + " already exists"))
                         .mapSuccess(it -> (UserDto) it))
                 .flatMapFailure(error -> {
                     if (error instanceof EntityNotFoundError) {
@@ -81,8 +76,8 @@ public class UserController {
     }
 
     @PreAuthorize("hasAnyAuthority('USER')")
-    @GetMapping("/{userId}")
-    public ResponseEntity<? super HBResponseData<? super UserDto>> getUserById(@PathVariable UUID userId) {
-        return HBResponseBuilder.fromHBResult(userService.getDtoById(userId)).build();
+    @GetMapping("/{userEmail}")
+    public ResponseEntity<? super HBResponseData<? super UserDto>> getUserByEmail(@PathVariable String userEmail) {
+        return HBResponseBuilder.fromHBResult(userService.getUserDtoByEmail(userEmail)).build();
     }
 }
