@@ -14,9 +14,10 @@ create table hb.users_categories
 (
     user_id       uuid                  not null
         references hb.users,
+    category_id   uuid                  not null    default gen_random_uuid (),
     category_name varchar(30)           not null,
     is_default    boolean default false not null,
-    primary key (user_id, category_name)
+    primary key (user_id, category_id)
 );
 
 create table hb.transactions
@@ -27,7 +28,7 @@ create table hb.transactions
     create_time    timestamp default CURRENT_TIMESTAMP not null,
     user_id        uuid                                not null
         references hb.users,
-    category_name  varchar(50),
+    category_id    uuid,
     description    text
 );
 

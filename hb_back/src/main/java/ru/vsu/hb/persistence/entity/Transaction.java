@@ -1,7 +1,5 @@
 package ru.vsu.hb.persistence.entity;
 
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
@@ -41,19 +39,19 @@ public class Transaction {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "category_name")
-    private String categoryName;
+    @Column(name = "category_id")
+    private UUID categoryId;
 
     public Transaction() {
     }
 
-    public Transaction(UUID transactionId, UUID userId, BigDecimal sum, LocalDateTime createTime, String description, String categoryName) {
+    public Transaction(UUID transactionId, UUID userId, BigDecimal sum, LocalDateTime createTime, String description, UUID categoryId) {
         this.transactionId = transactionId;
         this.userId = userId;
         this.sum = sum;
         this.createTime = createTime;
         this.description = description;
-        this.categoryName = categoryName;
+        this.categoryId = categoryId;
     }
 
 
@@ -105,11 +103,11 @@ public class Transaction {
         this.description = description;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public UUID getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setCategoryId(UUID categoryId) {
+        this.categoryId = categoryId;
     }
 }
