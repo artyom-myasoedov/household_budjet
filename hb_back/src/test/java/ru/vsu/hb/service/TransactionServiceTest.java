@@ -146,7 +146,7 @@ class TransactionServiceTest {
     @Test
     public void getBalanceSuccess() {
         Mockito.when(userService.getUserDtoByEmail(any())).thenReturn(Results.success(new UserDto()));
-        Mockito.when(repository.getBalance(any())).thenReturn(BigDecimal.ONE);
+        Mockito.when(repository.getInBalance(any())).thenReturn(Optional.of(BigDecimal.ONE));
         var res = service.getBalance(IN_TRANSACTION_DTO.getUserEmail());
         assertEquals(BigDecimal.ONE, res.orElse(BigDecimal.ZERO));
     }
@@ -154,7 +154,7 @@ class TransactionServiceTest {
     @Test
     public void getBalanceFailure() {
         Mockito.when(userService.getUserDtoByEmail(any())).thenReturn(Results.failure(new HBError("", "")));
-        Mockito.when(repository.getBalance(any())).thenReturn(BigDecimal.ONE);
+        Mockito.when(repository.getInBalance(any())).thenReturn(Optional.of(BigDecimal.ONE));
         var res = service.getBalance(IN_TRANSACTION_DTO.getUserEmail());
         assertTrue(res.isFailure());
     }
