@@ -3,6 +3,7 @@ package ru.vsu.hb.dto;
 import ru.vsu.hb.persistence.entity.Category;
 import ru.vsu.hb.persistence.entity.UserCategoryId;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 public class CategoryDto {
@@ -10,11 +11,23 @@ public class CategoryDto {
     private UUID categoryId;
     private Boolean isDefault;
     private String categoryName;
+    private BigDecimal outSumLastMonth;
+
+    public CategoryDto() {
+    }
 
     public CategoryDto(UUID categoryId, Boolean isDefault, String categoryName) {
         this.isDefault = isDefault;
         this.categoryName = categoryName;
         this.categoryId = categoryId;
+    }
+
+    public BigDecimal getOutSumLastMonth() {
+        return outSumLastMonth;
+    }
+
+    public void setOutSumLastMonth(BigDecimal outSumLastMonth) {
+        this.outSumLastMonth = outSumLastMonth;
     }
 
     public Boolean getDefault() {

@@ -8,18 +8,18 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserStatisticsRecommendationsTest {
+class GlobalStatisticsTest {
 
     @Test
-    public void getCurrMonthExpensesSumTest() {
-        var stat = new UserStatisticsRecommendations();
-        stat.setCurrMonthExpenses(Map.of("1", BigDecimal.ONE, "2", BigDecimal.TEN, "3", BigDecimal.valueOf(5.3)));
-        assertEquals(BigDecimal.valueOf(16.3), stat.getCurrMonthExpensesSum());
+    public void getPrevMonthSumOutTest() {
+        var stat = new GlobalStatistics();
+        stat.setPrevMonthExpenses(Map.of("1", BigDecimal.ONE, "2", BigDecimal.ONE, "3", BigDecimal.ZERO));
+        assertEquals(BigDecimal.valueOf(2), stat.getPrevMonthSumOut());
     }
 
     @Test
-    public void getCurrMonthPercentsTest() {
-        var stat = new UserStatisticsRecommendations();
+    public void getPrevMonthPercents() {
+        var stat = new GlobalStatistics();
         stat.setCurrMonthExpenses(Map.of("1", BigDecimal.ONE, "2", BigDecimal.ONE, "3", BigDecimal.ZERO));
         var temp = Map.of("1", BigDecimal.valueOf(50).setScale(6, RoundingMode.HALF_UP), "2", BigDecimal.valueOf(50).setScale(6, RoundingMode.HALF_UP), "3", BigDecimal.ZERO.setScale(6, RoundingMode.HALF_UP));
         assertEquals(temp, stat.getCurrMothPercents());

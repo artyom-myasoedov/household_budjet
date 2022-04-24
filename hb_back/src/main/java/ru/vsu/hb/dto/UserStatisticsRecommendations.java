@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -67,7 +68,8 @@ public class UserStatisticsRecommendations {
         var sum = getCurrMonthExpensesSum();
         if (currMonthPercents == null) {
             currMonthPercents = currMonthExpenses.entrySet().stream()
-                    .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().divide(sum, 6, RoundingMode.HALF_UP)));
+                    .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue()
+                            .divide(sum, 6, RoundingMode.HALF_UP).multiply(BigDecimal.valueOf(100))));
         }
         return currMonthPercents;
     }
@@ -77,7 +79,8 @@ public class UserStatisticsRecommendations {
         var sum = getPrevMonthExpensesSum();
         if (prevMonthPercents == null) {
             prevMonthPercents = prevMonthExpenses.entrySet().stream()
-                    .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().divide(sum, 6, RoundingMode.HALF_UP)));
+                    .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue()
+                            .divide(sum, 6, RoundingMode.HALF_UP).multiply(BigDecimal.valueOf(100))));
         }
         return prevMonthPercents;
     }

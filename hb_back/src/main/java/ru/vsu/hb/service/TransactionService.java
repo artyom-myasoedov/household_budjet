@@ -145,6 +145,7 @@ public class TransactionService {
                 .mapSuccess(getPageToPageDtoFunction(request.getPage()));
     }
 
+
     private Sort getSort(PageRequest request) {
         return Sort.by(request.getSortOrder().equals(SortOrder.ASC) ? Sort.Direction.ASC : Sort.Direction.DESC,
                 request.getSortField() == null ? "createTime" : request.getSortField());
@@ -165,4 +166,7 @@ public class TransactionService {
                 request.getSortOrder());
     }
 
+    public Result<BigDecimal, HBError> getCurrMonthOutSum(String userEmail) {
+        return Results.success(repository.getSumForLastMonth(userEmail).orElse(BigDecimal.ZERO));
+    }
 }

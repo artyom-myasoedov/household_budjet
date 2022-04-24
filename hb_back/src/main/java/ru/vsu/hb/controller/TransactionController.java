@@ -79,4 +79,9 @@ public class TransactionController {
                 .build();
     }
 
+    @GetMapping("/currMonthOutSum")
+    public ResponseEntity<? super HBResponseData<? super BigDecimal>> getCurrMonthOutSum(Principal principal) {
+        return HBResponseBuilder.fromHBResult(service.getCurrMonthOutSum(principal.getName())).build();
+    }
+
 }

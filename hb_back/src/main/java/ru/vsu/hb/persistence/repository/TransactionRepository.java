@@ -36,4 +36,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, UUID> 
     Page<Transaction> findByUser_UserEmailAndCategoryIdIsNotNull(String userEmail, Pageable pageable);
 
     Page<Transaction> findByUser_UserEmail(String userEmail, Pageable pageable);
+
+    @Query("select sum(t.sum) from transactions t where t.categoryId is not null and t.userEmail = :userEmail and month(t.createTime) = month(current_timestamp())")
+    Optional<BigDecimal> getSumForLastMonth(String userEmail);
 }

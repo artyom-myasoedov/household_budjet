@@ -45,8 +45,7 @@ public class CategoryController {
     public ResponseEntity<? super HBResponseData<? super CategoryDto>> getCategoryById(
             Principal principal, @PathVariable UUID categoryId) {
         return HBResponseBuilder
-                .fromHBResult(service.getByUserCategoryId(principal.getName(), categoryId)
-                        .mapSuccess(CategoryDto::fromEntity))
+                .fromHBResult(service.getByUserCategoryId(principal.getName(), categoryId))
                 .build();
     }
 
