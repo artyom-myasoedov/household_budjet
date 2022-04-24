@@ -1,0 +1,57 @@
+<configuration scan="true">
+    <springProperty scope="context" name="JSON_LOG_DIRECTORY_LOCAL" source="logging.directory" defaultValue="logs"/>
+    <springProperty scope="context" name="JSON_LOG_DIRECTORY_REMOTE" source="logging.directory" defaultValue="logs"/>
+
+    <property name="JSON_LOG_PATH_LOCAL" value="${JSON_LOG_DIRECTORY_LOCAL}/rbp-sign-auth-scheme-service.log"/>
+    <property name="JSON_LOG_PATH_REMOTE" value="${JSON_LOG_DIRECTORY_REMOTE}/rbp-sign-auth-scheme-service.log"/>
+    <property name="traceInfo" value="[%X{traceId:-}/%X{spanId:-}]"/>
+
+    <conversionRule conversionWord="whitespace_exception"
+                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+
+    <logger name="org.springframework.ws.client.MessageTracing.sent" level="TRACE"/>
+    <logger name="org.springframework.ws.client.MessageTracing.received" level="TRACE"/>
+    <logger name="org.springframework.jdbc.core" level="DEBUG"/>
+    <logger name="org.zalando.logbook.Logbook" level="TRACE"/>
+    <logger name="brave.Tracer" level="WARN"/>
+
+    <appender name="json-stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <providers>
+                <provider class="net.logstash.logback.composite.loggingevent.MdcJsonProvider"/>
+                <provider class="net.logstash.logback.composite.loggingevent.StackTraceJsonProvider"/>
+            </providers>
+            <customFields>{"application_name":"hb-service"}</customFields>
+        </encoder>
+    </appender>
+
+    <appender name="line-stdout-dev" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>utf8</charset>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] ${traceInfo} %highlight(%-5level) %cyan(%-40.40logger{39}) : %message
+                %n%whitespace_exception
+            </pattern>
+        </encoder>
+    </appender>
+
+    <springProfile name="dev">
+        <appender name="json-file-local" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${JSON_LOG_PATH_LOCAL}</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${JSON_LOG_PATH_LOCAL}.%d{yyyy-MM-dd}.gz</fileNamePattern>
+                <maxHistory>3</maxHistory>
+            </rollingPolicy>
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+                <providers>
+                    <provider class="net.logstash.logback.composite.loggingevent.MdcJsonProvider"/>
+                </providers>
+                <customFields>{"application_name":"hb-service"}</customFields>
+            </encoder>
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="line-stdout-dev"/>
+            <appender-ref ref="json-file-local"/>
+        </root>
+    </springProfile>
+
+</configuration>

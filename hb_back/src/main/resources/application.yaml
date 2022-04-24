@@ -1,6 +1,11 @@
 server:
   port: 8080
+logging:
+  level:
+    ru.vsu.hb: debug
 spring:
+  profiles:
+    active: dev
   application:
     name: household-budget-service
   mvc:
