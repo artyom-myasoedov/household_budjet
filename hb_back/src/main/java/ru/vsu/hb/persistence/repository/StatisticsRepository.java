@@ -1,8 +1,8 @@
 package ru.vsu.hb.persistence.repository;
 
-import org.springframework.stereotype.Repository;
 import ru.vsu.hb.dto.CategoryDto;
 import ru.vsu.hb.dto.GlobalStatistics;
+import ru.vsu.hb.dto.UserStatisticsRecommendations;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -13,7 +13,7 @@ import java.util.Map;
 public interface StatisticsRepository {
 
 
-    Map<String, BigDecimal> getUserOutTransactionsSumForMonth(String email, List<CategoryDto> categories, LocalDateTime date);
+    UserStatisticsRecommendations getUserOutTransactionStatistics(String email);
 
     GlobalStatistics getGlobalStatistics();
 }

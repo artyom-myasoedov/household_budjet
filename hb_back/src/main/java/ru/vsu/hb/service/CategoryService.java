@@ -14,6 +14,7 @@ import ru.vsu.hb.persistence.entity.UserCategoryId;
 import ru.vsu.hb.persistence.repository.CategoryRepository;
 import ru.vsu.hb.persistence.repository.TransactionRepository;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,10 +29,15 @@ public class CategoryService {
     @Autowired
     UserService userService;
 
-    public Result<Category, HBError> getByUserCategoryId(String userEmail, UUID categoryID) {
+    public Result<CategoryDto, HBError> getByUserCategoryId(String userEmail, UUID categoryID) {
         return userService.getUserDtoByEmail(userEmail).flatMapSuccess(u -> Results.ofCallable(() ->
                         repository.getByUserCategoryId(new UserCategoryId(u.getUserEmail(), categoryID))
                                 .orElseThrow(() -> new IllegalStateException("not_found")))
+                .mapSuccess(CategoryDto::fromEntity)
+                .mapSuccess(it -> {
+                    it.setOutSumLastMonth(repository.getSumForLastMonth(userEmail, it.getCategoryId()).orElse(BigDecimal.ZERO));
+                    return it;
+                })
                 .mapFailure(exception -> {
                     if (exception instanceof IllegalStateException && "not_found".equals(exception.getMessage())) {
                         return new EntityNotFoundError("Category: " + categoryID + " and userEmail: " + u.getUserEmail() + " not found");
@@ -64,9 +70,11 @@ public class CategoryService {
         }
         return getByUserCategoryId(userEmail, category.getCategoryId())
                 .mapSuccess(editCategory -> {
-                    editCategory.setCategoryName(category.getCategoryName());
-                    editCategory.setUserCategoryId(new UserCategoryId(userEmail, category.getCategoryId()));
-                    return repository.save(editCategory);
+                    Category categoryEntity = new Category();
+                    categoryEntity.setCategoryName(category.getCategoryName());
+                    categoryEntity.setUserCategoryId(new UserCategoryId(userEmail, category.getCategoryId()));
+                    categoryEntity.setDefault(editCategory.getDefault());
+                    return repository.save(categoryEntity);
                 }).mapSuccess(CategoryDto::fromEntity);
 
     }
@@ -75,7 +83,10 @@ public class CategoryService {
         return userService.getUserDtoByEmail(userEmail)
                 .flatMapSuccess(u ->
                         Results.success(repository.getAllByUserCategoryId_UserEmail(u.getUserEmail())))
-                .mapSuccess(it -> it.stream().map(CategoryDto::fromEntity).collect(Collectors.toList()));
+                .mapSuccess(it -> it.stream().map(CategoryDto::fromEntity)
+                        .peek(category -> category.setOutSumLastMonth(repository.getSumForLastMonth(userEmail, category.getCategoryId())
+                                .orElse(BigDecimal.ZERO)))
+                        .collect(Collectors.toList()));
     }
 
 }

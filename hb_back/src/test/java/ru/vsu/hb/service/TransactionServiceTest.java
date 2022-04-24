@@ -5,6 +5,7 @@ import com.leakyabstractions.result.Results;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.data.domain.Page;
+import ru.vsu.hb.dto.CategoryDto;
 import ru.vsu.hb.dto.TransactionDto;
 import ru.vsu.hb.dto.UserDto;
 import ru.vsu.hb.dto.error.EntityNotFoundError;
@@ -46,7 +47,7 @@ class TransactionServiceTest {
 
     @Test
     public void addOutTransactionSuccess() {
-        Mockito.when(categoryService.getByUserCategoryId(any(), any())).thenReturn(Results.success(new Category()));
+        Mockito.when(categoryService.getByUserCategoryId(any(), any())).thenReturn(Results.success(new CategoryDto()));
         Mockito.when(repository.save(any())).thenReturn(OUT_TRANSACTION_ENTITY);
         Result<TransactionDto, HBError> res = service.addTransaction(OUT_TRANSACTION_DTO);
         assertTrue(res.isSuccess());
@@ -84,7 +85,7 @@ class TransactionServiceTest {
     @Test
     public void updateOutTransactionSuccess() {
         Mockito.when(categoryService.getByUserCategoryId(any(), any()))
-                .thenReturn(Results.success(new Category()));
+                .thenReturn(Results.success(new CategoryDto()));
         Mockito.when(repository.save(any())).thenReturn(OUT_TRANSACTION_ENTITY);
         Mockito.when(repository.getByTransactionId(any())).thenReturn(Optional.of(OUT_TRANSACTION_ENTITY));
         Result<TransactionDto, HBError> res = service.updateTransaction(OUT_TRANSACTION_DTO);
@@ -94,7 +95,7 @@ class TransactionServiceTest {
     @Test
     public void updateOutTransactionTransactionNotFound() {
         Mockito.when(categoryService.getByUserCategoryId(any(), any()))
-                .thenReturn(Results.success(new Category()));
+                .thenReturn(Results.success(new CategoryDto()));
         Mockito.when(repository.save(any())).thenReturn(OUT_TRANSACTION_ENTITY);
         Mockito.when(repository.getByTransactionId(any())).thenReturn(Optional.empty());
         Result<TransactionDto, HBError> res = service.updateTransaction(OUT_TRANSACTION_DTO);
@@ -104,7 +105,7 @@ class TransactionServiceTest {
     @Test
     public void updateOutTransactionUserNotFound() {
         Mockito.when(categoryService.getByUserCategoryId(any(), any()))
-                .thenReturn(Results.success(new Category()));
+                .thenReturn(Results.success(new CategoryDto()));
         Mockito.when(repository.save(any())).thenReturn(OUT_TRANSACTION_ENTITY);
         Mockito.when(repository.getByTransactionId(any())).thenReturn(Optional.of(IN_TRANSACTION_ENTITY));
         Result<TransactionDto, HBError> res = service.updateTransaction(OUT_TRANSACTION_DTO);
@@ -114,7 +115,7 @@ class TransactionServiceTest {
     @Test
     public void updateInTransactionSuccess() {
         Mockito.when(categoryService.getByUserCategoryId(any(), any()))
-                .thenReturn(Results.success(new Category()));
+                .thenReturn(Results.success(new CategoryDto()));
         Mockito.when(repository.save(any())).thenReturn(IN_TRANSACTION_ENTITY);
         Mockito.when(repository.getByTransactionId(any())).thenReturn(Optional.of(IN_TRANSACTION_ENTITY));
         Result<TransactionDto, HBError> res = service.updateTransaction(IN_TRANSACTION_DTO);
@@ -146,7 +147,7 @@ class TransactionServiceTest {
     @Test
     public void getBalanceSuccess() {
         Mockito.when(userService.getUserDtoByEmail(any())).thenReturn(Results.success(new UserDto()));
-        Mockito.when(repository.getBalance(any())).thenReturn(BigDecimal.ONE);
+        Mockito.when(repository.getInBalance(any())).thenReturn(Optional.of(BigDecimal.ONE));
         var res = service.getBalance(IN_TRANSACTION_DTO.getUserEmail());
         assertEquals(BigDecimal.ONE, res.orElse(BigDecimal.ZERO));
     }
@@ -154,7 +155,7 @@ class TransactionServiceTest {
     @Test
     public void getBalanceFailure() {
         Mockito.when(userService.getUserDtoByEmail(any())).thenReturn(Results.failure(new HBError("", "")));
-        Mockito.when(repository.getBalance(any())).thenReturn(BigDecimal.ONE);
+        Mockito.when(repository.getInBalance(any())).thenReturn(Optional.of(BigDecimal.ONE));
         var res = service.getBalance(IN_TRANSACTION_DTO.getUserEmail());
         assertTrue(res.isFailure());
     }
@@ -180,7 +181,7 @@ class TransactionServiceTest {
     @Test
     public void getByCategorySuccess() {
         var req = new TransactionByCategoryRequest();
-        Mockito.when(categoryService.getByUserCategoryId(any(), any())).thenReturn(Results.success(new Category()));
+        Mockito.when(categoryService.getByUserCategoryId(any(), any())).thenReturn(Results.success(new CategoryDto()));
         Mockito.when(repository.findByUser_UserEmailAndCategoryId(any(), any(), any())).thenReturn(Page.empty());
         var res = service.getByCategoryName(req);
         assertTrue(res.isSuccess());

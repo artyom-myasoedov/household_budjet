@@ -107,9 +107,12 @@ public class TransactionService {
                 });
     }
 
-    public Result<BigDecimal, HBError> getBalance(String userId) {
-        return userService.getUserDtoByEmail(userId)
-                .mapSuccess(user -> repository.getBalance(userId));
+    public Result<BigDecimal, HBError> getBalance(String userEmail) {
+        return userService.getUserDtoByEmail(userEmail)
+                .mapSuccess(user -> repository.getInBalance(userEmail)
+                        .orElse(BigDecimal.ZERO)
+                        .subtract(repository.getOutBalance(userEmail)
+                                .orElse(BigDecimal.ZERO)));
     }
 
     public Result<PageDto<TransactionDto>, HBError> getList(TransactionListRequest request) {
@@ -142,6 +145,7 @@ public class TransactionService {
                 .mapSuccess(getPageToPageDtoFunction(request.getPage()));
     }
 
+
     private Sort getSort(PageRequest request) {
         return Sort.by(request.getSortOrder().equals(SortOrder.ASC) ? Sort.Direction.ASC : Sort.Direction.DESC,
                 request.getSortField() == null ? "createTime" : request.getSortField());
@@ -162,4 +166,7 @@ public class TransactionService {
                 request.getSortOrder());
     }
 
+    public Result<BigDecimal, HBError> getCurrMonthOutSum(String userEmail) {
+        return Results.success(repository.getSumForLastMonth(userEmail).orElse(BigDecimal.ZERO));
+    }
 }

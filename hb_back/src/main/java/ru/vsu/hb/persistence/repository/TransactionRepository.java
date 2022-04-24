@@ -23,8 +23,11 @@ public interface TransactionRepository extends JpaRepository<Transaction, UUID> 
 
     Integer deleteAllByCategoryIdAndUserEmail(UUID categoryId, String userEmail);
 
-    @Query(nativeQuery = true, value = "SELECT (SELECT SUM(sum) FROM hb.transactions where user_email = ?1 and category_name is null) - (SELECT SUM(sum) FROM hb.transactions where user_email = ?1 and category_name is not null)")
-    BigDecimal getBalance(String userEmail);
+    @Query(nativeQuery = true, value = "SELECT SUM(sum) FROM hb.transactions where user_email = ?1 and category_id is null")
+    Optional<BigDecimal> getInBalance(String userEmail);
+
+    @Query(nativeQuery = true, value = "SELECT SUM(sum) FROM hb.transactions where user_email = ?1 and category_id is not null")
+    Optional<BigDecimal> getOutBalance(String userEmail);
 
     Page<Transaction> findByUser_UserEmailAndCategoryId(String userEmail, UUID categoryId, Pageable pageable);
 
@@ -33,4 +36,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, UUID> 
     Page<Transaction> findByUser_UserEmailAndCategoryIdIsNotNull(String userEmail, Pageable pageable);
 
     Page<Transaction> findByUser_UserEmail(String userEmail, Pageable pageable);
+
+    @Query("select sum(t.sum) from transactions t where t.categoryId is not null and t.userEmail = :userEmail and month(t.createTime) = month(current_timestamp())")
+    Optional<BigDecimal> getSumForLastMonth(String userEmail);
 }
