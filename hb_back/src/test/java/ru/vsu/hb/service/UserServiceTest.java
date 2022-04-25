@@ -1,12 +1,10 @@
 package ru.vsu.hb.service;
 
-import com.leakyabstractions.result.Results;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import ru.vsu.hb.dto.UserDto;
 import ru.vsu.hb.persistence.entity.User;
 import ru.vsu.hb.persistence.repository.UserRepository;
-
 
 import java.util.Optional;
 
@@ -17,27 +15,36 @@ class UserServiceTest {
 
     private UserRepository repository = Mockito.mock(UserRepository.class);
     private UserService userService = new UserService(repository);
-    private CategoryService categoryService = Mockito.mock(CategoryService.class);
 
     private User USER = new User("aaa@gmail.com", "12345", "Name");
-
-    private UserDto USER_DTO = UserDto.fromEntity(USER);
 
     @Test
     public void createUserSuccess() {
         Mockito.when(repository.save(any())).thenReturn(USER);
         var res = userService.createUser(USER);
-        assertNotNull(res.getUserEmail());
+        assertEquals(res.getUserEmail(), USER.getUserEmail());
     }
 
     @Test
     public void editUserSuccess(){
-        Mockito.when(repository.findByUserEmail(USER.getUserEmail())).thenReturn(Optional.of(USER));
-        Mockito.when(userService.getUserByEmail(USER.getUserEmail())).thenReturn(Results.success(USER));
-        Mockito.when(userService.editUser(any())).thenReturn(Results.success(USER_DTO));
+        Mockito.when(repository.findByUserEmail(any())).thenReturn(Optional.of(USER));
+        Mockito.when(repository.save(any())).thenReturn(USER);
         var res = userService.editUser(USER);
         assertTrue(res.isSuccess());
     }
 
+    @Test
+    public void getUserByEmailSuccess(){
+        Mockito.when(repository.findByUserEmail(any())).thenReturn(Optional.of(USER));
+        var res = userService.getUserByEmail(USER.getUserEmail());
+        assertTrue(res.isSuccess());
+    }
+
+    @Test
+    public void getUserDtoByEmailSuccess(){
+        Mockito.when(repository.findByUserEmail(any())).thenReturn(Optional.of(USER));
+        var res = userService.getUserDtoByEmail(USER.getUserEmail());
+        assertTrue(res.isSuccess());
+    }
 
 }
