@@ -16,6 +16,15 @@ public class Category {
     @Column(name = "category_name")
     private String categoryName;
 
+    public Category() {
+    }
+
+    public Category(UserCategoryId userCategoryId, Boolean isDefault, String categoryName) {
+        this.userCategoryId = userCategoryId;
+        this.isDefault = isDefault;
+        this.categoryName = categoryName;
+    }
+
     public String getCategoryName() {
         return categoryName;
     }
