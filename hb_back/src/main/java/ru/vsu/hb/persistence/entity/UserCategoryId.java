@@ -17,7 +17,6 @@ public class UserCategoryId implements Serializable {
     private String userEmail;
 
     @Column(name = "category_id")
-    @Generated(GenerationTime.INSERT)
     private UUID categoryId = UUID.randomUUID();
 
     public UserCategoryId(String userEmail, UUID categoryId) {

@@ -5,21 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ea785690-e096-4d85-82a5-93916f618502" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/controller/CategoryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/dto/CategoryDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/controller/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/controller/TransactionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/dto/TransactionDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/dto/TransactionDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/dto/request/TransactionByCategoryRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/dto/request/TransactionByCategoryRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/dto/DefaultCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44392913-de6c-42a6-9338-5a21a641759e.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/44392913-de6c-42a6-9338-5a21a641759e.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44392913-de6c-42a6-9338-5a21a641759e/storage_v2/_src_/database/postgres.edMnLQ/schema/hb.-gwAAA.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/44392913-de6c-42a6-9338-5a21a641759e/storage_v2/_src_/database/postgres.edMnLQ/schema/hb.-gwAAA.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44392913-de6c-42a6-9338-5a21a641759e/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/44392913-de6c-42a6-9338-5a21a641759e/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/entity/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/entity/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/entity/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/entity/Transaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/entity/UserCategoryId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/entity/UserCategoryId.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/repository/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/repository/CategoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/repository/TransactionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/repository/TransactionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/service/CategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/service/TransactionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/service/TransactionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/v1/1.0/BOK-001-202204070009.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/v1/1.0/BOK-001-202204070009.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/vsu/hb/service/TransactionServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/vsu/hb/service/TransactionServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +28,9 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand />
@@ -47,6 +44,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -91,16 +89,14 @@
       <recent name="ru.vsu.hb.security" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.TransactionServiceTest">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="Spring Boot.HouseHoldBudgetApplication">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -172,5 +168,31 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ru/vsu/hb/controller/UserController.java</url>
+          <line>70</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ru/vsu/hb/service/CategoryService.java</url>
+          <line>51</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ru/vsu/hb/service/CategoryService.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ru/vsu/hb/dto/DefaultCategory.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
