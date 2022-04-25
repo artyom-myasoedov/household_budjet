@@ -24,7 +24,7 @@ import static ru.vsu.hb.utils.ControllerUtils.toHBResult;
 @PreAuthorize("hasAnyAuthority('USER')")
 @RestController
 @RequestMapping(value = "/transaction", produces = {"application/json"})
-@Api(description = "Траназкция(пополнение или расход))")
+@Api(description = "Транзакция(пополнение или расход)")
 public class TransactionController {
 
     @Autowired
