@@ -1,23 +1,32 @@
 package ru.vsu.hb.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import ru.vsu.hb.persistence.entity.Transaction;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@ApiModel(description = "Транзакция(пополнение или расход)")
 public class TransactionDto {
 
+    @ApiModelProperty("Идентификатор транзакции")
     private UUID transactionId;
 
+    @ApiModelProperty("Email пользователя")
     private String userEmail;
 
+    @ApiModelProperty("Сумма транзакции")
     private BigDecimal sum;
 
+    @ApiModelProperty("Время транзакции")
     private LocalDateTime createTime;
 
+    @ApiModelProperty("Описание транзакции")
     private String description;
 
+    @ApiModelProperty("Идентификатор категории, на которую была совершена трата(null в случае пополнения)")
     private UUID categoryId;
 
     public TransactionDto() {

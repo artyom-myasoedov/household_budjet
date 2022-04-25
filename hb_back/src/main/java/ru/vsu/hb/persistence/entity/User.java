@@ -1,5 +1,7 @@
 package ru.vsu.hb.persistence.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,16 +12,20 @@ import java.util.Collection;
 
 @Entity
 @Table(schema = "hb", name = "users")
+@ApiModel(description = "Пользователь")
 public class User implements UserDetails {
 
     @Id
     @Column(name = "user_email")
+    @ApiModelProperty("Email пользователя")
     private String userEmail;
 
     @Column(name = "password")
+    @ApiModelProperty("Пароль пользователя")
     private String password;
 
     @Column(name = "first_name")
+    @ApiModelProperty("Имя пользователя")
     private String firstName;
 
     public User() {

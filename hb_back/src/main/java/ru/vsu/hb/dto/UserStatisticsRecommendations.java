@@ -1,6 +1,8 @@
 package ru.vsu.hb.dto;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -9,17 +11,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@ApiModel(description = "Статистика по пользователю и рекомендации")
 public class UserStatisticsRecommendations {
 
+    @ApiModelProperty(value = "Отображение названий категорий на расходы по ним в текущем месяце")
     private Map<String, BigDecimal> currMonthExpenses;
+    @ApiModelProperty(value = "Отображение названий категорий на расходы по ним в предыдущем месяце")
     private Map<String, BigDecimal> prevMonthExpenses;
+    @ApiModelProperty(value = "Список рекомендаций")
     private List<String> recommendations;
+    @ApiModelProperty(value = "Сумма расходов в текущем месяце")
     private BigDecimal currMonthSumOut;
+    @ApiModelProperty(value = "Сумма расходов в предыдущем месяце")
     private BigDecimal prevMonthSumOut;
+    @ApiModelProperty(value = "Отображение названий категорий на их долю от общих расходов в текущем месяце")
     private Map<String, BigDecimal> currMonthPercents;
+    @ApiModelProperty(value = "Отображение названий категорий на их долю от общих расходов в предыдущем месяце")
     private Map<String, BigDecimal> prevMonthPercents;
-    private BigDecimal currMonthSumIn;
+    @ApiModelProperty(value = "Сумма пополнений в текущем месяце")
     private BigDecimal prevMonthSumIn;
+    @ApiModelProperty(value = "Сумма пополнений в предыдущем месяце")
+    private BigDecimal currMonthSumIn;
 
     public UserStatisticsRecommendations() {
     }

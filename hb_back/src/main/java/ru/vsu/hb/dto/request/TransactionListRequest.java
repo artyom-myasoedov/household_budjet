@@ -1,11 +1,17 @@
 package ru.vsu.hb.dto.request;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import ru.vsu.hb.dto.TransactionType;
 
+@ApiModel(description = "Запрос списка транзакций пользователя")
 public class TransactionListRequest {
 
+    @ApiModelProperty("Email пользователя")
     private String userEmail;
+    @ApiModelProperty("Тип транзакции(пополнение, расход ил все)")
     private TransactionType transactionType = TransactionType.ALL;
+    @ApiModelProperty("Пагинация")
     private PageRequest page = new PageRequest();
 
     public TransactionListRequest() {

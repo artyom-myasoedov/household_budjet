@@ -1,15 +1,21 @@
 package ru.vsu.hb.dto;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@ApiModel(description = "Статистика по всем пользователям")
 public class GlobalStatistics {
 
+    @ApiModelProperty(value = "Отображение названия категории на среднюю сумму расходов по ней среди всех пользователей в текущем месяце")
     private Map<String, BigDecimal> currMonthExpenses;
+    @ApiModelProperty(value = "Отображение названия категории на среднюю сумму расходов по ней среди всех пользователей в предыдущем месяце")
     private Map<String, BigDecimal> prevMonthExpenses;
 
     public GlobalStatistics() {

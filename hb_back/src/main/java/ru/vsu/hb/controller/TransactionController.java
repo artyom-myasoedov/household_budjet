@@ -1,5 +1,6 @@
 package ru.vsu.hb.controller;
 
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +23,19 @@ import static ru.vsu.hb.utils.ControllerUtils.toHBResult;
 
 @PreAuthorize("hasAnyAuthority('USER')")
 @RestController
-@RequestMapping("/transaction")
+@RequestMapping(value = "/transaction", produces = {"application/json"})
+@Api(description = "Траназкция(пополнение или расход))")
 public class TransactionController {
 
     @Autowired
     private TransactionService service;
 
     @PostMapping
-    public ResponseEntity<? super HBResponseData<? super TransactionDto>> addTransaction(
+    @ApiImplicitParams(
+            @ApiImplicitParam(name="Authorization", paramType = "header", value = "Bearer token")
+    )
+    @ApiOperation(value = "Добавление транзакции к пользователю")
+    public ResponseEntity<? extends HBResponseData<? extends TransactionDto>> addTransaction(
             @RequestBody TransactionDto transaction, Principal principal) {
         transaction.setUserEmail(principal.getName());
         return HBResponseBuilder.fromHBResult(service.addTransaction(transaction))
@@ -37,34 +43,54 @@ public class TransactionController {
     }
 
     @PutMapping
-    public ResponseEntity<? super HBResponseData<? super TransactionDto>> updateTransaction(
+    @ApiImplicitParams(
+            @ApiImplicitParam(name="Authorization", paramType = "header", value = "Bearer token")
+    )
+    @ApiOperation(value = "Редактирование транзакции")
+    public ResponseEntity<? extends HBResponseData<? extends TransactionDto>> updateTransaction(
             @RequestBody TransactionDto transaction) {
         return HBResponseBuilder.fromHBResult(service.updateTransaction(transaction))
                 .build();
     }
 
     @DeleteMapping
-    public ResponseEntity<? super HBResponseData<? super Integer>> deleteTransaction(
-            @RequestParam UUID transactionId) {
+    @ApiImplicitParams(
+            @ApiImplicitParam(name="Authorization", paramType = "header", value = "Bearer token")
+    )
+    @ApiOperation(value = "Удаление транзакции по id")
+    public ResponseEntity<? extends HBResponseData<? extends Integer>> deleteTransaction(
+            @RequestParam @ApiParam(value = "Идентификато транзакции") UUID transactionId) {
         return HBResponseBuilder.fromHBResult(service.deleteByTransactionId(transactionId))
                 .build();
     }
 
     @GetMapping("/{transactionId}")
-    public ResponseEntity<? super HBResponseData<? super TransactionDto>> getTransactionById(
-            @PathVariable UUID transactionId) {
+    @ApiImplicitParams(
+            @ApiImplicitParam(name="Authorization", paramType = "header", value = "Bearer token")
+    )
+    @ApiOperation(value = "Получение транзакции по id")
+    public ResponseEntity<? extends HBResponseData<? extends TransactionDto>> getTransactionById(
+            @PathVariable @ApiParam(value = "Идентификато транзакции") UUID transactionId) {
         return HBResponseBuilder.fromHBResult(service.getByTransactionId(transactionId))
                 .build();
     }
 
     @GetMapping("/balance")
-    public ResponseEntity<? super HBResponseData<? super BigDecimal>> getBalance(Principal principal) {
+    @ApiImplicitParams(
+            @ApiImplicitParam(name="Authorization", paramType = "header", value = "Bearer token")
+    )
+    @ApiOperation(value = "Получение баланса пользователя")
+    public ResponseEntity<? extends HBResponseData<? extends BigDecimal>> getBalance(Principal principal) {
         return HBResponseBuilder.fromHBResult(service.getBalance(principal.getName()))
                 .build();
     }
 
     @PostMapping("/list")
-    public ResponseEntity<? super HBResponseData<? super PageDto<TransactionDto>>> getList(
+    @ApiImplicitParams(
+            @ApiImplicitParam(name="Authorization", paramType = "header", value = "Bearer token")
+    )
+    @ApiOperation(value = "Получение списка транзакций пользователя")
+    public ResponseEntity<? extends HBResponseData<? extends PageDto<TransactionDto>>> getList(
             @RequestBody TransactionListRequest request, Principal principal) {
         request.setUserEmail(principal.getName());
         return HBResponseBuilder.fromHBResult(service.getList(request))
@@ -72,7 +98,11 @@ public class TransactionController {
     }
 
     @PostMapping("/byCategory")
-    public ResponseEntity<? super HBResponseData<? super PageDto<TransactionDto>>> getByCategory(
+    @ApiImplicitParams(
+            @ApiImplicitParam(name="Authorization", paramType = "header", value = "Bearer token")
+    )
+    @ApiOperation(value = "Получение списка транзакций пользователя в определённой категории")
+    public ResponseEntity<? extends HBResponseData<? extends PageDto<TransactionDto>>> getByCategory(
             @RequestBody TransactionByCategoryRequest request, Principal principal) {
         request.setUserEmail(principal.getName());
         return HBResponseBuilder.fromHBResult(service.getByCategoryName(request))
@@ -80,7 +110,11 @@ public class TransactionController {
     }
 
     @GetMapping("/currMonthOutSum")
-    public ResponseEntity<? super HBResponseData<? super BigDecimal>> getCurrMonthOutSum(Principal principal) {
+    @ApiImplicitParams(
+            @ApiImplicitParam(name="Authorization", paramType = "header", value = "Bearer token")
+    )
+    @ApiOperation(value = "Получение суммы расходов на все категории за текущий месяц")
+    public ResponseEntity<? extends HBResponseData<? extends BigDecimal>> getCurrMonthOutSum(Principal principal) {
         return HBResponseBuilder.fromHBResult(service.getCurrMonthOutSum(principal.getName())).build();
     }
 

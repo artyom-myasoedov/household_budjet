@@ -10,14 +10,14 @@ import static ru.vsu.hb.security.SecurityConstants.HEADER_STRING;
 
 public class HBResponseBuilder<T> {
 
-    private ResponseEntity<? super HBResponseData<? super T>> response;
+    private ResponseEntity<? extends HBResponseData<? extends T>> response;
 
-    public HBResponseBuilder(ResponseEntity<? super HBResponseData<? super T>> response) {
+    public HBResponseBuilder(ResponseEntity<? extends HBResponseData<T>> response) {
         this.response = response;
     }
 
     public static <T> HBResponseBuilder<T> fromHBResult(Result<T, HBError> result) {
-        return new HBResponseBuilder<>(ControllerUtils.toHBResult(result));
+        return new HBResponseBuilder<T>(ControllerUtils.toHBResult(result));
     }
 
     public HBResponseBuilder<T> withAuthToken(String token) {
@@ -33,7 +33,7 @@ public class HBResponseBuilder<T> {
         return this;
     }
 
-    public ResponseEntity<? super HBResponseData<? super T>> build() {
+    public ResponseEntity<? extends HBResponseData<? extends T>> build() {
         return response;
     }
 }
