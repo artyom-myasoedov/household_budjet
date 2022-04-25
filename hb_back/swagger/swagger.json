@@ -1,7 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "HB Service"
+    "title": "HB Service",
+    "version:: "1.0"
   },
   "host": "localhost:8080",
   "basePath": "/",
