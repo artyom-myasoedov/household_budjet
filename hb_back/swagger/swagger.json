@@ -2,7 +2,7 @@
 // http://localhost:8080/v3/api-docs
 
 {
-  "openapi": "3.0.3",
+  "openapi": 3.0.3,
   "info": {
     "title": "HB Service"
   },
