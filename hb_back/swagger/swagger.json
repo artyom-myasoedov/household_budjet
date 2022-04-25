@@ -1,17 +1,10 @@
-// 20220425210030
-// http://localhost:8080/v3/api-docs
-
 {
   "openapi": "3.0.3",
   "info": {
     "title": "HB Service"
   },
-  "servers": [
-    {
-      "url": "http://localhost:8080",
-      "description": "Inferred Url"
-    }
-  ],
+  "host": "localhost:8080",
+  "basePath": "/",
   "tags": [
     {
       "name": "category-controller",
@@ -38,10 +31,13 @@
         ],
         "summary": "Получение списка категорий для пользователя",
         "operationId": "getAllCategoriesUsingGET",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "Authorization",
             "in": "header",
+            "name": "Authorization",
             "description": "Bearer token",
             "required": false
           },
@@ -49,79 +45,15 @@
             "name": "name",
             "in": "query",
             "required": false,
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HBResponseData«List«CategoryDto»»"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "category-controller"
-        ],
-        "summary": "Обновление категории расходов пользователя",
-        "operationId": "updateCategoryUsingPUT",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Bearer token",
-            "required": false
-          },
-          {
-            "name": "name",
-            "in": "query",
-            "required": false,
-            "style": "form",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/HBResponseData«List«CategoryDto»»"
             }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CategoryDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HBResponseData«CategoryDto»"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Created"
           },
           "401": {
             "description": "Unauthorized"
@@ -140,41 +72,96 @@
         ],
         "summary": "Добавление категории расходов к пользователю",
         "operationId": "addCategoryUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "Authorization",
             "in": "header",
+            "name": "Authorization",
             "description": "Bearer token",
             "required": false
+          },
+          {
+            "in": "body",
+            "name": "category",
+            "description": "category",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CategoryDto"
+            }
           },
           {
             "name": "name",
             "in": "query",
             "required": false,
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CategoryDto"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HBResponseData«CategoryDto»"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/HBResponseData«CategoryDto»"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "category-controller"
+        ],
+        "summary": "Обновление категории расходов пользователя",
+        "operationId": "updateCategoryUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token",
+            "required": false
+          },
+          {
+            "in": "body",
+            "name": "category",
+            "description": "category",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CategoryDto"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HBResponseData«CategoryDto»"
             }
           },
           "201": {
@@ -197,43 +184,36 @@
         ],
         "summary": "Удаление категории расходов у пользователя",
         "operationId": "removeCategoryUsingDELETE",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "Authorization",
             "in": "header",
+            "name": "Authorization",
             "description": "Bearer token",
             "required": false
-          },
-          {
-            "name": "name",
-            "in": "query",
-            "required": false,
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
           },
           {
             "name": "categoryId",
             "in": "query",
             "description": "Идентификатор категории",
             "required": true,
-            "style": "form",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HBResponseData«int»"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/HBResponseData«int»"
             }
           },
           "204": {
@@ -255,43 +235,36 @@
         ],
         "summary": "Получение категории по id",
         "operationId": "getCategoryByIdUsingGET",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "Authorization",
             "in": "header",
+            "name": "Authorization",
             "description": "Bearer token",
             "required": false
-          },
-          {
-            "name": "name",
-            "in": "query",
-            "required": false,
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
           },
           {
             "name": "categoryId",
             "in": "path",
             "description": "Идентификатор категории",
             "required": true,
-            "style": "simple",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HBResponseData«CategoryDto»"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/HBResponseData«CategoryDto»"
             }
           },
           "401": {
@@ -313,15 +286,14 @@
         ],
         "summary": "Получение статистики по всем пользователям",
         "operationId": "getGlobalUsingGET",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HBResponseData«GlobalStatistics»"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/HBResponseData«GlobalStatistics»"
             }
           },
           "401": {
@@ -343,10 +315,13 @@
         ],
         "summary": "Получение статистики и рекомендаций для пользователя",
         "operationId": "getByUserIdUsingGET",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "Authorization",
             "in": "header",
+            "name": "Authorization",
             "description": "Bearer token",
             "required": false
           },
@@ -354,21 +329,14 @@
             "name": "name",
             "in": "query",
             "required": false,
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HBResponseData«UserStatisticsRecommendations»"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/HBResponseData«UserStatisticsRecommendations»"
             }
           },
           "401": {
@@ -384,38 +352,46 @@
       }
     },
     "/transaction": {
-      "put": {
+      "post": {
         "tags": [
           "transaction-controller"
         ],
-        "summary": "Редактирование транзакции",
-        "operationId": "updateTransactionUsingPUT",
+        "summary": "Добавление транзакции к пользователю",
+        "operationId": "addTransactionUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "Authorization",
             "in": "header",
+            "name": "Authorization",
             "description": "Bearer token",
             "required": false
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TransactionDto"
-              }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "transaction",
+            "description": "transaction",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransactionDto"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HBResponseData«TransactionDto»"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/HBResponseData«TransactionDto»"
             }
           },
           "201": {
@@ -432,47 +408,40 @@
           }
         }
       },
-      "post": {
+      "put": {
         "tags": [
           "transaction-controller"
         ],
-        "summary": "Добавление транзакции к пользователю",
-        "operationId": "addTransactionUsingPOST",
+        "summary": "Редактирование транзакции",
+        "operationId": "updateTransactionUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "Authorization",
             "in": "header",
+            "name": "Authorization",
             "description": "Bearer token",
             "required": false
           },
           {
-            "name": "name",
-            "in": "query",
-            "required": false,
-            "style": "form",
+            "in": "body",
+            "name": "transaction",
+            "description": "transaction",
+            "required": true,
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/TransactionDto"
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TransactionDto"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HBResponseData«TransactionDto»"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/HBResponseData«TransactionDto»"
             }
           },
           "201": {
@@ -495,10 +464,13 @@
         ],
         "summary": "Удаление транзакции по id",
         "operationId": "deleteTransactionUsingDELETE",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "Authorization",
             "in": "header",
+            "name": "Authorization",
             "description": "Bearer token",
             "required": false
           },
@@ -507,22 +479,15 @@
             "in": "query",
             "description": "Идентификато транзакции",
             "required": true,
-            "style": "form",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HBResponseData«int»"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/HBResponseData«int»"
             }
           },
           "204": {
@@ -544,10 +509,13 @@
         ],
         "summary": "Получение баланса пользователя",
         "operationId": "getBalanceUsingGET",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "Authorization",
             "in": "header",
+            "name": "Authorization",
             "description": "Bearer token",
             "required": false
           },
@@ -555,21 +523,14 @@
             "name": "name",
             "in": "query",
             "required": false,
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HBResponseData«bigdecimal»"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/HBResponseData«bigdecimal»"
             }
           },
           "401": {
@@ -591,10 +552,16 @@
         ],
         "summary": "Получение списка транзакций пользователя в определённой категории",
         "operationId": "getByCategoryUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "Authorization",
             "in": "header",
+            "name": "Authorization",
             "description": "Bearer token",
             "required": false
           },
@@ -602,30 +569,23 @@
             "name": "name",
             "in": "query",
             "required": false,
-            "style": "form",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "request",
+            "description": "request",
+            "required": true,
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/TransactionByCategoryRequest"
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TransactionByCategoryRequest"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HBResponseData«PageDto«TransactionDto»»"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/HBResponseData«PageDto«TransactionDto»»"
             }
           },
           "201": {
@@ -650,10 +610,13 @@
         ],
         "summary": "Получение суммы расходов на все категории за текущий месяц",
         "operationId": "getCurrMonthOutSumUsingGET",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "Authorization",
             "in": "header",
+            "name": "Authorization",
             "description": "Bearer token",
             "required": false
           },
@@ -661,21 +624,14 @@
             "name": "name",
             "in": "query",
             "required": false,
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HBResponseData«bigdecimal»"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/HBResponseData«bigdecimal»"
             }
           },
           "401": {
@@ -697,10 +653,16 @@
         ],
         "summary": "Получение списка транзакций пользователя",
         "operationId": "getListUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "Authorization",
             "in": "header",
+            "name": "Authorization",
             "description": "Bearer token",
             "required": false
           },
@@ -708,30 +670,23 @@
             "name": "name",
             "in": "query",
             "required": false,
-            "style": "form",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "request",
+            "description": "request",
+            "required": true,
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/TransactionListRequest"
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TransactionListRequest"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HBResponseData«PageDto«TransactionDto»»"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/HBResponseData«PageDto«TransactionDto»»"
             }
           },
           "201": {
@@ -756,10 +711,13 @@
         ],
         "summary": "Получение транзакции по id",
         "operationId": "getTransactionByIdUsingGET",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "Authorization",
             "in": "header",
+            "name": "Authorization",
             "description": "Bearer token",
             "required": false
           },
@@ -768,22 +726,15 @@
             "in": "path",
             "description": "Идентификато транзакции",
             "required": true,
-            "style": "simple",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HBResponseData«TransactionDto»"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/HBResponseData«TransactionDto»"
             }
           },
           "401": {
@@ -805,32 +756,34 @@
         ],
         "summary": "Редактирование пользователя",
         "operationId": "editUserUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "Authorization",
             "in": "header",
+            "name": "Authorization",
             "description": "Bearer token",
             "required": false
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/User"
-              }
+          },
+          {
+            "in": "body",
+            "name": "user",
+            "description": "user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HBResponseData«UserDto»"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/HBResponseData«UserDto»"
             }
           },
           "201": {
@@ -855,24 +808,28 @@
         ],
         "summary": "Авторизация пользователя",
         "operationId": "loginUsingPOST",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/User"
-              }
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HBResponseData«UserDto»"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/HBResponseData«UserDto»"
             }
           },
           "201": {
@@ -897,24 +854,28 @@
         ],
         "summary": "Регистрация пользователя",
         "operationId": "registerUsingPOST",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/User"
-              }
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HBResponseData«UserDto»"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/HBResponseData«UserDto»"
             }
           },
           "201": {
@@ -939,10 +900,13 @@
         ],
         "summary": "Получение пользователя по email",
         "operationId": "getUserByEmailUsingGET",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "Authorization",
             "in": "header",
+            "name": "Authorization",
             "description": "Bearer token",
             "required": false
           },
@@ -951,21 +915,14 @@
             "in": "path",
             "description": "Email пользователя",
             "required": true,
-            "style": "simple",
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HBResponseData«UserDto»"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/HBResponseData«UserDto»"
             }
           },
           "401": {
@@ -981,522 +938,502 @@
       }
     }
   },
-  "components": {
-    "schemas": {
-      "CategoryDto": {
-        "title": "CategoryDto",
-        "type": "object",
-        "properties": {
-          "categoryId": {
-            "type": "string",
-            "description": "Идентификатор категории",
-            "format": "uuid"
-          },
-          "categoryName": {
-            "type": "string",
-            "description": "Название категории"
-          },
-          "default": {
-            "type": "boolean"
-          },
-          "outSumLastMonth": {
-            "type": "number",
-            "description": "Сумма расходов на категорию в текущем месяце",
-            "format": "bigdecimal"
+  "definitions": {
+    "CategoryDto": {
+      "type": "object",
+      "properties": {
+        "categoryId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Идентификатор категории"
+        },
+        "categoryName": {
+          "type": "string",
+          "description": "Название категории"
+        },
+        "default": {
+          "type": "boolean"
+        },
+        "outSumLastMonth": {
+          "type": "number",
+          "description": "Сумма расходов на категорию в текущем месяце"
+        }
+      },
+      "title": "CategoryDto",
+      "description": "Категория"
+    },
+    "GlobalStatistics": {
+      "type": "object",
+      "properties": {
+        "currMonthExpenses": {
+          "type": "object",
+          "description": "Отображение названия категории на среднюю сумму расходов по ней среди всех пользователей в текущем месяце",
+          "additionalProperties": {
+            "type": "number"
           }
         },
-        "description": "Категория"
-      },
-      "GlobalStatistics": {
-        "title": "GlobalStatistics",
-        "type": "object",
-        "properties": {
-          "currMonthExpenses": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "number",
-              "format": "bigdecimal"
-            },
-            "description": "Отображение названия категории на среднюю сумму расходов по ней среди всех пользователей в текущем месяце"
-          },
-          "currMonthPercents": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "number",
-              "format": "bigdecimal"
-            }
-          },
-          "currMonthSumOut": {
-            "type": "number",
-            "format": "bigdecimal"
-          },
-          "prevMonthExpenses": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "number",
-              "format": "bigdecimal"
-            },
-            "description": "Отображение названия категории на среднюю сумму расходов по ней среди всех пользователей в предыдущем месяце"
-          },
-          "prevMonthPercents": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "number",
-              "format": "bigdecimal"
-            }
-          },
-          "prevMonthSumOut": {
-            "type": "number",
-            "format": "bigdecimal"
+        "currMonthPercents": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
           }
         },
-        "description": "Статистика по всем пользователям"
-      },
-      "HBResponseData": {
-        "title": "HBResponseData",
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Код ответа"
-          },
-          "data": {
-            "type": "object",
-            "description": "Тело ответа"
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "Ошибка"
+        "currMonthSumOut": {
+          "type": "number"
+        },
+        "prevMonthExpenses": {
+          "type": "object",
+          "description": "Отображение названия категории на среднюю сумму расходов по ней среди всех пользователей в предыдущем месяце",
+          "additionalProperties": {
+            "type": "number"
           }
         },
-        "description": "Ответ HBService"
-      },
-      "HBResponseData«CategoryDto»": {
-        "title": "HBResponseData«CategoryDto»",
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Код ответа"
-          },
-          "data": {
-            "description": "Тело ответа",
-            "$ref": "#/components/schemas/CategoryDto"
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "Ошибка"
+        "prevMonthPercents": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
           }
         },
-        "description": "Ответ HBService"
+        "prevMonthSumOut": {
+          "type": "number"
+        }
       },
-      "HBResponseData«GlobalStatistics»": {
-        "title": "HBResponseData«GlobalStatistics»",
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Код ответа"
-          },
-          "data": {
-            "description": "Тело ответа",
-            "$ref": "#/components/schemas/GlobalStatistics"
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "Ошибка"
-          }
+      "title": "GlobalStatistics",
+      "description": "Статистика по всем пользователям"
+    },
+    "HBResponseData": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код ответа"
         },
-        "description": "Ответ HBService"
-      },
-      "HBResponseData«List«CategoryDto»»": {
-        "title": "HBResponseData«List«CategoryDto»»",
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Код ответа"
-          },
-          "data": {
-            "type": "array",
-            "description": "Тело ответа",
-            "items": {
-              "$ref": "#/components/schemas/CategoryDto"
-            }
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "Ошибка"
-          }
+        "data": {
+          "type": "object",
+          "description": "Тело ответа"
         },
-        "description": "Ответ HBService"
+        "errorMessage": {
+          "type": "string",
+          "description": "Ошибка"
+        }
       },
-      "HBResponseData«PageDto«TransactionDto»»": {
-        "title": "HBResponseData«PageDto«TransactionDto»»",
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Код ответа"
-          },
-          "data": {
-            "description": "Тело ответа",
-            "$ref": "#/components/schemas/PageDto«TransactionDto»"
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "Ошибка"
-          }
+      "title": "HBResponseData",
+      "description": "Ответ HBService"
+    },
+    "HBResponseData«CategoryDto»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код ответа"
         },
-        "description": "Ответ HBService"
-      },
-      "HBResponseData«TransactionDto»": {
-        "title": "HBResponseData«TransactionDto»",
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Код ответа"
-          },
-          "data": {
-            "description": "Тело ответа",
-            "$ref": "#/components/schemas/TransactionDto"
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "Ошибка"
-          }
+        "data": {
+          "description": "Тело ответа",
+          "$ref": "#/definitions/CategoryDto"
         },
-        "description": "Ответ HBService"
+        "errorMessage": {
+          "type": "string",
+          "description": "Ошибка"
+        }
       },
-      "HBResponseData«UserDto»": {
-        "title": "HBResponseData«UserDto»",
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Код ответа"
-          },
-          "data": {
-            "description": "Тело ответа",
-            "$ref": "#/components/schemas/UserDto"
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "Ошибка"
-          }
+      "title": "HBResponseData«CategoryDto»",
+      "description": "Ответ HBService"
+    },
+    "HBResponseData«GlobalStatistics»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код ответа"
         },
-        "description": "Ответ HBService"
-      },
-      "HBResponseData«UserStatisticsRecommendations»": {
-        "title": "HBResponseData«UserStatisticsRecommendations»",
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Код ответа"
-          },
-          "data": {
-            "description": "Тело ответа",
-            "$ref": "#/components/schemas/UserStatisticsRecommendations"
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "Ошибка"
-          }
+        "data": {
+          "description": "Тело ответа",
+          "$ref": "#/definitions/GlobalStatistics"
         },
-        "description": "Ответ HBService"
+        "errorMessage": {
+          "type": "string",
+          "description": "Ошибка"
+        }
       },
-      "HBResponseData«bigdecimal»": {
-        "title": "HBResponseData«bigdecimal»",
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Код ответа"
-          },
-          "data": {
-            "type": "number",
-            "description": "Тело ответа",
-            "format": "bigdecimal"
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "Ошибка"
-          }
+      "title": "HBResponseData«GlobalStatistics»",
+      "description": "Ответ HBService"
+    },
+    "HBResponseData«List«CategoryDto»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код ответа"
         },
-        "description": "Ответ HBService"
-      },
-      "HBResponseData«int»": {
-        "title": "HBResponseData«int»",
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Код ответа"
-          },
-          "data": {
-            "type": "integer",
-            "description": "Тело ответа",
-            "format": "int32"
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "Ошибка"
-          }
-        },
-        "description": "Ответ HBService"
-      },
-      "PageDto«TransactionDto»": {
-        "title": "PageDto«TransactionDto»",
-        "type": "object",
-        "properties": {
-          "currPage": {
-            "type": "integer",
-            "description": "Текущая страница",
-            "format": "int32"
-          },
-          "hasNext": {
-            "type": "boolean",
-            "description": "Признак существует ли следующая страница",
-            "example": false
-          },
+        "data": {
+          "type": "array",
+          "description": "Тело ответа",
           "items": {
-            "type": "array",
-            "description": "Список элементов",
-            "items": {
-              "$ref": "#/components/schemas/TransactionDto"
-            }
-          },
-          "limit": {
-            "type": "integer",
-            "description": "Количество элементов на одной странице",
-            "format": "int32"
-          },
-          "maxPage": {
-            "type": "integer",
-            "description": "Общее число страниц",
-            "format": "int32"
-          },
-          "sortField": {
-            "type": "string",
-            "description": "Поле, по которому отсортированы элемента"
-          },
-          "sortOrder": {
-            "type": "string",
-            "description": "Порядок сортировки",
-            "enum": [
-              "ASC",
-              "DESC"
-            ]
+            "$ref": "#/definitions/CategoryDto"
           }
         },
-        "description": "Ответ со списком элементов с пагинацией "
+        "errorMessage": {
+          "type": "string",
+          "description": "Ошибка"
+        }
       },
-      "PageRequest": {
-        "title": "PageRequest",
-        "type": "object",
-        "properties": {
-          "limit": {
-            "type": "integer",
-            "description": "Размер страницы",
-            "format": "int32"
-          },
-          "pageNumber": {
-            "type": "integer",
-            "description": "Текущая страница",
-            "format": "int32"
-          },
-          "sortField": {
-            "type": "string",
-            "description": "Поле по которому будут отсортированы элементы"
-          },
-          "sortOrder": {
-            "type": "string",
-            "description": "Порядок сортировки",
-            "enum": [
-              "ASC",
-              "DESC"
-            ]
-          }
+      "title": "HBResponseData«List«CategoryDto»»",
+      "description": "Ответ HBService"
+    },
+    "HBResponseData«PageDto«TransactionDto»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код ответа"
         },
-        "description": "Пагинация"
+        "data": {
+          "description": "Тело ответа",
+          "$ref": "#/definitions/PageDto«TransactionDto»"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Ошибка"
+        }
       },
-      "TransactionByCategoryRequest": {
-        "title": "TransactionByCategoryRequest",
-        "type": "object",
-        "properties": {
-          "categoryId": {
-            "type": "string",
-            "description": "Идентификатор категории",
-            "format": "uuid"
-          },
-          "page": {
-            "description": "Пагинация",
-            "$ref": "#/components/schemas/PageRequest"
-          },
-          "userEmail": {
-            "type": "string",
-            "description": "Email пользователя"
-          }
+      "title": "HBResponseData«PageDto«TransactionDto»»",
+      "description": "Ответ HBService"
+    },
+    "HBResponseData«TransactionDto»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код ответа"
         },
-        "description": "Запрос списка транзакций по категории"
+        "data": {
+          "description": "Тело ответа",
+          "$ref": "#/definitions/TransactionDto"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Ошибка"
+        }
       },
-      "TransactionDto": {
-        "title": "TransactionDto",
-        "type": "object",
-        "properties": {
-          "categoryId": {
-            "type": "string",
-            "description": "Идентификатор категории, на которую была совершена трата(null в случае пополнения)",
-            "format": "uuid"
-          },
-          "createTime": {
-            "type": "string",
-            "description": "Время транзакции",
-            "format": "date-time"
-          },
-          "description": {
-            "type": "string",
-            "description": "Описание транзакции"
-          },
-          "sum": {
-            "type": "number",
-            "description": "Сумма транзакции",
-            "format": "bigdecimal"
-          },
-          "transactionId": {
-            "type": "string",
-            "description": "Идентификатор транзакции",
-            "format": "uuid"
-          },
-          "userEmail": {
-            "type": "string",
-            "description": "Email пользователя"
-          }
+      "title": "HBResponseData«TransactionDto»",
+      "description": "Ответ HBService"
+    },
+    "HBResponseData«UserDto»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код ответа"
         },
-        "description": "Транзакция(пополнение или расход)"
+        "data": {
+          "description": "Тело ответа",
+          "$ref": "#/definitions/UserDto"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Ошибка"
+        }
       },
-      "TransactionListRequest": {
-        "title": "TransactionListRequest",
-        "type": "object",
-        "properties": {
-          "page": {
-            "description": "Пагинация",
-            "$ref": "#/components/schemas/PageRequest"
-          },
-          "transactionType": {
-            "type": "string",
-            "description": "Тип транзакции(пополнение, расход ил все)",
-            "enum": [
-              "ALL",
-              "IN",
-              "OUT"
-            ]
-          },
-          "userEmail": {
-            "type": "string",
-            "description": "Email пользователя"
-          }
+      "title": "HBResponseData«UserDto»",
+      "description": "Ответ HBService"
+    },
+    "HBResponseData«UserStatisticsRecommendations»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код ответа"
         },
-        "description": "Запрос списка транзакций пользователя"
+        "data": {
+          "description": "Тело ответа",
+          "$ref": "#/definitions/UserStatisticsRecommendations"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Ошибка"
+        }
       },
-      "User": {
-        "title": "User",
-        "type": "object",
-        "properties": {
-          "firstName": {
-            "type": "string",
-            "description": "Имя пользователя"
-          },
-          "password": {
-            "type": "string",
-            "description": "Пароль пользователя"
-          },
-          "userEmail": {
-            "type": "string",
-            "description": "Email пользователя"
-          }
+      "title": "HBResponseData«UserStatisticsRecommendations»",
+      "description": "Ответ HBService"
+    },
+    "HBResponseData«bigdecimal»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код ответа"
         },
-        "description": "Пользователь"
+        "data": {
+          "type": "number",
+          "description": "Тело ответа"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Ошибка"
+        }
       },
-      "UserDto": {
-        "title": "UserDto",
-        "type": "object",
-        "properties": {
-          "firstName": {
-            "type": "string",
-            "description": "Имя пользователя"
-          },
-          "userEmail": {
-            "type": "string",
-            "description": "Email пользователя"
-          }
+      "title": "HBResponseData«bigdecimal»",
+      "description": "Ответ HBService"
+    },
+    "HBResponseData«int»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код ответа"
         },
-        "description": "Пользователь"
+        "data": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Тело ответа"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Ошибка"
+        }
       },
-      "UserStatisticsRecommendations": {
-        "title": "UserStatisticsRecommendations",
-        "type": "object",
-        "properties": {
-          "currMonthExpenses": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "number",
-              "format": "bigdecimal"
-            },
-            "description": "Отображение названий категорий на расходы по ним в текущем месяце"
-          },
-          "currMonthPercents": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "number",
-              "format": "bigdecimal"
-            }
-          },
-          "currMonthSumIn": {
-            "type": "number",
-            "description": "Сумма пополнений в предыдущем месяце",
-            "format": "bigdecimal"
-          },
-          "currMonthSumOut": {
-            "type": "number",
-            "format": "bigdecimal"
-          },
-          "prevMonthExpenses": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "number",
-              "format": "bigdecimal"
-            },
-            "description": "Отображение названий категорий на расходы по ним в предыдущем месяце"
-          },
-          "prevMonthPercents": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "number",
-              "format": "bigdecimal"
-            }
-          },
-          "prevMonthSumIn": {
-            "type": "number",
-            "description": "Сумма пополнений в текущем месяце",
-            "format": "bigdecimal"
-          },
-          "prevMonthSumOut": {
-            "type": "number",
-            "format": "bigdecimal"
-          },
-          "recommendations": {
-            "type": "array",
-            "description": "Список рекомендаций",
-            "items": {
-              "type": "string"
-            }
+      "title": "HBResponseData«int»",
+      "description": "Ответ HBService"
+    },
+    "PageDto«TransactionDto»": {
+      "type": "object",
+      "properties": {
+        "currPage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Текущая страница"
+        },
+        "hasNext": {
+          "type": "boolean",
+          "description": "Признак существует ли следующая страница"
+        },
+        "items": {
+          "type": "array",
+          "description": "Список элементов",
+          "items": {
+            "$ref": "#/definitions/TransactionDto"
           }
         },
-        "description": "Статистика по пользователю и рекомендации"
-      }
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество элементов на одной странице"
+        },
+        "maxPage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Общее число страниц"
+        },
+        "sortField": {
+          "type": "string",
+          "description": "Поле, по которому отсортированы элемента"
+        },
+        "sortOrder": {
+          "type": "string",
+          "description": "Порядок сортировки",
+          "enum": [
+            "ASC",
+            "DESC"
+          ]
+        }
+      },
+      "title": "PageDto«TransactionDto»",
+      "description": "Ответ со списком элементов с пагинацией "
+    },
+    "PageRequest": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Размер страницы"
+        },
+        "pageNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Текущая страница"
+        },
+        "sortField": {
+          "type": "string",
+          "description": "Поле по которому будут отсортированы элементы"
+        },
+        "sortOrder": {
+          "type": "string",
+          "description": "Порядок сортировки",
+          "enum": [
+            "ASC",
+            "DESC"
+          ]
+        }
+      },
+      "title": "PageRequest",
+      "description": "Пагинация"
+    },
+    "TransactionByCategoryRequest": {
+      "type": "object",
+      "properties": {
+        "categoryId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Идентификатор категории"
+        },
+        "page": {
+          "description": "Пагинация",
+          "$ref": "#/definitions/PageRequest"
+        },
+        "userEmail": {
+          "type": "string",
+          "description": "Email пользователя"
+        }
+      },
+      "title": "TransactionByCategoryRequest",
+      "description": "Запрос списка транзакций по категории"
+    },
+    "TransactionDto": {
+      "type": "object",
+      "properties": {
+        "categoryId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Идентификатор категории, на которую была совершена трата(null в случае пополнения)"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Время транзакции"
+        },
+        "description": {
+          "type": "string",
+          "description": "Описание транзакции"
+        },
+        "sum": {
+          "type": "number",
+          "description": "Сумма транзакции"
+        },
+        "transactionId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Идентификатор транзакции"
+        },
+        "userEmail": {
+          "type": "string",
+          "description": "Email пользователя"
+        }
+      },
+      "title": "TransactionDto",
+      "description": "Транзакция(пополнение или расход)"
+    },
+    "TransactionListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "description": "Пагинация",
+          "$ref": "#/definitions/PageRequest"
+        },
+        "transactionType": {
+          "type": "string",
+          "description": "Тип транзакции(пополнение, расход ил все)",
+          "enum": [
+            "ALL",
+            "IN",
+            "OUT"
+          ]
+        },
+        "userEmail": {
+          "type": "string",
+          "description": "Email пользователя"
+        }
+      },
+      "title": "TransactionListRequest",
+      "description": "Запрос списка транзакций пользователя"
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "Имя пользователя"
+        },
+        "password": {
+          "type": "string",
+          "description": "Пароль пользователя"
+        },
+        "userEmail": {
+          "type": "string",
+          "description": "Email пользователя"
+        }
+      },
+      "title": "User",
+      "description": "Пользователь"
+    },
+    "UserDto": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "Имя пользователя"
+        },
+        "userEmail": {
+          "type": "string",
+          "description": "Email пользователя"
+        }
+      },
+      "title": "UserDto",
+      "description": "Пользователь"
+    },
+    "UserStatisticsRecommendations": {
+      "type": "object",
+      "properties": {
+        "currMonthExpenses": {
+          "type": "object",
+          "description": "Отображение названий категорий на расходы по ним в текущем месяце",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "currMonthPercents": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "currMonthSumIn": {
+          "type": "number",
+          "description": "Сумма пополнений в предыдущем месяце"
+        },
+        "currMonthSumOut": {
+          "type": "number"
+        },
+        "prevMonthExpenses": {
+          "type": "object",
+          "description": "Отображение названий категорий на расходы по ним в предыдущем месяце",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "prevMonthPercents": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "prevMonthSumIn": {
+          "type": "number",
+          "description": "Сумма пополнений в текущем месяце"
+        },
+        "prevMonthSumOut": {
+          "type": "number"
+        },
+        "recommendations": {
+          "type": "array",
+          "description": "Список рекомендаций",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "UserStatisticsRecommendations",
+      "description": "Статистика по пользователю и рекомендации"
     }
   }
 }
