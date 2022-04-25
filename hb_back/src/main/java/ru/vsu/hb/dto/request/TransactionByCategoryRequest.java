@@ -1,11 +1,19 @@
 package ru.vsu.hb.dto.request;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.UUID;
 
+@ApiModel(description = "Запрос списка транзакций по категории")
 public class TransactionByCategoryRequest {
 
+    @ApiModelProperty("Email пользователя")
     private String userEmail;
+    @ApiModelProperty("Идентификатор категории")
     private UUID categoryId;
+    @ApiModelProperty("Пагинация")
     private PageRequest page = new PageRequest();
 
     public TransactionByCategoryRequest() {

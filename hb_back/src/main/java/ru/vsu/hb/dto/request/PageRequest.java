@@ -1,12 +1,19 @@
 package ru.vsu.hb.dto.request;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import ru.vsu.hb.dto.SortOrder;
 
+@ApiModel(description = "Пагинация")
 public class PageRequest {
 
+    @ApiModelProperty("Размер страницы")
     private int limit = 20;
+    @ApiModelProperty("Текущая страница")
     private int pageNumber = 0;
+    @ApiModelProperty("Поле по которому будут отсортированы элементы")
     private String sortField;
+    @ApiModelProperty("Порядок сортировки")
     private SortOrder sortOrder = SortOrder.ASC;
 
     public PageRequest() {

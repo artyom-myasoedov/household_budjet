@@ -2,7 +2,9 @@ package ru.vsu.hb.controller;
 
 import com.auth0.jwt.JWT;
 import com.leakyabstractions.result.Results;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,11 +26,14 @@ import ru.vsu.hb.service.CategoryService;
 import ru.vsu.hb.service.UserService;
 import ru.vsu.hb.utils.HBResponseBuilder;
 
+import java.lang.reflect.ParameterizedType;
+
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static ru.vsu.hb.security.SecurityConstants.*;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping(value = "/user", produces = {"application/json"})
+@Api(description = "Пользователь")
 public class UserController {
 
     @Autowired
@@ -41,7 +46,8 @@ public class UserController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @PostMapping("/login")
-    public ResponseEntity<? super HBResponseData<? super UserDto>> login(@RequestBody User user) {
+    @ApiOperation(value = "Авторизация пользователя", response = HBResponseData.class)
+    public ResponseEntity<? extends HBResponseData<? extends UserDto>> login(@RequestBody User user) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserEmail(), user.getPassword(), user.getAuthorities()));
         String token = JWT.create().withSubject(((UserDetails) authentication.getPrincipal()).getUsername())
                 .sign(HMAC512(SECRET.getBytes()));
@@ -56,7 +62,8 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<? super HBResponseData<? super UserDto>> register(@RequestBody User user) {
+    @ApiOperation(value = "Регистрация пользователя")
+    public ResponseEntity<? extends HBResponseData<? extends UserDto>> register(@RequestBody User user) {
         var result = userService.getUserDtoByEmail(user.getUserEmail())
                 .flatMapSuccess(u -> Results.failure(new HBError("client_error", "User with email " + user.getUserEmail() + " already exists"))
                         .mapSuccess(it -> (UserDto) it))
@@ -88,13 +95,21 @@ public class UserController {
 
     @PreAuthorize("hasAnyAuthority('USER')")
     @PostMapping
-    public ResponseEntity<? super HBResponseData<? super UserDto>> editUser(@RequestBody User user) {
+    @ApiOperation(value = "Редактирование пользователя")
+    @ApiImplicitParams(
+            @ApiImplicitParam(name="Authorization", paramType = "header", value = "Bearer token")
+            )
+    public ResponseEntity<? extends HBResponseData<? extends UserDto>> editUser(@RequestBody User user) {
         return HBResponseBuilder.fromHBResult(userService.editUser(user)).build();
     }
 
     @PreAuthorize("hasAnyAuthority('USER')")
     @GetMapping("/{userEmail}")
-    public ResponseEntity<? super HBResponseData<? super UserDto>> getUserByEmail(@PathVariable String userEmail) {
+    @ApiOperation(value = "Получение пользователя по email")
+    @ApiImplicitParams(
+            @ApiImplicitParam(name="Authorization", paramType = "header", value = "Bearer token")
+    )
+    public ResponseEntity<? extends HBResponseData<? extends UserDto>> getUserByEmail(@PathVariable @ApiParam(value = "Email пользователя") String userEmail) {
         return HBResponseBuilder.fromHBResult(userService.getUserDtoByEmail(userEmail)).build();
     }
 }

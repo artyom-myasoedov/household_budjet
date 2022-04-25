@@ -1,16 +1,23 @@
 package ru.vsu.hb.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import ru.vsu.hb.persistence.entity.Category;
 import ru.vsu.hb.persistence.entity.UserCategoryId;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
+@ApiModel(description = "Категория")
 public class CategoryDto {
 
+    @ApiModelProperty(value = "Идентификатор категории")
     private UUID categoryId;
+    @ApiModelProperty(value = "Признак является категория категорией по умолчанию")
     private Boolean isDefault;
+    @ApiModelProperty(value = "Название категории")
     private String categoryName;
+    @ApiModelProperty(value = "Сумма расходов на категорию в текущем месяце")
     private BigDecimal outSumLastMonth;
 
     public CategoryDto() {

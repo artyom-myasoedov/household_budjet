@@ -1,15 +1,26 @@
 package ru.vsu.hb.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.List;
 
+@ApiModel(description = "Ответ со списком элементов с пагинацией ")
 public class PageDto<T> {
 
+    @ApiModelProperty("Список элементов")
     private List<T> items;
+    @ApiModelProperty("Количество элементов на одной странице")
     private int limit;
+    @ApiModelProperty("Текущая страница")
     private int currPage;
+    @ApiModelProperty("Общее число страниц")
     private int maxPage;
+    @ApiModelProperty("Признак существует ли следующая страница")
     private boolean hasNext;
+    @ApiModelProperty("Поле, по которому отсортированы элемента")
     private String sortField;
+    @ApiModelProperty("Порядок сортировки")
     private SortOrder sortOrder;
 
     public PageDto() {

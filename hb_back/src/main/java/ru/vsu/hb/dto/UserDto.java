@@ -1,11 +1,16 @@
 package ru.vsu.hb.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import ru.vsu.hb.persistence.entity.User;
 
+@ApiModel(description = "Пользователь")
 public class UserDto {
 
+    @ApiModelProperty(value = "Email пользователя")
     private String userEmail;
 
+    @ApiModelProperty(value = "Имя пользователя")
     private String firstName;
 
     public UserDto() {
