@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ea785690-e096-4d85-82a5-93916f618502" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/ru/vsu/hb/service/CategoryServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/vsu/hb/service/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/vsu/hb/service/UserServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/entity/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/entity/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/service/CategoryService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +45,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="HB-43-adding_default_categories_while_adding_user" />
+        <entry key="$PROJECT_DIR$/.." value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -82,24 +84,47 @@
       <recent name="ru.vsu.hb.security" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.UserServiceTest.getUserByEmailSuccess">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="Gradle.CategoryServiceTest.addCategorySuccess">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TransactionServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="CategoryServiceTest.addCategorySuccess" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;ru.vsu.hb.service.TransactionServiceTest&quot;" />
+        <option name="scriptParameters" value="--tests &quot;ru.vsu.hb.service.CategoryServiceTest.addCategorySuccess&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="CategoryServiceTest.getByUserCategoryIdSuccess" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;ru.vsu.hb.service.CategoryServiceTest.getByUserCategoryIdSuccess&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -187,10 +212,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.CategoryServiceTest.addCategorySuccess" />
+        <item itemvalue="Gradle.CategoryServiceTest.getByUserCategoryIdSuccess" />
         <item itemvalue="Gradle.UserServiceTest.getUserByEmailSuccess" />
         <item itemvalue="Gradle.UserServiceTest.editUserSuccess" />
         <item itemvalue="Gradle.UserServiceTest" />
-        <item itemvalue="Gradle.TransactionServiceTest" />
       </list>
     </recent_temporary>
   </component>
