@@ -27,7 +27,13 @@ public class CategoryService {
     @Autowired
     private TransactionRepository transactionRepository;
     @Autowired
-    UserService userService;
+    private UserService userService;
+
+    public CategoryService(CategoryRepository repository, TransactionRepository transactionRepository, UserService userService) {
+        this.repository = repository;
+        this.transactionRepository = transactionRepository;
+        this.userService = userService;
+    }
 
     public Result<CategoryDto, HBError> getByUserCategoryId(String userEmail, UUID categoryID) {
         return userService.getUserDtoByEmail(userEmail).flatMapSuccess(u -> Results.ofCallable(() ->

@@ -1,9 +1,7 @@
 package ru.vsu.hb.persistence.entity;
 
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
-
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(schema = "hb", name = "users_categories")
@@ -13,11 +11,19 @@ public class Category {
     private UserCategoryId userCategoryId;
 
     @Column(name = "is_default")
-    @Generated(GenerationTime.INSERT)
-    private Boolean isDefault;
+    private Boolean isDefault = false;
 
     @Column(name = "category_name")
     private String categoryName;
+
+    public Category() {
+    }
+
+    public Category(UserCategoryId userCategoryId, Boolean isDefault, String categoryName) {
+        this.userCategoryId = userCategoryId;
+        this.isDefault = isDefault;
+        this.categoryName = categoryName;
+    }
 
     public String getCategoryName() {
         return categoryName;
@@ -40,6 +46,6 @@ public class Category {
     }
 
     public void setDefault(Boolean aDefault) {
-        isDefault = aDefault;
+        isDefault = Objects.requireNonNullElse(aDefault, false);
     }
 }

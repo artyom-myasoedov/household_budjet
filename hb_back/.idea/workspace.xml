@@ -5,21 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ea785690-e096-4d85-82a5-93916f618502" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/controller/CategoryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/dto/CategoryDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/controller/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/controller/TransactionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/dto/TransactionDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/dto/TransactionDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/dto/request/TransactionByCategoryRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/dto/request/TransactionByCategoryRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ru/vsu/hb/service/CategoryServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/entity/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/entity/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/entity/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/entity/Transaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/entity/UserCategoryId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/entity/UserCategoryId.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/repository/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/repository/CategoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/repository/TransactionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/repository/TransactionRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/service/CategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/service/TransactionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/service/TransactionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/v1/1.0/BOK-001-202204070009.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/v1/1.0/BOK-001-202204070009.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/vsu/hb/service/TransactionServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/vsu/hb/service/TransactionServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +23,9 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand />
@@ -75,7 +67,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/OneDrive/Рабочий стол/techsupportserver" />
+    <property name="last_opened_file_path" value="$USER_HOME$/OneDrive/Рабочий стол/schedluer" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -86,12 +78,13 @@
       <recent name="C:\Users\andre\AndroidStudioProjects\household_budjet\hb_back\src\main\java\ru\vsu\hb\security" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ru.vsu.hb.service" />
       <recent name="ru.vsu.hb.dto" />
       <recent name="ru.vsu.hb.controller" />
       <recent name="ru.vsu.hb.security" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.TransactionServiceTest">
+  <component name="RunManager" selected="Gradle.CategoryServiceTest.addCategorySuccess">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -105,12 +98,96 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TransactionServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="CategoryServiceTest.addCategorySuccess" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;ru.vsu.hb.service.TransactionServiceTest&quot;" />
+        <option name="scriptParameters" value="--tests &quot;ru.vsu.hb.service.CategoryServiceTest.addCategorySuccess&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="CategoryServiceTest.getByUserCategoryIdSuccess" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;ru.vsu.hb.service.CategoryServiceTest.getByUserCategoryIdSuccess&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="UserServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;ru.vsu.hb.service.UserServiceTest&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="UserServiceTest.editUserSuccess" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;ru.vsu.hb.service.UserServiceTest.editUserSuccess&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="UserServiceTest.getUserByEmailSuccess" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;ru.vsu.hb.service.UserServiceTest.getUserByEmailSuccess&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -135,7 +212,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.TransactionServiceTest" />
+        <item itemvalue="Gradle.CategoryServiceTest.addCategorySuccess" />
+        <item itemvalue="Gradle.CategoryServiceTest.getByUserCategoryIdSuccess" />
+        <item itemvalue="Gradle.UserServiceTest.getUserByEmailSuccess" />
+        <item itemvalue="Gradle.UserServiceTest.editUserSuccess" />
+        <item itemvalue="Gradle.UserServiceTest" />
       </list>
     </recent_temporary>
   </component>
@@ -154,7 +235,9 @@
       <workItem from="1650394003833" duration="8823000" />
       <workItem from="1650452406335" duration="286000" />
       <workItem from="1650571899016" duration="7109000" />
-      <workItem from="1650614377153" duration="7992000" />
+      <workItem from="1650614377153" duration="10057000" />
+      <workItem from="1650865683605" duration="336000" />
+      <workItem from="1650866252713" duration="3994000" />
     </task>
     <servers />
   </component>

@@ -15,11 +15,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import ru.vsu.hb.dto.CategoryDto;
+import ru.vsu.hb.dto.DefaultCategory;
 import ru.vsu.hb.dto.UserDto;
 import ru.vsu.hb.dto.error.EntityNotFoundError;
 import ru.vsu.hb.dto.error.HBError;
 import ru.vsu.hb.dto.response.HBResponseData;
 import ru.vsu.hb.persistence.entity.User;
+import ru.vsu.hb.service.CategoryService;
 import ru.vsu.hb.service.UserService;
 import ru.vsu.hb.utils.HBResponseBuilder;
 
@@ -35,6 +38,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private CategoryService categoryService;
     @Autowired
     AuthenticationManager authenticationManager;
     @Autowired
@@ -65,14 +70,26 @@ public class UserController {
                 .flatMapFailure(error -> {
                     if (error instanceof EntityNotFoundError) {
                         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
                         return Results.success(
-                                        UserDto.fromEntity(userService.createUser(user)))
+                                UserDto.fromEntity(userService.createUser(user)))
+                                .mapSuccess(it->{
+                                    for(CategoryDto categoryDto: DefaultCategory.getDefaultCategories()){
+                                        categoryService.addCategory(categoryDto, user.getUserEmail());
+                                    }
+                                    return it;
+                                })
                                 .mapFailure(it -> (HBError) it);
                     } else {
                         return Results.failure(error).mapSuccess(it -> (UserDto) it);
                     }
                 });
         var status = result.isSuccess() ? HttpStatus.OK : HttpStatus.CONFLICT;
+        /*if(result.isSuccess()){
+            for(CategoryDto categoryDto: DefaultCategory.getDefaultCategories()){
+                categoryService.addCategory(categoryDto, user.getUserEmail());
+            }
+        }*/
         return HBResponseBuilder.fromHBResult(result).withStatus(status).build();
     }
 

@@ -4,10 +4,13 @@ import com.leakyabstractions.result.Result;
 import com.leakyabstractions.result.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.vsu.hb.dto.CategoryDto;
+import ru.vsu.hb.dto.DefaultCategory;
 import ru.vsu.hb.dto.UserDto;
 import ru.vsu.hb.dto.error.EntityNotFoundError;
 import ru.vsu.hb.dto.error.HBError;
 import ru.vsu.hb.persistence.entity.User;
+import ru.vsu.hb.persistence.repository.CategoryRepository;
 import ru.vsu.hb.persistence.repository.UserRepository;
 
 @Service
@@ -15,6 +18,10 @@ public class UserService {
 
     @Autowired
     private UserRepository repository;
+
+    public UserService(UserRepository repository) {
+        this.repository = repository;
+    }
 
     public Result<User, HBError> getUserByEmail(String userEmail) {
         return Results.ofCallable(() -> repository.findByUserEmail(userEmail).orElseThrow(() -> new IllegalStateException("not_found")))
