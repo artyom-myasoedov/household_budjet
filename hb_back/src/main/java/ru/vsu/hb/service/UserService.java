@@ -19,6 +19,10 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
+    public UserService(UserRepository repository) {
+        this.repository = repository;
+    }
+
     public Result<User, HBError> getUserByEmail(String userEmail) {
         return Results.ofCallable(() -> repository.findByUserEmail(userEmail).orElseThrow(() -> new IllegalStateException("not_found")))
                 .mapFailure(e -> {
