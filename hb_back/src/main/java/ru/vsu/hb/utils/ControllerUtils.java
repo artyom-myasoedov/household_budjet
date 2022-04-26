@@ -28,6 +28,9 @@ public class ControllerUtils {
     }
 
     public static HBErrorResponse fromException(Exception e) {
+        if ("Доступ запрещен".equals(e.getMessage())) {
+            return new HBErrorResponse("forbidden", e.getMessage());
+        }
         return new HBErrorResponse("unknown_error", e.getMessage());
     }
 
