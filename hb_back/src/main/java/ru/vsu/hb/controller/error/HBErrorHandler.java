@@ -18,7 +18,8 @@ public class HBErrorHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {Exception.class})
     public ResponseEntity<?> handleConflict(Exception ex, WebRequest request) {
-    LOG.error("[SYSTEM ERROR] Unexpected error handled", ex);
-    return handleExceptionInternal(ex, ControllerUtils.fromException(ex), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
+        LOG.error("[SYSTEM ERROR] Unexpected error handled", ex);
+        return handleExceptionInternal(ex, ControllerUtils.fromException(ex), new HttpHeaders(),
+                "Доступ запрещен".equals(ex.getMessage()) ? HttpStatus.FORBIDDEN : HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 }

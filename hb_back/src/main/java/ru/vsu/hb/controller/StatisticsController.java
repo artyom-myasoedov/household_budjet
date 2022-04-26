@@ -15,6 +15,7 @@ import ru.vsu.hb.dto.UserStatisticsRecommendations;
 import ru.vsu.hb.dto.response.HBResponseData;
 import ru.vsu.hb.service.StatisticsService;
 import ru.vsu.hb.utils.HBResponseBuilder;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.security.Principal;
 
@@ -29,11 +30,8 @@ public class StatisticsController {
 
     @GetMapping("/personal")
     @PreAuthorize("hasAnyAuthority('USER')")
-    @ApiImplicitParams(
-            @ApiImplicitParam(name="Authorization", paramType = "header", value = "Bearer token")
-    )
     @ApiOperation(value = "Получение статистики и рекомендаций для пользователя")
-    public ResponseEntity<? extends HBResponseData<? extends UserStatisticsRecommendations>> getByUserId(Principal principal) {
+    public ResponseEntity<? extends HBResponseData<? extends UserStatisticsRecommendations>> getByUserId(@ApiIgnore Principal principal) {
         return HBResponseBuilder.fromHBResult(service.getUserStatistics(principal.getName())).build();
     }
 
