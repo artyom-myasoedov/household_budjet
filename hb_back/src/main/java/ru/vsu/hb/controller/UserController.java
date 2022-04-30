@@ -27,7 +27,6 @@ import ru.vsu.hb.service.CategoryService;
 import ru.vsu.hb.service.UserService;
 import ru.vsu.hb.utils.HBResponseBuilder;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
