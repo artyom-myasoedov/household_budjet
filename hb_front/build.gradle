@@ -9,6 +9,7 @@ buildscript {
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        //"11:6D:E9:43:C5:73:06:50:D8:EE:B9:95:2F:34:FC:64:16:50:83:42:E6:1D:BE:A8:8A:04:96:52:3F:CF:44:E5"
     }
 }
 
