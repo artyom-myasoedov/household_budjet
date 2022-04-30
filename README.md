@@ -11,7 +11,7 @@
 # Документация
 • [ТЗ docx](https://github.com/artyom-myasoedov/household_budjet/blob/main/documents/ТЗ%20приложение%20для%20ведения%20домашнего%20бюджета%20и%20рекомендаций%20по%20сокращению%20расходов.docx) <br>
 • [ТЗ pdf](https://github.com/artyom-myasoedov/household_budjet/blob/main/documents/ТЗ%20приложение%20для%20ведения%20домашнего%20бюджета%20и%20рекомендаций%20по%20сокращению%20расходов.pdf) <br>
-• [Swagger](http://185.246.66.190:8080/swagger-ui/)
+• [Swagger](http://185.246.66.190:8080/swagger-ui/) <br>
 • [Курсовой проект docx](https://github.com/artyom-myasoedov/household_budjet/blob/main/documents/Курсовой%20проект.docx) <br>
 • [Курсовой проект pdf](https://github.com/artyom-myasoedov/household_budjet/blob/main/documents/Курсовой%20проект.pdf) <br>
 
