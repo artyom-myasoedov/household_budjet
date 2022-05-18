@@ -6,6 +6,12 @@ plugins {
     id 'java'
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
 group 'ru.cs.vsu'
 version '1.0-SNAPSHOT'
 
