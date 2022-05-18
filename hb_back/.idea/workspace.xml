@@ -5,10 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ea785690-e096-4d85-82a5-93916f618502" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/ru/vsu/hb/service/CategoryServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/entity/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/entity/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/service/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hb_front/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/java/ru/vsu/hb_front/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/java/ru/vsu/hb_front/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/java/ru/vsu/hb_front/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/java/ru/vsu/hb_front/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/java/ru/vsu/hb_front/dto/error/HBError.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/java/ru/vsu/hb_front/dto/error/HBError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/fragment_categories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/fragment_categories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/fragment_register.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/fragment_register.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/fragment_statistics.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/fragment_statistics.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/fragment_transactions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/fragment_transactions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/fragment_unauthorized.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/fragment_unauthorized.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +41,23 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="hb_back" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="hb_back" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="hb_back" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -84,20 +113,7 @@
       <recent name="ru.vsu.hb.security" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.CategoryServiceTest.addCategorySuccess">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Spring Boot.HouseHoldBudgetApplication">
     <configuration name="CategoryServiceTest.addCategorySuccess" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -140,48 +156,6 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="UserServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;ru.vsu.hb.service.UserServiceTest&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="UserServiceTest.editUserSuccess" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;ru.vsu.hb.service.UserServiceTest.editUserSuccess&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
     <configuration name="UserServiceTest.getUserByEmailSuccess" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -203,6 +177,48 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="hb_back [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="hb_back [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="HouseHoldBudgetApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="hb_back.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="ru.vsu.hb.HouseHoldBudgetApplication" />
@@ -212,11 +228,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.hb_back [build]" />
+        <item itemvalue="Gradle.hb_back [jar]" />
         <item itemvalue="Gradle.CategoryServiceTest.addCategorySuccess" />
         <item itemvalue="Gradle.CategoryServiceTest.getByUserCategoryIdSuccess" />
         <item itemvalue="Gradle.UserServiceTest.getUserByEmailSuccess" />
-        <item itemvalue="Gradle.UserServiceTest.editUserSuccess" />
-        <item itemvalue="Gradle.UserServiceTest" />
       </list>
     </recent_temporary>
   </component>
@@ -238,6 +254,8 @@
       <workItem from="1650614377153" duration="10057000" />
       <workItem from="1650865683605" duration="336000" />
       <workItem from="1650866252713" duration="3994000" />
+      <workItem from="1651334708866" duration="707000" />
+      <workItem from="1651522777035" duration="77000" />
     </task>
     <servers />
   </component>
