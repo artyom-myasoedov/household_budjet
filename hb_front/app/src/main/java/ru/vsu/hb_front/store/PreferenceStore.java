@@ -28,4 +28,13 @@ public class PreferenceStore {
         return sharedPreferences.getString("token", "");
     }
 
+    @SuppressLint("ApplySharedPref")
+    public void saveName(String name) {
+        sharedPreferences.edit().putString("name", name).commit();
+    }
+
+    public String getName() {
+        return sharedPreferences.getString("name", "");
+    }
+
 }
