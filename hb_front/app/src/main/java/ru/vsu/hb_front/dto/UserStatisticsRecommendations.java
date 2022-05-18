@@ -42,42 +42,6 @@ public class UserStatisticsRecommendations {
         this.prevMonthSumIn = prevMonthSumIn;
     }
 
-    public BigDecimal getCurrMonthExpensesSum() {
-        if (currMonthSumOut == null) {
-            currMonthSumOut = currMonthExpenses.values().parallelStream()
-                    .reduce(BigDecimal.ZERO, BigDecimal::add, BigDecimal::add);
-        }
-        return currMonthSumOut;
-    }
-
-    public BigDecimal getPrevMonthExpensesSum() {
-        if (prevMonthSumOut == null) {
-            prevMonthSumOut = prevMonthExpenses.values().parallelStream()
-                    .reduce(BigDecimal.ZERO, BigDecimal::add, BigDecimal::add);
-        }
-        return prevMonthSumOut;
-    }
-
-    public Map<String, BigDecimal> getCurrMothPercents() {
-        BigDecimal sum = getCurrMonthExpensesSum();
-        if (currMonthPercents == null) {
-            currMonthPercents = currMonthExpenses.entrySet().stream()
-                    .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue()
-                            .divide(sum, 6, RoundingMode.HALF_UP).multiply(BigDecimal.valueOf(100))));
-        }
-        return currMonthPercents;
-    }
-
-    public Map<String, BigDecimal> getPrevMothPercents() {
-        BigDecimal sum = getPrevMonthExpensesSum();
-        if (prevMonthPercents == null) {
-            prevMonthPercents = prevMonthExpenses.entrySet().stream()
-                    .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue()
-                            .divide(sum, 6, RoundingMode.HALF_UP).multiply(BigDecimal.valueOf(100))));
-        }
-        return prevMonthPercents;
-    }
-
     public Map<String, BigDecimal> getCurrMonthExpenses() {
         return currMonthExpenses;
     }
@@ -100,5 +64,37 @@ public class UserStatisticsRecommendations {
 
     public void setRecommendations(List<String> recommendations) {
         this.recommendations = recommendations;
+    }
+
+    public BigDecimal getCurrMonthSumOut() {
+        return currMonthSumOut;
+    }
+
+    public void setCurrMonthSumOut(BigDecimal currMonthSumOut) {
+        this.currMonthSumOut = currMonthSumOut;
+    }
+
+    public BigDecimal getPrevMonthSumOut() {
+        return prevMonthSumOut;
+    }
+
+    public void setPrevMonthSumOut(BigDecimal prevMonthSumOut) {
+        this.prevMonthSumOut = prevMonthSumOut;
+    }
+
+    public Map<String, BigDecimal> getCurrMonthPercents() {
+        return currMonthPercents;
+    }
+
+    public void setCurrMonthPercents(Map<String, BigDecimal> currMonthPercents) {
+        this.currMonthPercents = currMonthPercents;
+    }
+
+    public Map<String, BigDecimal> getPrevMonthPercents() {
+        return prevMonthPercents;
+    }
+
+    public void setPrevMonthPercents(Map<String, BigDecimal> prevMonthPercents) {
+        this.prevMonthPercents = prevMonthPercents;
     }
 }
