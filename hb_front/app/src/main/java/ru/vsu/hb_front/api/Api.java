@@ -56,7 +56,7 @@ public class Api implements Interceptor {
 
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
 
-        api.client = new OkHttpClient.Builder().addInterceptor(api).addInterceptor(loggingInterceptor).build();
+        api.client = UnsafeOkHttpClient.getUnsafeOkHttpClient().newBuilder().addInterceptor(api).addInterceptor(loggingInterceptor).build();
         api.retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(api.client)

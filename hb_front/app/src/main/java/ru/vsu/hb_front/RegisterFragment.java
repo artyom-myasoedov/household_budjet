@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -15,13 +17,14 @@ public class RegisterFragment extends Fragment {
 
     private FragmentRegisterBinding b;
 
-    @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-        b = FragmentRegisterBinding.inflate(inflater, container, false);
-        return b.getRoot();
+    public View onCreateView(LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        b = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_register, container, false);
+        View view = b.getRoot();
+
+        return view;
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {

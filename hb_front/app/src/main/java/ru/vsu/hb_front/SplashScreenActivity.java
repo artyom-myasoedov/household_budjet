@@ -24,7 +24,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(() -> {
             Api.init("http://185.246.66.190:8080");
             PreferenceStore.init(getApplicationContext());
-            if(PreferenceStore.getInstance().getToken()!=null || PreferenceStore.getInstance().getToken().length()!=0){
+            if(PreferenceStore.getInstance().getToken()==null || PreferenceStore.getInstance().getToken().length()==0){
                 Intent mainIntent = new Intent(SplashScreenActivity.this, LoginActivity.class);
                 SplashScreenActivity.this.startActivity(mainIntent);
             }else{
