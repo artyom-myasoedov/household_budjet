@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/category_btn"
+        android:icon="@drawable/baseline_category_24"
+        android:title="Категории" />
+
+    <item
+        android:id="@+id/transaction_btn"
+        android:icon="@drawable/baseline_paid_24"
+        android:title="Транзакции" />
+
+    <item
+        android:id="@+id/placeholder"
+        android:title="" />
+
+    <item
+        android:id="@+id/statistics_btn"
+        android:icon="@drawable/baseline_leaderboard_24"
+        android:title="Статистика" />
+
+    <item
+        android:id="@+id/logout_btn"
+        android:icon="@drawable/baseline_logout_24"
+        android:title="Выход" />
+
+</menu>

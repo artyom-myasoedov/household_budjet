@@ -16,6 +16,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         b = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
+        b.bottomNavigationView.setBackground(null);
+        b.bottomNavigationView.getMenu().getItem(2).setEnabled(false);
+
+        b.bottomNavigationView.getMenu().getItem(0).setOnMenuItemClickListener(item -> {
+            if (b.bottomNavigationView.getSelectedItemId() != R.id.category_btn) {
+                CategoriesFragment categoriesFragment = new CategoriesFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment, categoriesFragment, "categories").commit();
+            }
+            return false;
+        });
+
+        CategoriesFragment categoriesFragment = new CategoriesFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment, categoriesFragment, "categories").commit();
+
     }
 
 }
