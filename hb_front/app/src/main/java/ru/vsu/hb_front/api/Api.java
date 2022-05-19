@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
+import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -85,13 +86,18 @@ public class Api implements Interceptor {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Single<Response<HBResponseData<List<CategoryDto>>>> getUserCategories() {
+    public Observable<Response<HBResponseData<List<CategoryDto>>>> getUserCategories() {
         return categoryService.getUserCategories().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Single<Response<HBResponseData<BigDecimal>>> getCurMonthOutSum() {
+    public Observable<Response<HBResponseData<BigDecimal>>> getCurMonthOutSum() {
         return transactionService.getCurMonthOutSum().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<Response<HBResponseData<CategoryDto>>> createCategory(CategoryDto category) {
+        return categoryService.createCategory(category).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 

@@ -13,8 +13,10 @@ import androidx.cardview.widget.CardView;
 
 import java.util.List;
 
+import ru.vsu.hb_front.MainActivity;
 import ru.vsu.hb_front.R;
 import ru.vsu.hb_front.dto.CategoryDto;
+import ru.vsu.hb_front.sheets.CreateCategoryBottomSheet;
 
 public class CategoriesAdapter extends BaseAdapter {
     private Context context;
@@ -46,16 +48,15 @@ public class CategoriesAdapter extends BaseAdapter {
         View grid;
 
         if (convertView == null) {
-            grid = new View(context);
             LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
             grid = inflater.inflate(R.layout.category_grid_card, parent, false);
         } else {
-            grid = (View) convertView;
+            grid = convertView;
         }
 
-        ImageView imageView = (ImageView) grid.findViewById(R.id.image);
-        TextView textName = (TextView) grid.findViewById(R.id.text_name);
-        TextView textSum = (TextView) grid.findViewById(R.id.text_sum);
+        ImageView imageView = grid.findViewById(R.id.image);
+        TextView textName = grid.findViewById(R.id.text_name);
+        TextView textSum = grid.findViewById(R.id.text_sum);
 
         switch (categories.get(position).getCategoryName()){
             case "Еда":
@@ -79,6 +80,13 @@ public class CategoriesAdapter extends BaseAdapter {
             case "Создать":
                 imageView.setImageResource(R.drawable.baseline_add_circle_outline_24);
                 textSum.setVisibility(View.GONE);
+                grid.setOnClickListener(v -> {
+                    if(context instanceof MainActivity){
+                        CreateCategoryBottomSheet bottomSheet = new CreateCategoryBottomSheet();
+                        bottomSheet.show(((MainActivity)context).getSupportFragmentManager(),
+                                "ModalBottomSheet");
+                    }
+                });
                 break;
             default:
                 imageView.setImageResource(R.drawable.baseline_more_horiz_24);
