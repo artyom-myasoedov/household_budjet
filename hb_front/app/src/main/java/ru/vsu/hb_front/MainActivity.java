@@ -4,8 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+
+import java.util.ArrayList;
 
 import ru.vsu.hb_front.databinding.ActivityMainBinding;
+import ru.vsu.hb_front.sheets.CreateCategoryBottomSheet;
+import ru.vsu.hb_front.sheets.CreateTransactionBottomSheet;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,10 +34,17 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
+        b.fab.setOnClickListener(view -> {
+            CreateTransactionBottomSheet bottomSheet = new CreateTransactionBottomSheet();
+            bottomSheet.show(this.getSupportFragmentManager(),
+                    "CreateTransactionBottomSheet");
+        });
+
         CategoriesFragment categoriesFragment = new CategoriesFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment, categoriesFragment, "categories").commit();
 
     }
+
 
 }
