@@ -23,6 +23,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import ru.vsu.hb_front.BuildConfig;
 import ru.vsu.hb_front.dto.CategoryDto;
+import ru.vsu.hb_front.dto.TransactionDto;
 import ru.vsu.hb_front.dto.UserDto;
 import ru.vsu.hb_front.dto.UserLoginRequest;
 import ru.vsu.hb_front.dto.response.HBResponseData;
@@ -103,6 +104,11 @@ public class Api implements Interceptor {
 
     public Single<Response<HBResponseData<CategoryDto>>> createCategory(CategoryDto category) {
         return categoryService.createCategory(category).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<Response<HBResponseData<TransactionDto>>> createTransaction(TransactionDto transaction) {
+        return transactionService.addTransaction(transaction).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 

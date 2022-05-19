@@ -47,18 +47,14 @@ public class CategoriesFragment extends Fragment {
                 .repeatWhen(completed -> completed.delay(500, TimeUnit.MILLISECONDS)).subscribe(resp -> {
                     if (resp.isSuccessful()) {
                         List<CategoryDto> categoriesFromServer = resp.body().getData();
-                        CategoryDto addingCategory = new CategoryDto();
-                        addingCategory.setCategoryName("Создать");
-                        categoriesFromServer.add(addingCategory);
-                        if(adapter == null){
-                            categories = categoriesFromServer;
-                            b.gridCategories.setAdapter(new CategoriesAdapter(getContext(), categories));
-                        }
-                        if (isNeenUpdateAdapter(categoriesFromServer)) {
-                            categories = categoriesFromServer;
-                            adapter.notifyDataSetChanged();
+                        if(categoriesFromServer.size()<15){
+                            CategoryDto addingCategory = new CategoryDto();
+                            addingCategory.setCategoryName("Создать");
+                            categoriesFromServer.add(addingCategory);
                         }
 
+                        categories = categoriesFromServer;
+                        b.gridCategories.setAdapter(new CategoriesAdapter(getContext(), categories));
                     } else {
 
                     }
@@ -68,35 +64,19 @@ public class CategoriesFragment extends Fragment {
 
         monthOutDisposable = Api.getInstance().getCurMonthOutSum()
                 .repeatWhen(completed -> completed.delay(1000, TimeUnit.MILLISECONDS)).subscribe(resp -> {
-            if (resp.isSuccessful()) {
-                if(!b.monthSum.getText().toString().equals("Траты за месяц: "+resp.body().getData().toString()))
-                    b.monthSum.setText("Траты за месяц: " + resp.body().getData().toString());
-            } else {
+                    if (resp.isSuccessful()) {
+                        if (!b.monthSum.getText().toString().equals("Траты за месяц: " + resp.body().getData().toString()))
+                            b.monthSum.setText("Траты за месяц: " + resp.body().getData().toString());
+                    } else {
 
-            }
-        }, err -> {
-            err.printStackTrace();
-        });
+                    }
+                }, err -> {
+                    err.printStackTrace();
+                });
 
         View view = b.getRoot();
 
         return view;
-    }
-
-    private boolean isNeenUpdateAdapter(List<CategoryDto> categoriesFromServer) {
-        if (categories == null)
-            return true;
-        if (categories.size() != categoriesFromServer.size())
-            return true;
-        for (CategoryDto category : categories) {
-            for (CategoryDto categoryFromServer : categoriesFromServer) {
-                if (category.getCategoryId()!=null && category.getCategoryId().equals(categoryFromServer.getCategoryId())
-                        && !category.getCategoryName().equals(categoryFromServer.getCategoryName())) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     @Override
@@ -112,11 +92,11 @@ public class CategoriesFragment extends Fragment {
         GridView gridView = view.findViewById(R.id.gridCategories);
         gridView.setOnItemClickListener((adapterView, view1, i, l) -> {
 
-            if(categories.get(i).getCategoryName().equals("Создать")){
+            if (categories.get(i).getCategoryName().equals("Создать")) {
                 CreateCategoryBottomSheet bottomSheet = new CreateCategoryBottomSheet();
                 bottomSheet.show(getActivity().getSupportFragmentManager(),
                         "CreateCategoryBottomSheet");
-            }else{
+            } else {
                 EditCategoryBottomSheet bottomSheet = new EditCategoryBottomSheet(categories.get(i));
                 bottomSheet.show(getActivity().getSupportFragmentManager(),
                         "EditCategoryBottomSheet");
