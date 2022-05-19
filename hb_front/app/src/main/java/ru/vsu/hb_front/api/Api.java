@@ -6,6 +6,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.List;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -18,6 +20,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import ru.vsu.hb_front.dto.CategoryDto;
 import ru.vsu.hb_front.dto.UserDto;
 import ru.vsu.hb_front.dto.UserLoginRequest;
 import ru.vsu.hb_front.dto.response.HBResponseData;
@@ -78,7 +81,18 @@ public class Api implements Interceptor {
     }
 
     public Single<Response<HBResponseData<UserDto>>> login(UserLoginRequest user) {
-        return userService.login(user).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        return userService.login(user).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<Response<HBResponseData<List<CategoryDto>>>> getUserCategories() {
+        return categoryService.getUserCategories().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<Response<HBResponseData<BigDecimal>>> getCurMonthOutSum() {
+        return transactionService.getCurMonthOutSum().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     @NonNull
