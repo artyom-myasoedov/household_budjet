@@ -17,6 +17,7 @@ import ru.vsu.hb_front.MainActivity;
 import ru.vsu.hb_front.R;
 import ru.vsu.hb_front.dto.CategoryDto;
 import ru.vsu.hb_front.sheets.CreateCategoryBottomSheet;
+import ru.vsu.hb_front.sheets.EditCategoryBottomSheet;
 
 public class CategoriesAdapter extends BaseAdapter {
     private Context context;
@@ -79,14 +80,7 @@ public class CategoriesAdapter extends BaseAdapter {
                 break;
             case "Создать":
                 imageView.setImageResource(R.drawable.baseline_add_circle_outline_24);
-                textSum.setVisibility(View.GONE);
-                grid.setOnClickListener(v -> {
-                    if(context instanceof MainActivity){
-                        CreateCategoryBottomSheet bottomSheet = new CreateCategoryBottomSheet();
-                        bottomSheet.show(((MainActivity)context).getSupportFragmentManager(),
-                                "ModalBottomSheet");
-                    }
-                });
+
                 break;
             default:
                 imageView.setImageResource(R.drawable.baseline_more_horiz_24);
@@ -96,7 +90,6 @@ public class CategoriesAdapter extends BaseAdapter {
         textName.setText(categories.get(position).getCategoryName());
         if(categories.get(position).getOutSumLastMonth() != null){
             textSum.setText(categories.get(position).getOutSumLastMonth().toString());
-
         }
 
         return grid;
