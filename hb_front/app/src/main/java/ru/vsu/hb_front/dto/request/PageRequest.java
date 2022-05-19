@@ -7,7 +7,7 @@ public class PageRequest {
     private int limit = 20;
     private int pageNumber = 0;
     private String sortField;
-    private SortOrder sortOrder = SortOrder.ASC;
+    private SortOrder sortOrder = SortOrder.DESC;
 
     public PageRequest() {
     }

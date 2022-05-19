@@ -1,13 +1,18 @@
 package ru.vsu.hb_front.sheets;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.annotation.Nullable;
 
@@ -18,7 +23,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;
@@ -33,6 +40,8 @@ public class CreateTransactionBottomSheet extends BottomSheetDialogFragment {
     private Disposable getCategoriesDisposable;
     private List<CategoryDto> categories;
     private AutoCompleteTextView categoriesAutoTV;
+    private MaterialButton currentDate;
+    Calendar date=Calendar.getInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable
@@ -45,6 +54,8 @@ public class CreateTransactionBottomSheet extends BottomSheetDialogFragment {
         MaterialButton createBtn = v.findViewById(R.id.create_btn);
         MaterialButtonToggleGroup group = v.findViewById(R.id.toggleGroup);
         TextInputLayout categoriesSpinLayout = v.findViewById(R.id.categories_spin_layout);
+        currentDate = v.findViewById(R.id.date);
+        currentDate.setOnClickListener(this::setDate);
 
         getCategoriesDisposable = Api.getInstance().getUserCategories().subscribe(resp -> {
             if(resp.isSuccessful()){
@@ -73,6 +84,7 @@ public class CreateTransactionBottomSheet extends BottomSheetDialogFragment {
                 categoriesAutoTV.setError("Выберите категорию");
             } else {
                 TransactionDto transactionDto = new TransactionDto();
+                transactionDto.setCreateTime(LocalDateTime.from(date.toInstant()));
                 transactionDto.setDescription(transactionNameInput.getText().toString());
                 transactionDto.setSum(new BigDecimal(summInput.getText().toString()));
                 if(group.getCheckedButtonId() == R.id.btn_out){
@@ -93,8 +105,31 @@ public class CreateTransactionBottomSheet extends BottomSheetDialogFragment {
             }
         });
 
+        setInitialDateTime();
+
         return v;
     }
+
+    public void setDate(View v) {
+        new DatePickerDialog(getActivity(), d,
+                date.get(Calendar.YEAR),
+                date.get(Calendar.MONTH),
+                date.get(Calendar.DAY_OF_MONTH))
+                .show();
+    }
+
+    private void setInitialDateTime() {
+        currentDate.setText(DateUtils.formatDateTime(getActivity(),
+                date.getTimeInMillis(),
+                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
+    }
+
+    DatePickerDialog.OnDateSetListener d= (view, year, monthOfYear, dayOfMonth) -> {
+        date.set(Calendar.YEAR, year);
+        date.set(Calendar.MONTH, monthOfYear);
+        date.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        setInitialDateTime();
+    };
 
     private void initCategoriesSpinner(View v)
     {

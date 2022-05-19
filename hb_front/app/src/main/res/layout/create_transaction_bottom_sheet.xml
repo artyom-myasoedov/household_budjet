@@ -51,11 +51,26 @@
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/date"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_below="@id/toggleGroup"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Добавить"
+        android:textColor="@color/text_color"
+
+        app:cornerRadius="4dp"
+        app:strokeColor="#818181"
+        app:strokeWidth="1dp" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/summ_input_layout"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:layout_below="@+id/toggleGroup"
+        android:layout_below="@+id/date"
         android:layout_marginTop="10dp"
         android:hint="Сумма"
         android:paddingLeft="25dp"
@@ -74,7 +89,7 @@
             android:background="@android:color/transparent"
 
             android:inputType="numberDecimal"
-            android:maxLength="20"
+            android:maxLength="6"
 
             android:textColor="@android:color/black"
             android:textColorHighlight="#606E7D"
