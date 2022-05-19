@@ -21,6 +21,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import ru.vsu.hb_front.BuildConfig;
 import ru.vsu.hb_front.dto.CategoryDto;
 import ru.vsu.hb_front.dto.UserDto;
 import ru.vsu.hb_front.dto.UserLoginRequest;
@@ -59,6 +60,10 @@ public class Api implements Interceptor {
                 .create();
 
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+
+        if(BuildConfig.DEBUG){
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY );
+        }
 
         api.client = UnsafeOkHttpClient.getUnsafeOkHttpClient().newBuilder().addInterceptor(api).addInterceptor(loggingInterceptor).build();
         api.retrofit = new Retrofit.Builder()
@@ -100,6 +105,17 @@ public class Api implements Interceptor {
         return categoryService.createCategory(category).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
+    public Single<Response<HBResponseData<CategoryDto>>> editCategory(CategoryDto category) {
+        return categoryService.editCategory(category).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<Response<HBResponseData<Integer>>> deleteCategory(String id) {
+        return categoryService.deleteCategory(id).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
 
     @NonNull
     @Override

@@ -27,7 +27,7 @@ public interface CategoryService {
     Single<Response<HBResponseData<CategoryDto>>> createCategory(@Body CategoryDto category);
 
     @DELETE("/category")
-    Single<Response<HBResponseData<CategoryDto>>> deleteCategory(@Query("categoryId") String id);
+    Single<Response<HBResponseData<Integer>>> deleteCategory(@Query("categoryId") String id);
 
     @GET("/category")
     Single<Response<HBResponseData<CategoryDto>>> getCategory(@Path("categoryId") String id);

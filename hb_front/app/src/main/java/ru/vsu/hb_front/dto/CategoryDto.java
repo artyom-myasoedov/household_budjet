@@ -1,19 +1,22 @@
 package ru.vsu.hb_front.dto;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.math.BigDecimal;
 import java.util.UUID;
 
 public class CategoryDto {
 
     private UUID categoryId;
-    private Boolean isDefault;
+    @SerializedName("default")
+    private boolean isDefault;
     private String categoryName;
     private BigDecimal outSumLastMonth;
 
     public CategoryDto() {
     }
 
-    public CategoryDto(UUID categoryId, Boolean isDefault, String categoryName) {
+    public CategoryDto(UUID categoryId, boolean isDefault, String categoryName) {
         this.isDefault = isDefault;
         this.categoryName = categoryName;
         this.categoryId = categoryId;
@@ -27,11 +30,11 @@ public class CategoryDto {
         this.outSumLastMonth = outSumLastMonth;
     }
 
-    public Boolean getDefault() {
+    public boolean getDefault() {
         return isDefault;
     }
 
-    public void setDefault(Boolean aDefault) {
+    public void setDefault(boolean aDefault) {
         isDefault = aDefault;
     }
 
