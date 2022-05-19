@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="800dp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+
+    <TextView
+        android:id="@+id/sheet_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Добавление категории"
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/name_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginTop="10dp"
+        android:hint="Название категории"
+        android:paddingLeft="25dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="5dp"
+        android:textColorHint="@color/black"
+        app:boxStrokeColor="#606E7D"
+        app:endIconTint="#606E7D"
+        app:hintTextColor="#606E7D"
+        app:startIconTint="#606E7D"
+        android:layout_below="@+id/sheet_title">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+
+            android:inputType="textNoSuggestions"
+            android:maxLength="20"
+
+            android:textColor="@android:color/black"
+            android:textColorHighlight="#606E7D"
+            android:textColorLink="#606E7D"
+            android:textSize="17sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/create_btn"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="200dp"
+        android:layout_height="55dp"
+
+        android:layout_below="@id/name_input_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Добавить"
+        android:textColor="@color/text_color"
+
+        app:cornerRadius="4dp"
+        app:strokeColor="@color/background_color"
+        app:strokeWidth="2dp" />
+
+</RelativeLayout>

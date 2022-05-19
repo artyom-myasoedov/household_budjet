@@ -2,6 +2,7 @@ package ru.vsu.hb_front.api;
 
 import java.math.BigDecimal;
 
+import io.reactivex.Observable;
 import io.reactivex.Single;
 import retrofit2.Response;
 import retrofit2.http.Body;
@@ -39,7 +40,7 @@ public interface TransactionService {
             (@Body TransactionByCategoryRequest request);
 
     @GET("/transaction/currMonthOutSum")
-    Single<Response<HBResponseData<BigDecimal>>> getCurMonthOutSum();
+    Observable<Response<HBResponseData<BigDecimal>>> getCurMonthOutSum();
 
     @GET("/transaction/list")
     Single<Response<HBResponseData<PageDto<TransactionDto>>>> getTransactionsList
