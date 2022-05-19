@@ -24,6 +24,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -84,7 +85,8 @@ public class CreateTransactionBottomSheet extends BottomSheetDialogFragment {
                 categoriesAutoTV.setError("Выберите категорию");
             } else {
                 TransactionDto transactionDto = new TransactionDto();
-                transactionDto.setCreateTime(LocalDateTime.from(date.toInstant()));
+
+                transactionDto.setCreateTime(LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()));
                 transactionDto.setDescription(transactionNameInput.getText().toString());
                 transactionDto.setSum(new BigDecimal(summInput.getText().toString()));
                 if(group.getCheckedButtonId() == R.id.btn_out){

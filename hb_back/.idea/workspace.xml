@@ -5,23 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ea785690-e096-4d85-82a5-93916f618502" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hb_front/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/java/ru/vsu/hb_front/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/java/ru/vsu/hb_front/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/java/ru/vsu/hb_front/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/java/ru/vsu/hb_front/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/java/ru/vsu/hb_front/dto/error/HBError.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/java/ru/vsu/hb_front/dto/error/HBError.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/activity_login.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/fragment_categories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/fragment_categories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/fragment_register.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/fragment_register.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/fragment_statistics.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/fragment_statistics.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/fragment_transactions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/fragment_transactions.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/fragment_unauthorized.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/res/layout/fragment_unauthorized.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/java/ru/vsu/hb_front/sheets/CreateTransactionBottomSheet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/java/ru/vsu/hb_front/sheets/CreateTransactionBottomSheet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +80,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/OneDrive/Рабочий стол/schedluer" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -256,6 +240,7 @@
       <workItem from="1650866252713" duration="3994000" />
       <workItem from="1651334708866" duration="707000" />
       <workItem from="1651522777035" duration="77000" />
+      <workItem from="1652997849662" duration="188000" />
     </task>
     <servers />
   </component>

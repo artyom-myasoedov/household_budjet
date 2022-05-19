@@ -4,9 +4,22 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -55,8 +68,24 @@ public class Api implements Interceptor {
     private TransactionService transactionService;
     private StatisticsService statisticsService;
 
+    private static class LocalDateAdapter implements JsonSerializer<LocalDateTime> {
+
+        public JsonElement serialize(LocalDateTime date, Type typeOfSrc, JsonSerializationContext context) {
+            return new JsonPrimitive(date.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        }
+    }
+
+    private static class LocalDateDeserializeAdapter implements JsonDeserializer<LocalDateTime> {
+        @Override
+        public LocalDateTime deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+            return LocalDateTime.parse(json.getAsString().substring(0,19), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+        }
+    }
+
     public static void init(String baseUrl) {
         Gson gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateAdapter())
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateDeserializeAdapter())
                 .setLenient()
                 .create();
 
