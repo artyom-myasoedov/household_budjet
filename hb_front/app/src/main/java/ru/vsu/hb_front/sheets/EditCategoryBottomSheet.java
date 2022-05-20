@@ -16,6 +16,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.Disposable;
 import ru.vsu.hb_front.R;
@@ -53,31 +54,31 @@ public class EditCategoryBottomSheet extends BottomSheetDialogFragment {
         categoryNameInput.setText(category.getCategoryName());
 
         saveBtn.setOnClickListener(view -> {
-            if(categoryNameInput.getText().toString()==null || categoryNameInput.getText().toString().length()==0){
+            if (categoryNameInput.getText().toString() == null || categoryNameInput.getText().toString().length() == 0) {
                 categoryNameInput.setError("Недопустимая длина");
-            }else {
+            } else {
                 category.setCategoryName(categoryNameInput.getText().toString());
-                editCategoryDisposable = Api.getInstance().editCategory(category).subscribe(resp->{
-                    if(resp.isSuccessful()){
+                editCategoryDisposable = Api.getInstance().editCategory(category).subscribe(resp -> {
+                    if (resp.isSuccessful()) {
                         dismiss();
-                    }else{
+                    } else {
                         categoryNameInput.setError("Возникла ошибка, возможно имя уже занято");
                     }
                 });
             }
         });
 
-        if(category.getDefault()) {
+        if (category.getDefault()) {
             deleteBtn.setVisibility(View.GONE);
             saveBtn.setVisibility(View.GONE);
             categoryNameInput.setEnabled(false);
         }
 
-        deleteBtn.setOnClickListener(view->{
-            deleteCategoryDisposable = Api.getInstance().deleteCategory(category.getCategoryId().toString()).subscribe(resp->{
-                if(resp.isSuccessful()){
+        deleteBtn.setOnClickListener(view -> {
+            deleteCategoryDisposable = Api.getInstance().deleteCategory(category.getCategoryId().toString()).subscribe(resp -> {
+                if (resp.isSuccessful()) {
                     dismiss();
-                }else{
+                } else {
                     categoryNameInput.setError("Возникла ошибка");
                 }
             });
@@ -89,16 +90,21 @@ public class EditCategoryBottomSheet extends BottomSheetDialogFragment {
         pageRequest.setLimit(1000);
         request.setPage(pageRequest);
 
-        transactionsDisposable = Api.getInstance().getCategoryTransactions(request).subscribe(resp->{
-            if(resp.isSuccessful()){
-                transactions.addAll(resp.body().getData().getItems());
-                adapter = new TransactionsAdapter(transactions, getActivity());
-                LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
-                rv.setLayoutManager(llm);
-                rv.setAdapter(adapter);
-            }
+        transactionsDisposable = Api.getInstance().getCategoryTransactions(request)
+                .repeatWhen(completed -> completed.delay(1000, TimeUnit.MILLISECONDS)).subscribe(resp -> {
+                    if (resp.isSuccessful()) {
+                        transactions.clear();
+                        transactions.addAll(resp.body().getData().getItems());
+                        if (adapter == null) {
+                            adapter = new TransactionsAdapter(transactions, getActivity());
+                            LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
+                            rv.setLayoutManager(llm);
+                            rv.setAdapter(adapter);
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
 
-        }, Throwable::printStackTrace);
+                }, Throwable::printStackTrace);
 
         return v;
     }
@@ -106,8 +112,8 @@ public class EditCategoryBottomSheet extends BottomSheetDialogFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if(editCategoryDisposable !=null) editCategoryDisposable.dispose();
-        if(deleteCategoryDisposable!=null) deleteCategoryDisposable.dispose();
-        if(transactionsDisposable!=null) transactionsDisposable.dispose();
+        if (editCategoryDisposable != null) editCategoryDisposable.dispose();
+        if (deleteCategoryDisposable != null) deleteCategoryDisposable.dispose();
+        if (transactionsDisposable != null) transactionsDisposable.dispose();
     }
 }
