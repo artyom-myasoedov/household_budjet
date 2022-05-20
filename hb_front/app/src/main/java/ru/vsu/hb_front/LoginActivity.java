@@ -73,6 +73,10 @@ public class LoginActivity extends AppCompatActivity {
 //                    .replace(R.id.fragment, fragment, "register").commit();
         });
 
+        b.statisticsBtn.setOnClickListener(v->{
+            startActivity(new Intent(this, UnauthorizedActivity.class));
+        });
+
     }
 
     @Override
