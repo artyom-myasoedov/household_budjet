@@ -6,15 +6,18 @@ import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import ru.vsu.hb_front.databinding.ActivityMainBinding;
+import ru.vsu.hb_front.dialogs.LogoutConfirmDialogFragment;
 import ru.vsu.hb_front.sheets.CreateCategoryBottomSheet;
 import ru.vsu.hb_front.sheets.CreateTransactionBottomSheet;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static long back_pressed;
     private ActivityMainBinding b;
 
     @Override
@@ -34,6 +37,12 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
+        b.bottomNavigationView.getMenu().getItem(4).setOnMenuItemClickListener(item->{
+            LogoutConfirmDialogFragment dialog = new LogoutConfirmDialogFragment();
+            dialog.show(getSupportFragmentManager(), "logoutConfirm");
+            return true;
+        });
+
         b.fab.setOnClickListener(view -> {
             CreateTransactionBottomSheet bottomSheet = new CreateTransactionBottomSheet();
             bottomSheet.show(this.getSupportFragmentManager(),
@@ -44,6 +53,16 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment, categoriesFragment, "categories").commit();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (back_pressed + 2000 > System.currentTimeMillis()) {
+            finishAffinity();
+        } else {
+            Toast.makeText(getBaseContext(), "Нажмите ещё раз для выхода!", Toast.LENGTH_SHORT).show();
+        }
+        back_pressed = System.currentTimeMillis();
     }
 
 
