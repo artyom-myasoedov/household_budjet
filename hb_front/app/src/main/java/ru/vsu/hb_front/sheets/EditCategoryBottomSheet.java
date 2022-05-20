@@ -85,7 +85,9 @@ public class EditCategoryBottomSheet extends BottomSheetDialogFragment {
 
         TransactionByCategoryRequest request = new TransactionByCategoryRequest();
         request.setCategoryId(category.getCategoryId());
-        request.setPage(new PageRequest());
+        PageRequest pageRequest = new PageRequest();
+        pageRequest.setLimit(1000);
+        request.setPage(pageRequest);
 
         transactionsDisposable = Api.getInstance().getCategoryTransactions(request).subscribe(resp->{
             if(resp.isSuccessful()){
