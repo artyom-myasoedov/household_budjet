@@ -36,6 +36,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import ru.vsu.hb_front.BuildConfig;
 import ru.vsu.hb_front.dto.CategoryDto;
+import ru.vsu.hb_front.dto.GlobalStatistics;
 import ru.vsu.hb_front.dto.PageDto;
 import ru.vsu.hb_front.dto.TransactionDto;
 import ru.vsu.hb_front.dto.UserDto;
@@ -122,6 +123,11 @@ public class Api implements Interceptor {
 
     public Single<Response<HBResponseData<UserDto>>> login(UserLoginRequest user) {
         return userService.login(user).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<Response<HBResponseData<GlobalStatistics>>> getGlobalStat() {
+        return statisticsService.getGlobalStat().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
