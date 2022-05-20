@@ -35,14 +35,14 @@ public interface TransactionService {
     @GET("/transaction/balance")
     Single<Response<HBResponseData<BigDecimal>>> getBalance();
 
-    @GET("/transaction/byCategory")
+    @POST("/transaction/byCategory")
     Single<Response<HBResponseData<PageDto<TransactionDto>>>> getTransactionsByCategory
             (@Body TransactionByCategoryRequest request);
 
     @GET("/transaction/currMonthOutSum")
     Observable<Response<HBResponseData<BigDecimal>>> getCurMonthOutSum();
 
-    @GET("/transaction/list")
+    @POST("/transaction/list")
     Single<Response<HBResponseData<PageDto<TransactionDto>>>> getTransactionsList
             (@Body TransactionListRequest request);
 
