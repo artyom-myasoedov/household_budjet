@@ -37,6 +37,15 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
+        b.bottomNavigationView.getMenu().getItem(1).setOnMenuItemClickListener(item->{
+            if (b.bottomNavigationView.getSelectedItemId() != R.id.transaction_btn) {
+                TransactionsFragment transactionsFragment = new TransactionsFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment, transactionsFragment, "transactions").commit();
+            }
+            return false;
+        });
+
         b.bottomNavigationView.getMenu().getItem(4).setOnMenuItemClickListener(item->{
             LogoutConfirmDialogFragment dialog = new LogoutConfirmDialogFragment();
             dialog.show(getSupportFragmentManager(), "logoutConfirm");

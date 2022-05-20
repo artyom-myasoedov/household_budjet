@@ -42,6 +42,7 @@ import ru.vsu.hb_front.dto.UserDto;
 import ru.vsu.hb_front.dto.UserEditRequest;
 import ru.vsu.hb_front.dto.UserLoginRequest;
 import ru.vsu.hb_front.dto.request.TransactionByCategoryRequest;
+import ru.vsu.hb_front.dto.request.TransactionListRequest;
 import ru.vsu.hb_front.dto.response.HBResponseData;
 import ru.vsu.hb_front.store.PreferenceStore;
 
@@ -134,8 +135,18 @@ public class Api implements Interceptor {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Single<Response<HBResponseData<PageDto<TransactionDto>>>> getTransactionsList(TransactionListRequest request) {
+        return transactionService.getTransactionsList(request).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     public Observable<Response<HBResponseData<BigDecimal>>> getCurMonthOutSum() {
         return transactionService.getCurMonthOutSum().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<Response<HBResponseData<BigDecimal>>> getBalance() {
+        return transactionService.getBalance().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 

@@ -33,7 +33,7 @@ public interface TransactionService {
     Single<Response<HBResponseData<TransactionDto>>> getTransaction(@Path("transactionId") String id);
 
     @GET("/transaction/balance")
-    Single<Response<HBResponseData<BigDecimal>>> getBalance();
+    Observable<Response<HBResponseData<BigDecimal>>> getBalance();
 
     @POST("/transaction/byCategory")
     Single<Response<HBResponseData<PageDto<TransactionDto>>>> getTransactionsByCategory
