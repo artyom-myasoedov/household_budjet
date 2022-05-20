@@ -42,6 +42,7 @@ import ru.vsu.hb_front.dto.TransactionDto;
 import ru.vsu.hb_front.dto.UserDto;
 import ru.vsu.hb_front.dto.UserEditRequest;
 import ru.vsu.hb_front.dto.UserLoginRequest;
+import ru.vsu.hb_front.dto.UserStatisticsRecommendations;
 import ru.vsu.hb_front.dto.request.TransactionByCategoryRequest;
 import ru.vsu.hb_front.dto.request.TransactionListRequest;
 import ru.vsu.hb_front.dto.response.HBResponseData;
@@ -128,6 +129,11 @@ public class Api implements Interceptor {
 
     public Single<Response<HBResponseData<GlobalStatistics>>> getGlobalStat() {
         return statisticsService.getGlobalStat().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<Response<HBResponseData<UserStatisticsRecommendations>>> getUserStat() {
+        return statisticsService.getPersonalStat().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 

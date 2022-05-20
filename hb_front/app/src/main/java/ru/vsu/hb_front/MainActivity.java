@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ru.vsu.hb_front.api.StatisticsService;
 import ru.vsu.hb_front.databinding.ActivityMainBinding;
 import ru.vsu.hb_front.dialogs.LogoutConfirmDialogFragment;
 import ru.vsu.hb_front.sheets.CreateCategoryBottomSheet;
@@ -42,6 +43,15 @@ public class MainActivity extends AppCompatActivity {
                 TransactionsFragment transactionsFragment = new TransactionsFragment();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment, transactionsFragment, "transactions").commit();
+            }
+            return false;
+        });
+
+        b.bottomNavigationView.getMenu().getItem(3).setOnMenuItemClickListener(item->{
+            if (b.bottomNavigationView.getSelectedItemId() != R.id.statistics_btn) {
+                StatisticsFragment statisticsFragment = new StatisticsFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment, statisticsFragment, "statistics").commit();
             }
             return false;
         });
