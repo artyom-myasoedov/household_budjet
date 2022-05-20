@@ -108,5 +108,6 @@ public class EditCategoryBottomSheet extends BottomSheetDialogFragment {
         super.onDestroyView();
         if(editCategoryDisposable !=null) editCategoryDisposable.dispose();
         if(deleteCategoryDisposable!=null) deleteCategoryDisposable.dispose();
+        if(transactionsDisposable!=null) transactionsDisposable.dispose();
     }
 }

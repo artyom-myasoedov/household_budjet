@@ -1,12 +1,16 @@
 package ru.vsu.hb_front.adapters;
 
 import android.content.Context;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.format.DateTimeFormatter;
@@ -14,6 +18,8 @@ import java.util.List;
 
 import ru.vsu.hb_front.R;
 import ru.vsu.hb_front.dto.TransactionDto;
+import ru.vsu.hb_front.sheets.CreateTransactionBottomSheet;
+import ru.vsu.hb_front.sheets.EditTransactionBottomSheet;
 
 
 public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapter.CardViewHolder>{
@@ -51,6 +57,12 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
     @Override
     public void onBindViewHolder(CardViewHolder cardViewHolder, int position) {
         CardView cardView = cardViewHolder.cardView;
+
+        cardView.setOnClickListener(view -> {
+            EditTransactionBottomSheet bottomSheet = new EditTransactionBottomSheet(cards.get(position));
+            bottomSheet.show(fragmentActivity.getSupportFragmentManager(),
+                    "EditTransactionBottomSheet");
+        });
 
         cardViewHolder.currentCardPosition = position;
 

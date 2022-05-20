@@ -165,8 +165,18 @@ public class Api implements Interceptor {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Single<Response<HBResponseData<TransactionDto>>> editTransaction(TransactionDto transaction) {
+        return transactionService.editTransaction(transaction).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     public Single<Response<HBResponseData<Integer>>> deleteCategory(String id) {
         return categoryService.deleteCategory(id).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<Response<HBResponseData<Integer>>> deleteTransaction(String id) {
+        return transactionService.deleteTransaction(id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 

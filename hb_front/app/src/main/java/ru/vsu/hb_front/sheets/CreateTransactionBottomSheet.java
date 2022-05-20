@@ -1,7 +1,6 @@
 package ru.vsu.hb_front.sheets;
 
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -9,10 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.TextView;
-import android.widget.TimePicker;
 
 import androidx.annotation.Nullable;
 
@@ -42,7 +37,7 @@ public class CreateTransactionBottomSheet extends BottomSheetDialogFragment {
     private List<CategoryDto> categories;
     private AutoCompleteTextView categoriesAutoTV;
     private MaterialButton currentDate;
-    Calendar date=Calendar.getInstance();
+    private Calendar date=Calendar.getInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable
@@ -141,15 +136,14 @@ public class CreateTransactionBottomSheet extends BottomSheetDialogFragment {
             return true;
         });
 
-        ArrayList<String> customerList = getCustomerList();
+        ArrayList<String> customerList = getCategoriesList();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, customerList);
         categoriesAutoTV.setAdapter(adapter);
 
     }
 
-    private ArrayList<String> getCustomerList()
+    private ArrayList<String> getCategoriesList()
     {
-
         ArrayList<String> categoryNames = new ArrayList<>();
         for(CategoryDto category: categories){
             categoryNames.add(category.getCategoryName());
