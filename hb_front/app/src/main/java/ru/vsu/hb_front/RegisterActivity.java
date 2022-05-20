@@ -23,6 +23,7 @@ public class RegisterActivity extends Activity {
 
     private ActivityRegisterBindingImpl b;
     private Disposable registerDisposable;
+    private Disposable loginDisposable;
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,10}$", Pattern.CASE_INSENSITIVE);
 
@@ -48,10 +49,10 @@ public class RegisterActivity extends Activity {
                         resp -> {
                             if (resp.isSuccessful()) {
                                 if ("success".equals(resp.body().getCode())) {
-                                    registerDisposable = Api.getInstance().login(new UserLoginRequest(resp.body().getData().getUserEmail(), pass)).subscribe(
+                                    loginDisposable = Api.getInstance().login(new UserLoginRequest(resp.body().getData().getUserEmail(), pass)).subscribe(
                                             response -> {
                                                 if (response.isSuccessful()) {
-                                                    PreferenceStore.getInstance().saveToken(resp.headers().get("Authorization"));
+                                                    PreferenceStore.getInstance().saveToken(response.headers().get("Authorization"));
                                                     PreferenceStore.getInstance().saveName(Objects.requireNonNull(resp.body()).getData().getFirstName());
                                                     Intent intent = new Intent(this, MainActivity.class);
                                                     startActivity(intent);
@@ -83,6 +84,7 @@ public class RegisterActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         if (registerDisposable != null) registerDisposable.dispose();
+        if(loginDisposable!= null) loginDisposable.dispose();
     }
 
 }
