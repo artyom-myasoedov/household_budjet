@@ -2,6 +2,7 @@ package ru.vsu.hb_front;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -20,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding b;
     private Disposable loginDisposable;
+    private static long back_pressed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,5 +79,15 @@ public class LoginActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         if(loginDisposable!=null) loginDisposable.dispose();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (back_pressed + 2000 > System.currentTimeMillis()) {
+            finishAffinity();
+        } else {
+            Toast.makeText(getBaseContext(), "Нажмите ещё раз для выхода!", Toast.LENGTH_SHORT).show();
+        }
+        back_pressed = System.currentTimeMillis();
     }
 }
