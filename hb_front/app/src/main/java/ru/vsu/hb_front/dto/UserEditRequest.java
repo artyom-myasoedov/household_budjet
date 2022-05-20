@@ -9,6 +9,15 @@ public class UserEditRequest {
 
     private String firstName;
 
+    public UserEditRequest() {
+    }
+
+    public UserEditRequest(String userEmail, String password, String firstName) {
+        this.userEmail = userEmail;
+        this.password = password;
+        this.firstName = firstName;
+    }
+
     public String getFirstName() {
         return firstName;
     }

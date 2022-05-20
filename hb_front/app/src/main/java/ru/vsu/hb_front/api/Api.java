@@ -39,6 +39,7 @@ import ru.vsu.hb_front.dto.CategoryDto;
 import ru.vsu.hb_front.dto.PageDto;
 import ru.vsu.hb_front.dto.TransactionDto;
 import ru.vsu.hb_front.dto.UserDto;
+import ru.vsu.hb_front.dto.UserEditRequest;
 import ru.vsu.hb_front.dto.UserLoginRequest;
 import ru.vsu.hb_front.dto.request.TransactionByCategoryRequest;
 import ru.vsu.hb_front.dto.response.HBResponseData;
@@ -155,6 +156,11 @@ public class Api implements Interceptor {
 
     public Single<Response<HBResponseData<Integer>>> deleteCategory(String id) {
         return categoryService.deleteCategory(id).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<Response<HBResponseData<UserDto>>> register(UserEditRequest userEditRequest) {
+        return userService.register(userEditRequest).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 

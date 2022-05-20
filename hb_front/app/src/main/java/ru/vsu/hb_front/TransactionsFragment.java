@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import ru.vsu.hb_front.databinding.FragmentRegisterBinding;
 import ru.vsu.hb_front.databinding.FragmentTransactionsBinding;
 
 public class TransactionsFragment extends Fragment {

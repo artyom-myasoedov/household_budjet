@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="ru.vsu.hb_front.RegisterFragment"
+        android:name="ru.vsu.hb_front.RegisterActivity"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_register">
+        tools:layout="@layout/activity_register">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"

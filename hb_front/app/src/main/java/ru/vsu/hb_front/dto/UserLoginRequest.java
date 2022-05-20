@@ -7,6 +7,14 @@ public class UserLoginRequest {
 
     private String password;
 
+    public UserLoginRequest() {
+    }
+
+    public UserLoginRequest(String userEmail, String password) {
+        this.userEmail = userEmail;
+        this.password = password;
+    }
+
     public String getUserEmail() {
         return userEmail;
     }
