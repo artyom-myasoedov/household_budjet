@@ -8,13 +8,65 @@
 
     </data>
 
-    <RelativeLayout
-        android:id="@+id/fragment"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_marginBottom="25dp">
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="30dp"
+                android:textAlignment="center"
+                android:text="Распределение расходов"
+                android:textSize="18sp" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/cur_month_chart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_below="@id/title"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pre_month_chart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="30dp"
+                android:layout_below="@id/cur_month_chart"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp" />
+
+            <TextView
+                android:id="@+id/title2"
+                android:layout_below="@id/pre_month_chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="20dp"
+                android:textAlignment="center"
+                android:text="Рекомендации"
+                android:textSize="18sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recommendation"
+                android:layout_below="@id/title2"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
 
 </layout>
