@@ -43,18 +43,14 @@
             android:textSize="17sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/category_transactions"
-        android:layout_below="@id/name_input_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="550dp"
-        />
+
 
     <LinearLayout
+        android:id="@+id/buttons_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/category_transactions"
+        android:layout_below="@id/name_input_layout"
 
         android:layout_centerHorizontal="true">
         <com.google.android.material.button.MaterialButton
@@ -86,5 +82,10 @@
             app:strokeWidth="2dp" />
     </LinearLayout>
 
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/category_transactions"
+        android:layout_below="@id/buttons_layout"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        />
 </RelativeLayout>
