@@ -84,22 +84,22 @@ public class StatisticsService {
                     prevSum.subtract(currSum).setScale(2, RoundingMode.HALF_UP) + "руб.";
             if (currSum.compareTo(BigDecimal.ZERO) > 0) {
                 recommendation += "(" + BigDecimal.valueOf(100).subtract(currSum.divide(prevSum, 2, RoundingMode.HALF_UP).multiply(BigDecimal.valueOf(100))) +
-                        "%). Соблюдайте такую динамику!.";
+                        "%). Соблюдайте такую динамику!";
             }
         }
         return recommendation;
     }
 
     private List<String> getAbsencesCategoriesPrevMonth(UserStatisticsRecommendations statistics) {
-        return statistics.getCurrMonthExpenses().keySet().stream()//категории, которые есть в текущем месяце, но отсутствуют в пред месяце => расходы в текущем месяце появились
-                .filter(it -> !statistics.getPrevMonthExpenses().containsKey(it))
+        return statistics.getPrevMonthExpenses().keySet().stream()//категории, которые есть в текущем месяце, но отсутствуют в пред месяце => расходы в текущем месяце появились
+                .filter(it -> !statistics.getCurrMonthExpenses().containsKey(it))
                 .map(it -> "В текущем месяце у вас отсутствуют расходы по категории \"" + it + "\", в отличие от предыдущего месяца. Продолжайте в том же духе!")
                 .collect(Collectors.toList());
     }
 
     private List<String> getAbsencesCategoriesCurrMonth(UserStatisticsRecommendations statistics) {
-        return statistics.getPrevMonthExpenses().keySet().stream()//категории, которые есть в пред месяце, но отсутствуют в текущем месяце => расходов в текущем месяце нет
-                .filter(it -> !statistics.getCurrMonthExpenses().containsKey(it))
+        return statistics.getCurrMonthExpenses().keySet().stream()//категории, которые есть в пред месяце, но отсутствуют в текущем месяце => расходов в текущем месяце нет
+                .filter(it -> !statistics.getPrevMonthExpenses().containsKey(it))
                 .map(it -> "В текущем месяце у вас появились расходы по категории \"" + it + "\", в отличие от предыдущего месяца. Возможно стоит подумать, действительно ли они необходимы.")
                 .collect(Collectors.toList());
     }
@@ -115,8 +115,8 @@ public class StatisticsService {
                         .divide(prev, 2, RoundingMode.HALF_UP)
                         .multiply(BigDecimal.valueOf(100)).subtract(BigDecimal.valueOf(100)) + "%)";
             }
-            sumRecommendation = "Вы привысили расходы в текущем месяце в сравнении с предыдущим на ";
-            sumRecommendation += overrun + ".";
+            sumRecommendation = "Вы превысили расходы в текущем месяце в сравнении с предыдущим на ";
+            sumRecommendation += overrun;
         } else {
             sumRecommendation = "Ваши расходы в текущем месяце не превышают расходы в предыдущем. Так Держать!";
         }
