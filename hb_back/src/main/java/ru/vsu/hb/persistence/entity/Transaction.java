@@ -1,7 +1,5 @@
 package ru.vsu.hb.persistence.entity;
 
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -33,8 +31,7 @@ public class Transaction {
     private BigDecimal sum;
 
     @Column(name = "create_time")
-    @Generated(GenerationTime.INSERT)
-    private LocalDateTime createTime;
+    private LocalDateTime createTime = LocalDateTime.now();
 
     @Column(name = "description")
     private String description;
@@ -92,7 +89,9 @@ public class Transaction {
     }
 
     public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
+        if (createTime != null) {
+            this.createTime = createTime;
+        }
     }
 
     public String getDescription() {
