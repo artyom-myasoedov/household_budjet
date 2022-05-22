@@ -1,5 +1,6 @@
 package ru.vsu.hb_front;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import ru.vsu.hb_front.databinding.FragmentTransactionsBinding;
 import ru.vsu.hb_front.dto.CategoryDto;
 import ru.vsu.hb_front.sheets.CreateCategoryBottomSheet;
 import ru.vsu.hb_front.sheets.EditCategoryBottomSheet;
+import ru.vsu.hb_front.store.PreferenceStore;
 
 public class CategoriesFragment extends Fragment {
 
@@ -42,6 +44,9 @@ public class CategoriesFragment extends Fragment {
 
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.category_btn);
+
+        b.username.setPaintFlags(b.username.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        b.username.setText(PreferenceStore.getInstance().getName());
 
         categoriesDisposable = Api.getInstance().getUserCategories()
                 .repeatWhen(completed -> completed.delay(500, TimeUnit.MILLISECONDS)).subscribe(resp -> {

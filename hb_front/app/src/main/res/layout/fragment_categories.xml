@@ -13,13 +13,26 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="16sp"
+            android:textColor="@color/purple_700"
+            android:layout_alignParentEnd="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="20dp"
+            />
+
+        <TextView
             android:id="@+id/fragment_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/username"
             android:text="Категории"
             android:textSize="30sp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
             />
 
         <TextView

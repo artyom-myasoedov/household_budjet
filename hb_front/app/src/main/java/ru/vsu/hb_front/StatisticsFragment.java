@@ -1,6 +1,7 @@
 package ru.vsu.hb_front;
 
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ import ru.vsu.hb_front.api.Api;
 import ru.vsu.hb_front.databinding.FragmentCategoriesBinding;
 import ru.vsu.hb_front.databinding.FragmentStatisticsBinding;
 import ru.vsu.hb_front.dto.UserStatisticsRecommendations;
+import ru.vsu.hb_front.store.PreferenceStore;
 
 public class StatisticsFragment extends Fragment {
 
@@ -41,6 +43,9 @@ public class StatisticsFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         b = DataBindingUtil.inflate(inflater, R.layout.fragment_statistics, container, false);
+
+        b.username.setPaintFlags(b.username.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        b.username.setText(PreferenceStore.getInstance().getName());
 
         userStatisticsDisposable = Api.getInstance().getUserStat().subscribe(resp->{
             if(resp.isSuccessful()){

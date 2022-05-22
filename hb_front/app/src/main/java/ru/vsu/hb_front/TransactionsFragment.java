@@ -1,5 +1,6 @@
 package ru.vsu.hb_front;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -26,6 +27,7 @@ import ru.vsu.hb_front.dto.TransactionDto;
 import ru.vsu.hb_front.dto.request.PageRequest;
 import ru.vsu.hb_front.dto.request.TransactionByCategoryRequest;
 import ru.vsu.hb_front.dto.request.TransactionListRequest;
+import ru.vsu.hb_front.store.PreferenceStore;
 
 public class TransactionsFragment extends Fragment {
 
@@ -41,6 +43,9 @@ public class TransactionsFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         b = FragmentTransactionsBinding.inflate(inflater, container, false);
+
+        b.username.setPaintFlags(b.username.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        b.username.setText(PreferenceStore.getInstance().getName());
 
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.transaction_btn);
