@@ -27,6 +27,7 @@ import ru.vsu.hb.service.CategoryService;
 import ru.vsu.hb.service.UserService;
 import ru.vsu.hb.utils.HBResponseBuilder;
 
+import java.security.Principal;
 import java.util.List;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
@@ -97,7 +98,8 @@ public class UserController {
     @PreAuthorize("hasAnyAuthority('USER')")
     @PostMapping
     @ApiOperation(value = "Редактирование пользователя")
-    public ResponseEntity<? extends HBResponseData<? extends UserDto>> editUser(@RequestBody User user) {
+    public ResponseEntity<? extends HBResponseData<? extends UserDto>> editUser(@RequestBody User user, Principal principal) {
+        user.setUserEmail(principal.getName());
         return HBResponseBuilder.fromHBResult(userService.editUser(user)).build();
     }
 
