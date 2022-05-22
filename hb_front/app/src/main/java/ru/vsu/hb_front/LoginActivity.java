@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import com.yandex.metrica.YandexMetrica;
+
 import java.net.ConnectException;
 import java.util.Objects;
 
@@ -67,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         b.registrationBtn.setOnClickListener(v->{
+            YandexMetrica.getReporter(getApplicationContext(), "e21872c4-3278-4bca-a10f-0e3357ebcfd2").reportEvent("register_activity");
             startActivity(new Intent(this, RegisterActivity.class));
             //Fragment fragment = new RegisterActivity();
 //            getSupportFragmentManager().beginTransaction().addToBackStack("register")
@@ -74,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         b.statisticsBtn.setOnClickListener(v->{
+            YandexMetrica.getReporter(getApplicationContext(), "e21872c4-3278-4bca-a10f-0e3357ebcfd2").reportEvent("global_stats");
             startActivity(new Intent(this, UnauthorizedActivity.class));
         });
 
