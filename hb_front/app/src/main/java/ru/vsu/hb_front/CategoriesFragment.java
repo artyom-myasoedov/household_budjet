@@ -1,5 +1,6 @@
 package ru.vsu.hb_front;
 
+import android.app.Activity;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -47,6 +48,10 @@ public class CategoriesFragment extends Fragment {
 
         b.username.setPaintFlags(b.username.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         b.username.setText(PreferenceStore.getInstance().getName());
+        b.username.setOnClickListener(l -> {
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.fragment, new UserEditFragment(), "useredit").commit();
+        });
 
         categoriesDisposable = Api.getInstance().getUserCategories()
                 .repeatWhen(completed -> completed.delay(500, TimeUnit.MILLISECONDS)).subscribe(resp -> {

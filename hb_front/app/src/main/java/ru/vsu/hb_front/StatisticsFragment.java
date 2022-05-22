@@ -46,6 +46,10 @@ public class StatisticsFragment extends Fragment {
 
         b.username.setPaintFlags(b.username.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         b.username.setText(PreferenceStore.getInstance().getName());
+        b.username.setOnClickListener(l -> {
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment, new UserEditFragment(), "userEdit").commit();
+        });
 
         userStatisticsDisposable = Api.getInstance().getUserStat().subscribe(resp->{
             if(resp.isSuccessful()){

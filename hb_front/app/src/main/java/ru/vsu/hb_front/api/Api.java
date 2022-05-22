@@ -197,6 +197,11 @@ public class Api implements Interceptor {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Single<Response<HBResponseData<UserDto>>> updateUser(UserEditRequest userEditRequest) {
+        return userService.edit(userEditRequest).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
 
     @NonNull
     @Override
