@@ -25,7 +25,6 @@ import ru.vsu.hb_front.api.Api;
 import ru.vsu.hb_front.databinding.FragmentTransactionsBinding;
 import ru.vsu.hb_front.dto.TransactionDto;
 import ru.vsu.hb_front.dto.request.PageRequest;
-import ru.vsu.hb_front.dto.request.TransactionByCategoryRequest;
 import ru.vsu.hb_front.dto.request.TransactionListRequest;
 import ru.vsu.hb_front.store.PreferenceStore;
 
@@ -46,6 +45,10 @@ public class TransactionsFragment extends Fragment {
 
         b.username.setPaintFlags(b.username.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         b.username.setText(PreferenceStore.getInstance().getName());
+        b.username.setOnClickListener(l -> {
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment, new UserEditFragment(), "userEdit").commit();
+        });
 
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.transaction_btn);

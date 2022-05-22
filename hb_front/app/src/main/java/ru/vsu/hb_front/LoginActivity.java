@@ -71,9 +71,6 @@ public class LoginActivity extends AppCompatActivity {
         b.registrationBtn.setOnClickListener(v->{
             YandexMetrica.getReporter(getApplicationContext(), "e21872c4-3278-4bca-a10f-0e3357ebcfd2").reportEvent("register_activity");
             startActivity(new Intent(this, RegisterActivity.class));
-            //Fragment fragment = new RegisterActivity();
-//            getSupportFragmentManager().beginTransaction().addToBackStack("register")
-//                    .replace(R.id.fragment, fragment, "register").commit();
         });
 
         b.statisticsBtn.setOnClickListener(v->{
