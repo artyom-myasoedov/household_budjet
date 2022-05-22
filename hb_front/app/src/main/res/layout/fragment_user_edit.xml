@@ -9,7 +9,6 @@
     </data>
 
     <RelativeLayout
-        android:id="@+id/fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -17,6 +16,7 @@
             android:id="@+id/fragment_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:text="Редактирование пользователя"
             android:textSize="30sp"
             android:layout_centerHorizontal="true"
@@ -116,41 +116,45 @@
                 android:textSize="17sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/firstname_btn"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="150dp"
-            android:layout_height="55dp"
 
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:layout_below="@id/password_repeat_input_layout"
-            android:layout_marginVertical="40dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="40dp"
-            android:text="Изменить имя"
-            android:textColor="@color/text_color"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/firstname_btn"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
 
-            app:cornerRadius="4dp"
-            app:strokeColor="@color/background_color"
-            app:strokeWidth="2dp" />
+                android:layout_marginVertical="40dp"
+                android:layout_marginTop="20dp"
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/password_btn"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="150dp"
-            android:layout_height="55dp"
+                android:text="Изменить имя"
+                android:textColor="@color/text_color"
 
-            android:layout_below="@id/password_repeat_input_layout"
-            android:layout_toRightOf="@id/firstname_btn"
-            android:layout_marginLeft="20dp"
-            android:layout_marginVertical="40dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:text="Изменить пароль"
-            android:textColor="@color/text_color"
+                app:cornerRadius="4dp"
+                app:strokeColor="@color/background_color"
+                app:strokeWidth="2dp" />
 
-            app:cornerRadius="4dp"
-            app:strokeColor="@color/background_color"
-            app:strokeWidth="2dp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/password_btn"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginVertical="40dp"
+                android:layout_marginTop="20dp"
+                android:text="Изменить пароль"
+                android:textColor="@color/text_color"
+
+                app:cornerRadius="4dp"
+                app:strokeColor="@color/background_color"
+                app:strokeWidth="2dp" />
+        </LinearLayout>
+
 
     </RelativeLayout>
 </layout>

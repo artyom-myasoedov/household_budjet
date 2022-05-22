@@ -4,16 +4,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.util.Objects;
 
 import io.reactivex.disposables.Disposable;
 
 import ru.vsu.hb_front.api.Api;
+import ru.vsu.hb_front.databinding.FragmentTransactionsBinding;
 import ru.vsu.hb_front.databinding.FragmentUserEditBinding;
 import ru.vsu.hb_front.dto.UserEditRequest;
 import ru.vsu.hb_front.store.PreferenceStore;
@@ -27,6 +30,7 @@ public class UserEditFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        b = FragmentUserEditBinding.inflate(inflater, container, false);
 
         b.firstnameBtn.setOnClickListener(l -> {
             String firstname = b.firstname.getText().toString();
@@ -38,7 +42,7 @@ public class UserEditFragment extends Fragment {
                 userEditDisposable = Api.getInstance().updateUser(editRequest).subscribe(resp -> {
                     if (resp.isSuccessful()) {
                         PreferenceStore.getInstance().saveName(firstname);
-                        //todo Возвращаться на старый экран?
+                        Toast.makeText(getContext(), "Имя успешно изменено!", Toast.LENGTH_SHORT).show();
                     } else {
                         b.firstnameInputLayout.setError("Неизвестная ошибка");
                     }
@@ -61,8 +65,8 @@ public class UserEditFragment extends Fragment {
                 editRequest.setPassword(password);
                 userEditDisposable = Api.getInstance().updateUser(editRequest).subscribe(resp -> {
                     if (resp.isSuccessful()) {
-                        PreferenceStore.getInstance().saveToken(resp.headers().get("Authorization"));
-                        //todo Возвращаться на старый экран?
+                        //PreferenceStore.getInstance().saveToken(resp.headers().get("Authorization"));
+                        Toast.makeText(getContext(), "Пароль успешно изменён!", Toast.LENGTH_SHORT).show();
                     } else {
                         b.passwordInputLayout.setError("Неизвестная ошибка");
                     }
