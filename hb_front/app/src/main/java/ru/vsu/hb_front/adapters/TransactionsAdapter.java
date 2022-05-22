@@ -1,6 +1,7 @@
 package ru.vsu.hb_front.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,8 +70,15 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         TextView varName = cardView.findViewById(R.id.name);
         TextView summ = cardView.findViewById(R.id.summ);
         TextView date = cardView.findViewById(R.id.date);
-        varName.setText(cards.get(position).getDescription());
-        summ.setText(cards.get(position).getSum().toString());
+        varName.setText("Описание: "+cards.get(position).getDescription());
+        if(cards.get(position).getCategoryId()!=null){
+            summ.setText("- "+cards.get(position).getSum().toString()+" руб");
+            summ.setTextColor(Color.RED);
+        }else{
+            summ.setText("+ "+cards.get(position).getSum().toString()+" руб");
+            summ.setTextColor(Color.GREEN);
+        }
+
         date.setText(cards.get(position).getCreateTime().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
         cardViewHolder.curTransaction = cards.get(position);
