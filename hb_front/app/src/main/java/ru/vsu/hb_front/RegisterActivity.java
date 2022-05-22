@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 
+import com.yandex.metrica.YandexMetrica;
+
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -49,6 +51,7 @@ public class RegisterActivity extends Activity {
                         resp -> {
                             if (resp.isSuccessful()) {
                                 if ("success".equals(resp.body().getCode())) {
+                                    YandexMetrica.getReporter(getApplicationContext(), "e21872c4-3278-4bca-a10f-0e3357ebcfd2").reportEvent("register_success");
                                     loginDisposable = Api.getInstance().login(new UserLoginRequest(resp.body().getData().getUserEmail(), pass)).subscribe(
                                             response -> {
                                                 if (response.isSuccessful()) {

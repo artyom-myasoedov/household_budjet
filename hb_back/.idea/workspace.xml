@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ea785690-e096-4d85-82a5-93916f618502" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../hb_front/app/src/main/java/ru/vsu/hb_front/MyApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/entity/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/persistence/entity/Transaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/service/StatisticsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/vsu/hb/service/StatisticsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/vsu/hb/service/StatisticsServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/vsu/hb/service/StatisticsServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hb_front/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hb_front/app/src/main/java/ru/vsu/hb_front/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/app/src/main/java/ru/vsu/hb_front/LoginActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../hb_front/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/gradlew" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../hb_front/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../hb_front/gradlew.bat" afterDir="false" />
     </list>
@@ -259,7 +259,7 @@
       <workItem from="1651334708866" duration="707000" />
       <workItem from="1651522777035" duration="77000" />
       <workItem from="1652997849662" duration="188000" />
-      <workItem from="1653169348882" duration="3855000" />
+      <workItem from="1653169348882" duration="4261000" />
     </task>
     <servers />
   </component>

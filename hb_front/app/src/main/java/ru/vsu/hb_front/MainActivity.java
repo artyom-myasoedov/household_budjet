@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
+import com.yandex.metrica.YandexMetrica;
+
 import java.util.ArrayList;
 
 import ru.vsu.hb_front.api.StatisticsService;
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         b.bottomNavigationView.getMenu().getItem(3).setOnMenuItemClickListener(item->{
             if (b.bottomNavigationView.getSelectedItemId() != R.id.statistics_btn) {
+                YandexMetrica.getReporter(getApplicationContext(), "e21872c4-3278-4bca-a10f-0e3357ebcfd2").reportEvent("personal_stats");
                 StatisticsFragment statisticsFragment = new StatisticsFragment();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment, statisticsFragment, "statistics").commit();
