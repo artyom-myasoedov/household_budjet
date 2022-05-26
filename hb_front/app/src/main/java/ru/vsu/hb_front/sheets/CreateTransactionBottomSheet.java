@@ -83,7 +83,13 @@ public class CreateTransactionBottomSheet extends BottomSheetDialogFragment {
 
                 transactionDto.setCreateTime(LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()));
                 transactionDto.setDescription(transactionNameInput.getText().toString());
-                transactionDto.setSum(new BigDecimal(summInput.getText().toString()));
+                try{
+                    transactionDto.setSum(new BigDecimal(summInput.getText().toString()));
+                }catch (Exception e){
+                    summInput.setError("Неверный ввод");
+                    return;
+                }
+
                 if(group.getCheckedButtonId() == R.id.btn_out){
                     for(CategoryDto category: categories){
                         if(category.getCategoryName().equals(categoriesAutoTV.getText().toString())){

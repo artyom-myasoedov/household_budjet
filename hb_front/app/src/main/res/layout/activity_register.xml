@@ -59,7 +59,7 @@
                         android:background="@android:color/transparent"
 
                         android:inputType="textNoSuggestions"
-                        android:maxLength="20"
+                        android:maxLength="50"
 
                         android:textColor="@android:color/black"
                         android:textColorHighlight="#606E7D"
@@ -89,7 +89,7 @@
                         android:background="@android:color/transparent"
 
                         android:inputType="textNoSuggestions"
-                        android:maxLength="20"
+                        android:maxLength="50"
 
                         android:textColor="@android:color/black"
                         android:textColorHighlight="#606E7D"
