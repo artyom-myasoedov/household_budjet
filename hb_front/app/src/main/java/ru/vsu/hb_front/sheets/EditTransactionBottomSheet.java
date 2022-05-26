@@ -96,7 +96,12 @@ public class EditTransactionBottomSheet extends BottomSheetDialogFragment {
             } else {
                 transaction.setCreateTime(LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()));
                 transaction.setDescription(transactionNameInput.getText().toString());
-                transaction.setSum(new BigDecimal(summInput.getText().toString()));
+                try{
+                    transaction.setSum(new BigDecimal(summInput.getText().toString()));
+                }catch (Exception e){
+                    summInput.setError("Неверный ввод");
+                    return;
+                }
                 if (categoriesSpinLayout.getVisibility() == View.VISIBLE) {
                     for (CategoryDto category : categories) {
                         if (category.getCategoryName().equals(categoriesAutoTV.getText().toString())) {
