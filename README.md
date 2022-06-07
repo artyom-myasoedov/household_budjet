@@ -16,4 +16,4 @@
 • [Курсовой проект pdf](https://github.com/artyom-myasoedov/household_budjet/blob/main/documents/Курсовой%20проект.pdf) <br>
 # Ссылки
 • [Apk файл для установки приложения](https://drive.google.com/drive/folders/1kpkOlQjInv50qi_PTg4KgtMi6Byujogx?usp=sharing) <br>
-
+• [Видео по технической части](https://youtu.be/SfF9fSy1BZE) <br>
