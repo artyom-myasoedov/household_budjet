@@ -48,7 +48,6 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
-            // parse the token.
             DecodedJWT decodedJWT = null;
             try {
 
@@ -64,7 +63,6 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            // List<SimpleGrantedAuthority> authorityList = decodedJWT.getClaim("authorities").asList(String.class).stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 
         }
         return null;
