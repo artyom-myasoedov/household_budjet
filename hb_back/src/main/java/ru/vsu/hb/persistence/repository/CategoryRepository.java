@@ -26,7 +26,5 @@ public interface CategoryRepository extends JpaRepository<Category, UserCategory
 
     Integer deleteByUserCategoryId_CategoryId(UUID categoryId);
 
-    void deleteByUserCategoryId_UserEmail(String userEmail);
-
 
 }

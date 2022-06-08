@@ -55,12 +55,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         User user = userRepo.findByUserEmail(auth.getName()).orElse(null);
         String token = JWT.create()
                 .withSubject(((User) auth.getPrincipal()).getUserEmail())
-                // .withClaim("authorities",  user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
-//                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(HMAC512(SECRET.getBytes()));
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
         res.addHeader("user_email", String.valueOf(user.getUserEmail()));
         res.addHeader("first_name", user.getFirstName());
-        //res.addHeader("last_name", user.getLastName());
     }
 }
